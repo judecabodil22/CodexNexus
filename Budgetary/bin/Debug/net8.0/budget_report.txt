@@ -1,0 +1,36 @@
+---------------------------------
+         Budget Report           
+---------------------------------
+Date: 06-06-2024               
+Mode of Payment: Monthly                  
+Starting Budget: 35,000.00                
+---------------------------------
+Days remaining until next cutoff: 24.00                    
+Total Bills: 2,500.00                 
+Starting Budget after bills deduction: 35,000.00                
+Actual Daily Budget: 350.00                   
+Maximum Daily Budget: 1,458.33                 
+Expected end of cycle savings: 26,600.00                
+---------------------------------
+Date: 06-06-2024               
+Mode of Payment: Monthly                  
+Starting Budget: 35,000.00                
+---------------------------------
+Days remaining until next cutoff: 24.00                    
+Total Bills: 2,500.00                 
+Starting Budget after bills deduction: 32,500.00                
+Actual Daily Budget: 350.00                   
+Maximum Daily Budget: 1,354.17                 
+Expected end of cycle savings: 24,100.00                
+---------------------------------
+Date: 06-06-2024               
+Mode of Payment: Semi-Annual              
+Starting Budget: 16,000.00                
+---------------------------------
+Days remaining until next cutoff: 24.00                    
+Total Bills: 2,500.00                 
+Starting Budget after bills deduction: 13,500.00                
+Actual Daily Budget: 350.00                   
+Maximum Daily Budget: 562.50                   
+Expected end of cycle savings: 5,100.00                 
+---------------------------------
