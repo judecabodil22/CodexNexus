@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\judec\\OneDrive\\Desktop\\Web Apps\\Budgetary\\Budgetary.csproj": {}
+    "C:\\Users\\judec\\OneDrive\\Desktop\\C-Sharp Apps\\Console Applications\\Budgetary\\Budgetary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\judec\\OneDrive\\Desktop\\Web Apps\\Budgetary\\Budgetary.csproj": {
+    "C:\\Users\\judec\\OneDrive\\Desktop\\C-Sharp Apps\\Console Applications\\Budgetary\\Budgetary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\judec\\OneDrive\\Desktop\\Web Apps\\Budgetary\\Budgetary.csproj",
+        "projectUniqueName": "C:\\Users\\judec\\OneDrive\\Desktop\\C-Sharp Apps\\Console Applications\\Budgetary\\Budgetary.csproj",
         "projectName": "Budgetary",
-        "projectPath": "C:\\Users\\judec\\OneDrive\\Desktop\\Web Apps\\Budgetary\\Budgetary.csproj",
+        "projectPath": "C:\\Users\\judec\\OneDrive\\Desktop\\C-Sharp Apps\\Console Applications\\Budgetary\\Budgetary.csproj",
         "packagesPath": "C:\\Users\\judec\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\judec\\OneDrive\\Desktop\\Web Apps\\Budgetary\\obj\\",
+        "outputPath": "C:\\Users\\judec\\OneDrive\\Desktop\\C-Sharp Apps\\Console Applications\\Budgetary\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\judec\\AppData\\Roaming\\NuGet\\NuGet.Config"

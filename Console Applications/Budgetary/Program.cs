@@ -31,13 +31,13 @@ void modeofIncome()
                     {
                         bills.modeOfPayment = 1;
                         Console.WriteLine("Got it! You are being paid monthly!");
-                        break;
+                        dailyBudget(bills);
                     }
                     else
                     {
                         bills.modeOfPayment = 2;
                         Console.WriteLine("Got it! You are being paid semi-monthly!");
-                        break;
+                        dailyBudget(bills);
                     }
 
                 }
@@ -45,7 +45,7 @@ void modeofIncome()
             }
         }
 
-        dailyBudget(bills);
+
     }
     catch (System.Exception)
     {

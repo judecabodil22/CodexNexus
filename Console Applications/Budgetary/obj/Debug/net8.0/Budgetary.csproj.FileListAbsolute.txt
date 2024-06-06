@@ -1,0 +1,28 @@
+c:\Users\judec\OneDrive\Desktop\Web Apps\Budgetary\bin\Debug\net8.0\Budgetary.exe
+c:\Users\judec\OneDrive\Desktop\Web Apps\Budgetary\bin\Debug\net8.0\Budgetary.deps.json
+c:\Users\judec\OneDrive\Desktop\Web Apps\Budgetary\bin\Debug\net8.0\Budgetary.runtimeconfig.json
+c:\Users\judec\OneDrive\Desktop\Web Apps\Budgetary\bin\Debug\net8.0\Budgetary.dll
+c:\Users\judec\OneDrive\Desktop\Web Apps\Budgetary\bin\Debug\net8.0\Budgetary.pdb
+c:\Users\judec\OneDrive\Desktop\Web Apps\Budgetary\obj\Debug\net8.0\Budgetary.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\judec\OneDrive\Desktop\Web Apps\Budgetary\obj\Debug\net8.0\Budgetary.AssemblyInfoInputs.cache
+c:\Users\judec\OneDrive\Desktop\Web Apps\Budgetary\obj\Debug\net8.0\Budgetary.AssemblyInfo.cs
+c:\Users\judec\OneDrive\Desktop\Web Apps\Budgetary\obj\Debug\net8.0\Budgetary.csproj.CoreCompileInputs.cache
+c:\Users\judec\OneDrive\Desktop\Web Apps\Budgetary\obj\Debug\net8.0\Budgetary.dll
+c:\Users\judec\OneDrive\Desktop\Web Apps\Budgetary\obj\Debug\net8.0\refint\Budgetary.dll
+c:\Users\judec\OneDrive\Desktop\Web Apps\Budgetary\obj\Debug\net8.0\Budgetary.pdb
+c:\Users\judec\OneDrive\Desktop\Web Apps\Budgetary\obj\Debug\net8.0\Budgetary.genruntimeconfig.cache
+c:\Users\judec\OneDrive\Desktop\Web Apps\Budgetary\obj\Debug\net8.0\ref\Budgetary.dll
+C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\bin\Debug\net8.0\Budgetary.exe
+C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\bin\Debug\net8.0\Budgetary.deps.json
+C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\bin\Debug\net8.0\Budgetary.runtimeconfig.json
+C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\bin\Debug\net8.0\Budgetary.dll
+C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\bin\Debug\net8.0\Budgetary.pdb
+C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.AssemblyInfoInputs.cache
+C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.AssemblyInfo.cs
+C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.csproj.CoreCompileInputs.cache
+C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.dll
+C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\obj\Debug\net8.0\refint\Budgetary.dll
+C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.pdb
+C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.genruntimeconfig.cache
+C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\obj\Debug\net8.0\ref\Budgetary.dll
