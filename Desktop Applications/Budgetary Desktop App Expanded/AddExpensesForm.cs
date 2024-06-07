@@ -13,7 +13,6 @@ namespace Budgetary_Desktop_App_Expanded
 {
     public partial class AddExpensesForm : Form
     {
-        MainForm mainForm = new MainForm();
 
         private void AddExpensesForm_Load(object sender, EventArgs e)
         {
