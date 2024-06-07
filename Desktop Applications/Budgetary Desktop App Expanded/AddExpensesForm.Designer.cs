@@ -6,11 +6,11 @@ namespace Budgetary_Desktop_App_Expanded
     public partial class AddExpensesForm : Form
     {
         private Label lblExpenseName;
-        private TextBox txtExpenseName;
+        internal TextBox txtExpenseName;
         private Label lblCategory;
-        private ComboBox cmbCategory;
+        internal ComboBox cmbCategory;
         private Label lblAmount;
-        private TextBox txtAmount;
+        internal TextBox txtAmount;
         private Button btnAddExpense;
         private Button btnCancel;
 
@@ -119,8 +119,6 @@ namespace Budgetary_Desktop_App_Expanded
             ResumeLayout(false);
             PerformLayout();
         }
-
-       
 
         private void btnCancel_Click(object sender, EventArgs e)
         {

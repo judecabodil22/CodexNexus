@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Budgetary_Desktop_App_Expanded;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,16 @@ namespace Budgetary_Desktop_App_Expanded
 {
     public partial class AddExpensesForm : Form
     {
+
+
+        private MainForm mainForm;
+
+        public AddExpensesForm(MainForm mainForm)
+        {
+            this.mainForm = mainForm;
+            InitializeComponent();
+
+        }
 
         private void AddExpensesForm_Load(object sender, EventArgs e)
         {
@@ -34,14 +45,53 @@ namespace Budgetary_Desktop_App_Expanded
             }
         }
 
+
+        private void btnAddExpense_Click(object sender, EventArgs e, MainForm mainForm)
+        {
+
+        }
+
         private void btnAddExpense_Click(object sender, EventArgs e)
         {
-            Regex regex = new Regex("^[0-9]*$");
-            if (!regex.IsMatch(txtAmount.Text) && !regex.IsMatch(txtAmount.Text))
+            MainForm form = new MainForm();
+            string errorMessage = "";
+            string errorTitle = "";
+            Regex regex = new Regex("^[0-9]*(\\.[0-9]{1,2})?$");
+
+
+            if (string.IsNullOrEmpty(txtExpenseName.Text))
             {
-                string errorMessage = "Please input only numbers on amount.";
-                string errorTitle = "Error on Starting Budget and Daily Budget";
-                mainForm.mainFormTextMessage(errorMessage, errorTitle,txtAmount);
+                errorMessage = "Please input an expense name.";
+                errorTitle = "Error on Expense Name";
+                wrongExpense();
+            }
+            else if (string.IsNullOrEmpty(cmbCategory.Text))
+            {
+                errorMessage = "Please choose a category.";
+                errorTitle = "Error on Category";
+                wrongExpense();
+            }
+            else if (!regex.IsMatch(txtAmount.Text))
+            {
+                errorMessage = "Please only input numbers.";
+                errorTitle = "Error on Amount";
+                wrongExpense();
+            }
+            else if (string.IsNullOrEmpty(cmbCategory.Text))
+            {
+                errorMessage = "Please only input numbers.";
+                errorTitle = "Error on Amount";
+                wrongExpense();
+            }
+            else
+            {
+                mainForm.listViewUpdate(txtExpenseName.Text, txtAmount.Text, cmbCategory.Text);
+            }
+
+
+            void wrongExpense()
+            {    
+                form.mainFormTextMessage(errorMessage, errorTitle, txtAmount);
             }
         }
     }

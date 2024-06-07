@@ -21,7 +21,7 @@ namespace Budgetary_Desktop_App_Expanded
 
         private void btnAddExpense_Click(object sender, EventArgs e)
         {
-            AddExpensesForm form = new AddExpensesForm();
+            AddExpensesForm form = new AddExpensesForm(this);
             form.ShowDialog();
         }
 
@@ -79,18 +79,66 @@ namespace Budgetary_Desktop_App_Expanded
                 string errorTitle = "Error on Daily Budget";
                 mainFormTextMessage(errorMessage, errorTitle, txtDailyBudget);
             }
+            else if (string.IsNullOrEmpty(txtStartingBudget.Text))
+            {
+                string errorMessage = "Starting Budget must not be empty.";
+                string errorTitle = "Error on Starting Budget";
+                mainFormTextMessage(errorMessage, errorTitle, txtStartingBudget);
+            }
+            else if(string.IsNullOrEmpty(txtDailyBudget.Text))
+            {
+                string errorMessage = "Daily Budget must not be empty.";
+                string errorTitle = "Error on Daily Budget";
+                mainFormTextMessage(errorMessage, errorTitle, txtDailyBudget);
+            }
+            else if (string.IsNullOrEmpty(cboModeOfPayment.Text))
+            {
+                string errorMessage = "Please select a mode of payment.";
+                string errorTitle = "Error on Mode of Payment";
+                mainFormTextMessage(errorMessage, errorTitle, cboModeOfPayment);
+            }
+
         }
 
         public void mainFormTextMessage(string errorMessage, string errorTitle, TextBox component)
         {
             MessageBox.Show(errorMessage, errorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            component.Text = component.Text.Remove(component.Text.Length - 1);
+            if (component.Text.Length > 0)
+            {
+                component.Text = component.Text.Remove(component.Text.Length - 1);
+            }
+            else
+            {
+                component.Text = component.Text.Remove(component.Text.Length);
+            }
+            component.SelectionStart = component.Text.Length;
+        }
+
+        public void mainFormTextMessage(string errorMessage, string errorTitle, ComboBox component)
+        {
+            MessageBox.Show(errorMessage, errorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (component.Text.Length > 0)
+            {
+                component.Text = component.Text.Remove(component.Text.Length - 1);
+            }
+            else
+            {
+                component.Text = component.Text.Remove(component.Text.Length);
+            }
             component.SelectionStart = component.Text.Length;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             groupBoxBudget.Text = $"Budget Information ({DateTime.Today.ToString("D")})";
+        }
+
+        public void listViewUpdate(string expenseName, string category, string amount)
+        {
+            ListViewItem item = new ListViewItem(expenseName);
+            item.SubItems.Add(amount);
+            item.SubItems.Add(category);
+            lvExpenses.Items.Add(item);
         }
     }
 }
