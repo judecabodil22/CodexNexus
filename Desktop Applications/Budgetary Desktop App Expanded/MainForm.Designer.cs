@@ -1,4 +1,6 @@
-﻿namespace Budgetary_Desktop_App_Expanded
+﻿using System.Windows.Forms;
+
+namespace Budgetary_Desktop_App_Expanded
 {
     partial class MainForm
     {
@@ -40,10 +42,14 @@
             columnName = new ColumnHeader();
             columnAmount = new ColumnHeader();
             columnCategory = new ColumnHeader();
+            columnRecurring = new ColumnHeader();
             btnAddExpense = new Button();
             btnGenerateReport = new Button();
+            toolStripBottom = new ToolStrip();
+            toolStripButtonAbout = new ToolStripButton();
             groupBoxBudget.SuspendLayout();
             groupBoxExpenses.SuspendLayout();
+            toolStripBottom.SuspendLayout();
             SuspendLayout();
             // 
             // groupBoxBudget
@@ -56,7 +62,7 @@
             groupBoxBudget.Controls.Add(cboModeOfPayment);
             groupBoxBudget.Location = new Point(12, 12);
             groupBoxBudget.Name = "groupBoxBudget";
-            groupBoxBudget.Size = new Size(300, 150);
+            groupBoxBudget.Size = new Size(379, 150);
             groupBoxBudget.TabIndex = 0;
             groupBoxBudget.TabStop = false;
             groupBoxBudget.Text = "Budget Information";
@@ -75,7 +81,7 @@
             txtStartingBudget.Location = new Point(120, 27);
             txtStartingBudget.Name = "txtStartingBudget";
             txtStartingBudget.PlaceholderText = "Numbers only";
-            txtStartingBudget.Size = new Size(160, 23);
+            txtStartingBudget.Size = new Size(233, 23);
             txtStartingBudget.TabIndex = 1;
             txtStartingBudget.KeyPress += txtStartingBudget_KeyPress;
             // 
@@ -93,7 +99,7 @@
             txtDailyBudget.Location = new Point(120, 57);
             txtDailyBudget.Name = "txtDailyBudget";
             txtDailyBudget.PlaceholderText = "Numbers only";
-            txtDailyBudget.Size = new Size(160, 23);
+            txtDailyBudget.Size = new Size(233, 23);
             txtDailyBudget.TabIndex = 3;
             txtDailyBudget.KeyPress += txtDailyBudget_KeyPress;
             // 
@@ -113,7 +119,7 @@
             cboModeOfPayment.Items.AddRange(new object[] { "Monthly", "Semi-Monthly" });
             cboModeOfPayment.Location = new Point(120, 87);
             cboModeOfPayment.Name = "cboModeOfPayment";
-            cboModeOfPayment.Size = new Size(160, 23);
+            cboModeOfPayment.Size = new Size(233, 23);
             cboModeOfPayment.TabIndex = 5;
             // 
             // groupBoxExpenses
@@ -123,19 +129,19 @@
             groupBoxExpenses.Controls.Add(btnGenerateReport);
             groupBoxExpenses.Location = new Point(12, 180);
             groupBoxExpenses.Name = "groupBoxExpenses";
-            groupBoxExpenses.Size = new Size(300, 250);
+            groupBoxExpenses.Size = new Size(379, 270);
             groupBoxExpenses.TabIndex = 6;
             groupBoxExpenses.TabStop = false;
             groupBoxExpenses.Text = "Expenses";
             // 
             // lvExpenses
             // 
-            lvExpenses.Columns.AddRange(new ColumnHeader[] { columnName, columnAmount, columnCategory });
+            lvExpenses.Columns.AddRange(new ColumnHeader[] { columnName, columnAmount, columnCategory, columnRecurring });
             lvExpenses.FullRowSelect = true;
             lvExpenses.GridLines = true;
             lvExpenses.Location = new Point(6, 20);
             lvExpenses.Name = "lvExpenses";
-            lvExpenses.Size = new Size(280, 180);
+            lvExpenses.Size = new Size(367, 200);
             lvExpenses.TabIndex = 7;
             lvExpenses.UseCompatibleStateImageBehavior = false;
             lvExpenses.View = View.Details;
@@ -156,11 +162,16 @@
             columnCategory.Text = "Category";
             columnCategory.Width = 80;
             // 
+            // columnRecurring
+            // 
+            columnRecurring.Text = "Recurring";
+            columnRecurring.Width = 100;
+            // 
             // btnAddExpense
             // 
-            btnAddExpense.Location = new Point(6, 210);
+            btnAddExpense.Location = new Point(17, 230);
             btnAddExpense.Name = "btnAddExpense";
-            btnAddExpense.Size = new Size(130, 30);
+            btnAddExpense.Size = new Size(140, 30);
             btnAddExpense.TabIndex = 8;
             btnAddExpense.Text = "Add Expense";
             btnAddExpense.UseVisualStyleBackColor = true;
@@ -168,19 +179,39 @@
             // 
             // btnGenerateReport
             // 
-            btnGenerateReport.Location = new Point(156, 210);
+            btnGenerateReport.Location = new Point(213, 230);
             btnGenerateReport.Name = "btnGenerateReport";
-            btnGenerateReport.Size = new Size(130, 30);
+            btnGenerateReport.Size = new Size(140, 30);
             btnGenerateReport.TabIndex = 9;
             btnGenerateReport.Text = "Generate Report";
             btnGenerateReport.UseVisualStyleBackColor = true;
             btnGenerateReport.Click += btnGenerateReport_Click;
             // 
+            // toolStripBottom
+            // 
+            toolStripBottom.Dock = DockStyle.Bottom;
+            toolStripBottom.Items.AddRange(new ToolStripItem[] { toolStripButtonAbout });
+            toolStripBottom.Location = new Point(0, 511);
+            toolStripBottom.Name = "toolStripBottom";
+            toolStripBottom.Size = new Size(410, 25);
+            toolStripBottom.TabIndex = 11;
+            toolStripBottom.Text = "toolStripBottom";
+            // 
+            // toolStripButtonAbout
+            // 
+            toolStripButtonAbout.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButtonAbout.ImageTransparentColor = Color.Magenta;
+            toolStripButtonAbout.Name = "toolStripButtonAbout";
+            toolStripButtonAbout.Size = new Size(44, 22);
+            toolStripButtonAbout.Text = "About";
+            toolStripButtonAbout.Click += toolStripButtonAbout_Click;
+            // 
             // MainForm
             // 
-            ClientSize = new Size(327, 480);
+            ClientSize = new Size(410, 536);
             Controls.Add(groupBoxBudget);
             Controls.Add(groupBoxExpenses);
+            Controls.Add(toolStripBottom);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -189,7 +220,10 @@
             groupBoxBudget.ResumeLayout(false);
             groupBoxBudget.PerformLayout();
             groupBoxExpenses.ResumeLayout(false);
+            toolStripBottom.ResumeLayout(false);
+            toolStripBottom.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         private System.Windows.Forms.GroupBox groupBoxBudget;
@@ -204,10 +238,12 @@
         private System.Windows.Forms.ColumnHeader columnName;
         private System.Windows.Forms.ColumnHeader columnAmount;
         private System.Windows.Forms.ColumnHeader columnCategory;
+        private System.Windows.Forms.ColumnHeader columnRecurring;
         private System.Windows.Forms.Button btnAddExpense;
         private System.Windows.Forms.Button btnGenerateReport;
-    }
+        private System.Windows.Forms.ToolStrip toolStripBottom;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAbout;
 
         #endregion
     }
-
+}

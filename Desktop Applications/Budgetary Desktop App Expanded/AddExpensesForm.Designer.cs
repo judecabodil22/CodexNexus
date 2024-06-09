@@ -11,6 +11,7 @@ namespace Budgetary_Desktop_App_Expanded
         internal ComboBox cmbCategory;
         private Label lblAmount;
         internal TextBox txtAmount;
+        private CheckBox chkRecurring;
         private Button btnAddExpense;
         private Button btnCancel;
 
@@ -27,6 +28,7 @@ namespace Budgetary_Desktop_App_Expanded
             cmbCategory = new ComboBox();
             lblAmount = new Label();
             txtAmount = new TextBox();
+            chkRecurring = new CheckBox();
             btnAddExpense = new Button();
             btnCancel = new Button();
             SuspendLayout();
@@ -82,35 +84,46 @@ namespace Budgetary_Desktop_App_Expanded
             txtAmount.TabIndex = 5;
             txtAmount.KeyPress += txtAmount_KeyPress;
             // 
+            // chkRecurring
+            // 
+            chkRecurring.AutoSize = true;
+            chkRecurring.Location = new Point(130, 130);
+            chkRecurring.Name = "chkRecurring";
+            chkRecurring.Size = new Size(104, 19);
+            chkRecurring.TabIndex = 6;
+            chkRecurring.Text = "Recurring Bill";
+            chkRecurring.UseVisualStyleBackColor = true;
+            // 
             // btnAddExpense
             // 
-            btnAddExpense.Location = new Point(130, 140);
+            btnAddExpense.Location = new Point(130, 160);
             btnAddExpense.Name = "btnAddExpense";
             btnAddExpense.Size = new Size(100, 30);
-            btnAddExpense.TabIndex = 6;
+            btnAddExpense.TabIndex = 7;
             btnAddExpense.Text = "Add Expense";
             btnAddExpense.UseVisualStyleBackColor = true;
             btnAddExpense.Click += btnAddExpense_Click;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(230, 140);
+            btnCancel.Location = new Point(230, 160);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(100, 30);
-            btnCancel.TabIndex = 7;
+            btnCancel.TabIndex = 8;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
             // 
             // AddExpensesForm
             // 
-            ClientSize = new Size(350, 200);
+            ClientSize = new Size(350, 220);
             Controls.Add(lblExpenseName);
             Controls.Add(txtExpenseName);
             Controls.Add(lblCategory);
             Controls.Add(cmbCategory);
             Controls.Add(lblAmount);
             Controls.Add(txtAmount);
+            Controls.Add(chkRecurring);
             Controls.Add(btnAddExpense);
             Controls.Add(btnCancel);
             Name = "AddExpensesForm";
