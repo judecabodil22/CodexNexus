@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
             lblTitle = new Label();
             lblVersion = new Label();
             lblDescription = new Label();
@@ -58,14 +59,14 @@
             lblDescription.AutoSize = true;
             lblDescription.Location = new Point(30, 90);
             lblDescription.Name = "lblDescription";
-            lblDescription.Size = new Size(387, 60);
+            lblDescription.Size = new Size(410, 105);
             lblDescription.TabIndex = 2;
-            lblDescription.Text = "Budgetary App is a desktop application for managing expenses.\r\nIt allows users to track their spending, set budgets, and generate reports.\r\n\r\nDeveloped by Justin Jude Cabodil.";
+            lblDescription.Text = resources.GetString("lblDescription.Text");
             lblDescription.Click += lblDescription_Click;
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(180, 160);
+            btnClose.Location = new Point(30, 224);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(100, 30);
             btnClose.TabIndex = 3;
@@ -75,7 +76,7 @@
             // 
             // AboutForm
             // 
-            ClientSize = new Size(450, 210);
+            ClientSize = new Size(450, 266);
             Controls.Add(btnClose);
             Controls.Add(lblDescription);
             Controls.Add(lblVersion);

@@ -13,6 +13,30 @@ namespace Budgetary_Desktop_App_Expanded
     public partial class MainForm : Form
     {
 
+        public List<Expense> expenseList = new List<Expense>();
+
+        public class Expense
+        {
+            public string Name { get; set; }
+            public string Category { get; set; }
+            public decimal Amount { get; set; }
+            public bool IsRecurring { get; set; }
+
+            public Expense(string name, decimal amount, string category, bool isRecurring)
+            {
+                Name = name;
+                Category = category;
+                Amount = amount;
+                IsRecurring = isRecurring;
+            }
+        }
+
+        public class Budget
+        {
+            public decimal StartingBudget { get; set; }
+            public decimal DailyBudget { get; set; }
+        }
+
         public MainForm()
         {
             InitializeComponent();
@@ -92,22 +116,17 @@ namespace Budgetary_Desktop_App_Expanded
             component.SelectionStart = component.Text.Length;
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            groupBoxBudget.Text = $"Budget Information ({DateTime.Today.ToString("D")})";
-
-            var item1 = new ListViewItem(new[] { "Coffee", "Food", "3.50" });
-            var item2 = new ListViewItem(new[] { "Bus Ticket", "Transport", "2.50" });
-            lvExpenses.Items.Add(item1);
-            lvExpenses.Items.Add(item2);
-        }
-
-        public void listViewUpdate(string expenseName, string category, string amount)
+        public void listViewUpdate(string expenseName, decimal amount, string category, bool isRecurring)
         {
             ListViewItem item = new ListViewItem(expenseName);
-            item.SubItems.Add(amount);
+            item.SubItems.Add(amount.ToString());
             item.SubItems.Add(category);
             lvExpenses.Items.Add(item);
+
+            Expense newExpense = new Expense(expenseName, amount, category, isRecurring);
+            expenseList.Add(newExpense);
+            MessageBox.Show(newExpense.ToString());
+
         }
 
         private void btnGenerateReport_Click(object sender, EventArgs e)
@@ -163,60 +182,106 @@ namespace Budgetary_Desktop_App_Expanded
 
         private void GeneratePdfReport(string fileName)
         {
-            float startingBudget = float.Parse(txtStartingBudget.Text);
-            float dailyBudget = float.Parse(txtDailyBudget.Text);
+            decimal startingBudget = decimal.Parse(txtStartingBudget.Text);
+            decimal dailyBudget = decimal.Parse(txtDailyBudget.Text);
+
 
             using (iText.Kernel.Pdf.PdfWriter writer = new iText.Kernel.Pdf.PdfWriter(fileName)) // Fully qualify PdfWriter
             {
                 using (iText.Kernel.Pdf.PdfDocument pdf = new iText.Kernel.Pdf.PdfDocument(writer)) // Fully qualify PdfDocument
                 {
                     iText.Layout.Document document = new iText.Layout.Document(pdf); // Fully qualify Document
-                    double totalExpensesval = 0;
+                    decimal oneoffExpenses = 0;
+                    decimal recurringExpenses = 0;
 
                     // Add title to the document
-                    Paragraph title = new Paragraph("Budgetary App Report " + DateTime.Today.ToString("D"));
+                    Paragraph title = new Paragraph("Budgetary App Report " + DateTime.Today.ToString("D")).SetBold();
                     document.Add(title);
 
                     // Extract Income and Budget details
-                    Paragraph incomeBudget = new Paragraph("Starting and Daily Budget");
-                    incomeBudget.Add("\nMode of Income: " + cboModeOfPayment.Text);
-                    incomeBudget.Add("\nStarting Budget: ₱" + startingBudget.ToString("0.00"));
-                    incomeBudget.Add("\nDaily Budget: ₱" + dailyBudget.ToString("0.00"));
+                    Paragraph incomeBudgetTitle = new Paragraph("Starting and Daily Budget").SetBold();
+                    Paragraph incomeBudget = new Paragraph();
+                    incomeBudget.Add("Mode of Income: " + cboModeOfPayment.Text);
+                    incomeBudget.Add("\nStarting Budget: ₱" + startingBudget.ToString("0.00").PadLeft(85, ' '));
+                    incomeBudget.Add("\nDaily Budget: ₱" + dailyBudget.ToString("0.00").PadLeft(91, ' '));
 
-                    // Add expenses to the document
                     Table expenseTable = new Table(UnitValue.CreatePercentArray(3)).UseAllAvailableWidth();
                     expenseTable.AddHeaderCell("Expense Name");
                     expenseTable.AddHeaderCell("Category");
                     expenseTable.AddHeaderCell("Amount");
 
-                    foreach (ListViewItem item in lvExpenses.Items)
+                    Table expenseTableRecurring = new Table(UnitValue.CreatePercentArray(3)).UseAllAvailableWidth();
+                    expenseTableRecurring.AddHeaderCell("Expense Name");
+                    expenseTableRecurring.AddHeaderCell("Category");
+                    expenseTableRecurring.AddHeaderCell("Amount");
+
+
+
+
+
+                    foreach (var item in expenseList)
                     {
-                        // Extract expense details
-                        string expenseName = item.SubItems[0].Text;
-                        string category = item.SubItems[1].Text;
-                        string amount = "₱" + float.Parse(item.SubItems[2].Text).ToString("0.00");
+                        string expenseName = item.Name;
+                        string category = item.Category;
+                        string amount = "₱" + item.Amount;
 
-                        // Add row to the table
-                        expenseTable.AddCell(expenseName);
-                        expenseTable.AddCell(category);
-                        expenseTable.AddCell(amount);
+                        if (item.IsRecurring)
+                        {
+                            expenseTableRecurring.AddCell(expenseName);
+                            expenseTableRecurring.AddCell(category);
+                            expenseTableRecurring.AddCell(amount);
 
-                        totalExpensesval += float.Parse(item.SubItems[2].Text);
+                            recurringExpenses += item.Amount;
+
+
+                        }
+                        else
+                        {
+                            expenseTable.AddCell(expenseName);
+                            expenseTable.AddCell(category);
+                            expenseTable.AddCell(amount);
+
+                            oneoffExpenses += item.Amount;
+
+
+                        }
+
+
+
                     }
 
                     int daysRemaining = DateTime.DaysInMonth(int.Parse(DateTime.Now.ToString("yyyy")), int.Parse(DateTime.Now.ToString("MM"))) - int.Parse(DateTime.Now.ToString("dd"));
-                   
-                    Paragraph totalExpenses = new Paragraph("\nTotal Expenses: ₱" + totalExpensesval.ToString("0.00"));
-                    string nxtCutoff = cboModeOfPayment.SelectedIndex == 0 ? $"Days remaining until next cutoff: {daysRemaining.ToString("N").PadRight(25)}\n" : $"Days remaining until next cutoff: {(daysRemaining / 2).ToString("N").PadRight(25)}\n";
+                    decimal totalExpense = oneoffExpenses + recurringExpenses;
+                    decimal actualBudget = startingBudget - (oneoffExpenses + recurringExpenses);
+                    Paragraph expensesTitle = new Paragraph("Expenses Details").SetBold();
+                    Paragraph expensesParagraph = new Paragraph();
+                    expensesParagraph.Add("Total One-time Expenses: ₱" + oneoffExpenses.ToString("0.00").PadLeft(70, ' ')).SetFontSize(12);
+                    expensesParagraph.Add("\nTotal Recurring Expenses: ₱" + recurringExpenses.ToString("0.00").PadLeft(69, ' '));
+                    expensesParagraph.Add($"\nTotal Expenses: ₱"+ totalExpense.ToString("0.00").PadLeft(86, ' '));
+                    expensesParagraph.Add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
+                    expensesParagraph.Add($"\n\nActual Budget after recurring expenses: "+actualBudget.ToString("0.00").PadLeft(49, ' '));
+                    
+                    string nxtCutoff = cboModeOfPayment.SelectedIndex == 0 ? $"Days remaining until next cutoff: {daysRemaining.ToString().PadRight(25)}\n".PadLeft(70, ' ') : $"Days remaining until next cutoff: {(daysRemaining / 4).ToString().PadRight(25)}\n".PadLeft(70, ' ');
                     Paragraph nextCutOff = new Paragraph(nxtCutoff);
                     // Add the income and budget details
+                    document.Add(incomeBudgetTitle);
                     document.Add(incomeBudget);
 
                     // Add the expense table
+                    document.Add(new Paragraph("One-time Expenses:").SetBold());
                     document.Add(expenseTable);
 
-                    document.Add(totalExpenses);
+                    
+
+
+                    document.Add(new Paragraph("Recurring Expenses:").SetBold());
+                    document.Add(expenseTableRecurring);
+                    document.Add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
+                    document.Add(expensesTitle);
+                    document.Add(expensesParagraph);
                     document.Add(nextCutOff);
+
+
                 }
             }
         }
@@ -239,5 +304,19 @@ namespace Budgetary_Desktop_App_Expanded
             form.ShowDialog(this);
         }
 
+        private void MainForm_Load_1(object sender, EventArgs e)
+        {
+            groupBoxBudget.Text = $"Budget Information ({DateTime.Today.ToString("D")})";
+            Expense expense = new Expense("Food Suplies", 2500, "Food", false);
+            expenseList.Add(expense);
+            expense = new Expense("Internet", 2500, "Utility", true);
+            expenseList.Add(expense);
+
+            txtStartingBudget.Text = "16000";
+            txtDailyBudget.Text = "350";
+            cboModeOfPayment.SelectedIndex = 0;
+
+
+        }
     }
 }

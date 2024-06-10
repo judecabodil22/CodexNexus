@@ -31,6 +31,9 @@ namespace Budgetary_Desktop_App_Expanded
             chkRecurring = new CheckBox();
             btnAddExpense = new Button();
             btnCancel = new Button();
+            toolStripBottom = new ToolStrip();
+            toolStripButtonAbout = new ToolStripButton();
+            toolStripBottom.SuspendLayout();
             SuspendLayout();
             // 
             // lblExpenseName
@@ -89,7 +92,7 @@ namespace Budgetary_Desktop_App_Expanded
             chkRecurring.AutoSize = true;
             chkRecurring.Location = new Point(130, 130);
             chkRecurring.Name = "chkRecurring";
-            chkRecurring.Size = new Size(104, 19);
+            chkRecurring.Size = new Size(96, 19);
             chkRecurring.TabIndex = 6;
             chkRecurring.Text = "Recurring Bill";
             chkRecurring.UseVisualStyleBackColor = true;
@@ -114,9 +117,29 @@ namespace Budgetary_Desktop_App_Expanded
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
             // 
+            // toolStripBottom
+            // 
+            toolStripBottom.Dock = DockStyle.Bottom;
+            toolStripBottom.Items.AddRange(new ToolStripItem[] { toolStripButtonAbout });
+            toolStripBottom.Location = new Point(0, 195);
+            toolStripBottom.Name = "toolStripBottom";
+            toolStripBottom.Size = new Size(350, 25);
+            toolStripBottom.TabIndex = 12;
+            toolStripBottom.Text = "toolStripBottom";
+            // 
+            // toolStripButtonAbout
+            // 
+            toolStripButtonAbout.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButtonAbout.ImageTransparentColor = Color.Magenta;
+            toolStripButtonAbout.Name = "toolStripButtonAbout";
+            toolStripButtonAbout.Size = new Size(36, 22);
+            toolStripButtonAbout.Text = "Help";
+            toolStripButtonAbout.Click += toolStripButtonAbout_Click;
+            // 
             // AddExpensesForm
             // 
             ClientSize = new Size(350, 220);
+            Controls.Add(toolStripBottom);
             Controls.Add(lblExpenseName);
             Controls.Add(txtExpenseName);
             Controls.Add(lblCategory);
@@ -129,6 +152,9 @@ namespace Budgetary_Desktop_App_Expanded
             Name = "AddExpensesForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Add New Expense";
+            Load += AddExpensesForm_Load_1;
+            toolStripBottom.ResumeLayout(false);
+            toolStripBottom.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -138,5 +164,8 @@ namespace Budgetary_Desktop_App_Expanded
             // Close the form without saving
             this.Close();
         }
+
+        private ToolStrip toolStripBottom;
+        private ToolStripButton toolStripButtonAbout;
     }
 }

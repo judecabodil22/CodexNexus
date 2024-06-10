@@ -117,4 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblDescription.Text" xml:space="preserve">
+    <value>Budgetary App is a desktop application for managing expenses.
+It allows users to track their spending, set budgets, and generate reports.
+
+Every expenditures being track should cover a set period defined by the user 
+whether the expenses should be covered biweekly or monthly.
+
+Developed by Justin Jude Cabodil.</value>
+  </data>
 </root>

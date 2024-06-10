@@ -85,14 +85,24 @@ namespace Budgetary_Desktop_App_Expanded
             }
             else
             {
-                mainForm.listViewUpdate(txtExpenseName.Text, txtAmount.Text, cmbCategory.Text);
+                mainForm.listViewUpdate(txtExpenseName.Text, decimal.Parse(txtAmount.Text), cmbCategory.Text, chkRecurring.Checked);
             }
 
 
             void wrongExpense()
-            {    
+            {
                 form.mainFormTextMessage(errorMessage, errorTitle, txtAmount);
             }
+        }
+
+        private void toolStripButtonAbout_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This part of the app will allow you to input your expenses whether if it's recurring or not.\n\nKindly fill up the form and click the button to add the expense. You will then see it on the main form added on the list.");
+        }
+
+        private void AddExpensesForm_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
