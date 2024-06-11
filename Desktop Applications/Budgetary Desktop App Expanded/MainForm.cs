@@ -125,7 +125,6 @@ namespace Budgetary_Desktop_App_Expanded
 
             Expense newExpense = new Expense(expenseName, amount, category, isRecurring);
             expenseList.Add(newExpense);
-            MessageBox.Show(newExpense.ToString());
 
         }
 
@@ -198,6 +197,7 @@ namespace Budgetary_Desktop_App_Expanded
                     Paragraph title = new Paragraph("Budgetary App Report " + DateTime.Today.ToString("D")).SetBold();
                     document.Add(title);
 
+
                     // Extract Income and Budget details
                     Paragraph incomeBudgetTitle = new Paragraph("Starting and Daily Budget").SetBold();
                     Paragraph incomeBudget = new Paragraph();
@@ -215,10 +215,6 @@ namespace Budgetary_Desktop_App_Expanded
                     expenseTableRecurring.AddHeaderCell("Category");
                     expenseTableRecurring.AddHeaderCell("Amount");
 
-
-
-
-
                     foreach (var item in expenseList)
                     {
                         string expenseName = item.Name;
@@ -233,7 +229,6 @@ namespace Budgetary_Desktop_App_Expanded
 
                             recurringExpenses += item.Amount;
 
-
                         }
                         else
                         {
@@ -246,23 +241,22 @@ namespace Budgetary_Desktop_App_Expanded
 
                         }
 
-
-
                     }
 
                     int daysRemaining = DateTime.DaysInMonth(int.Parse(DateTime.Now.ToString("yyyy")), int.Parse(DateTime.Now.ToString("MM"))) - int.Parse(DateTime.Now.ToString("dd"));
                     decimal totalExpense = oneoffExpenses + recurringExpenses;
                     decimal actualBudget = startingBudget - (oneoffExpenses + recurringExpenses);
-                    Paragraph expensesTitle = new Paragraph("Expenses Details").SetBold();
+                    Paragraph expensesTitle = new Paragraph("\nExpenses Details").SetBold();
                     Paragraph expensesParagraph = new Paragraph();
                     expensesParagraph.Add("Total One-time Expenses: ₱" + oneoffExpenses.ToString("0.00").PadLeft(70, ' ')).SetFontSize(12);
                     expensesParagraph.Add("\nTotal Recurring Expenses: ₱" + recurringExpenses.ToString("0.00").PadLeft(69, ' '));
-                    expensesParagraph.Add($"\nTotal Expenses: ₱"+ totalExpense.ToString("0.00").PadLeft(86, ' '));
-                    expensesParagraph.Add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
-                    expensesParagraph.Add($"\n\nActual Budget after recurring expenses: "+actualBudget.ToString("0.00").PadLeft(49, ' '));
-                    
+                    expensesParagraph.Add($"\nTotal Expenses: ₱" + totalExpense.ToString("0.00").PadLeft(86, ' '));
+                    expensesParagraph.Add($"\n\nActual Budget expenses: " + actualBudget.ToString("0.00").PadLeft(49, ' '));
+
                     string nxtCutoff = cboModeOfPayment.SelectedIndex == 0 ? $"Days remaining until next cutoff: {daysRemaining.ToString().PadRight(25)}\n".PadLeft(70, ' ') : $"Days remaining until next cutoff: {(daysRemaining / 4).ToString().PadRight(25)}\n".PadLeft(70, ' ');
                     Paragraph nextCutOff = new Paragraph(nxtCutoff);
+                    document.Add(nextCutOff);
+
                     // Add the income and budget details
                     document.Add(incomeBudgetTitle);
                     document.Add(incomeBudget);
@@ -271,16 +265,24 @@ namespace Budgetary_Desktop_App_Expanded
                     document.Add(new Paragraph("One-time Expenses:").SetBold());
                     document.Add(expenseTable);
 
-                    
-
-
                     document.Add(new Paragraph("Recurring Expenses:").SetBold());
                     document.Add(expenseTableRecurring);
-                    document.Add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
                     document.Add(expensesTitle);
                     document.Add(expensesParagraph);
-                    document.Add(nextCutOff);
+                    var remainingDaysBudget = int.Parse(actualBudget.ToString()) / int.Parse(dailyBudget.ToString());
+                    int.Parse(remainingDaysBudget.ToString());
+                    Paragraph remainingDays = new Paragraph();
+                    remainingDays.Add($"\nComputing Daily Budget against the remaining balance:{remainingDaysBudget.ToString().PadLeft(25, ' ')}");
+                    remainingDays.Add($"\n\nIf you stick to your daily budget, you may have {remainingDaysBudget} days against the next cut off (if this value is negative, then you are spending more than your actual budget and we suggest that you lower your daily budget to encourage savings.)");
+                    document.Add(remainingDays);
+                    document.Add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
 
+                    Paragraph savings = new Paragraph("\nEstimated Savings").SetBold();
+                    document.Add(savings);
+                    var cutoff = cboModeOfPayment.SelectedIndex == 0 ? daysRemaining : (daysRemaining / 4);
+                    decimal actualSavings = (remainingDaysBudget - cutoff) * dailyBudget;
+                    document.Add(new Paragraph($"End of cycle savings: {actualSavings.ToString("0.00").PadLeft(75, ' ')}"));
+                    document.Add(new Paragraph($"You will save {actualSavings.ToString("0.00")} by the end of the cycle if you manage to keep your daily expenses below your daily budget."));
 
                 }
             }
@@ -306,16 +308,6 @@ namespace Budgetary_Desktop_App_Expanded
 
         private void MainForm_Load_1(object sender, EventArgs e)
         {
-            groupBoxBudget.Text = $"Budget Information ({DateTime.Today.ToString("D")})";
-            Expense expense = new Expense("Food Suplies", 2500, "Food", false);
-            expenseList.Add(expense);
-            expense = new Expense("Internet", 2500, "Utility", true);
-            expenseList.Add(expense);
-
-            txtStartingBudget.Text = "16000";
-            txtDailyBudget.Text = "350";
-            cboModeOfPayment.SelectedIndex = 0;
-
 
         }
     }

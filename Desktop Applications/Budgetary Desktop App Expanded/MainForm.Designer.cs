@@ -207,6 +207,7 @@ namespace Budgetary_Desktop_App_Expanded
             Controls.Add(groupBoxExpenses);
             Controls.Add(toolStripBottom);
             Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Budgetary Desktop App";
             Load += MainForm_Load_1;
             groupBoxBudget.ResumeLayout(false);
