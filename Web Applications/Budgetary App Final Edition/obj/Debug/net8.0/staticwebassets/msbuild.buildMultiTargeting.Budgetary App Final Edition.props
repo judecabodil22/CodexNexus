@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Budgetary App Final Edition.props" />
+</Project>

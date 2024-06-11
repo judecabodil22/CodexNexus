@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Budgetary App Final Edition.props" />
+</Project>
