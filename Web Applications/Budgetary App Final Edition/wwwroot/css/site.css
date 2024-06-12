@@ -1,22 +1,43 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+/* Custom styles for the grey and white theme */
 body {
-  margin-bottom: 60px;
+    background-color: #f8f9fa;
+    color: #495057;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#hero-section {
+    background-color: #6c757d;
+    color: #fff;
+    padding: 50px 0; /* Adjust as needed */
+}
+
+#features-section {
+    background-color: #fff;
+    padding: 50px 0; /* Adjust as needed */
+}
+
+.feature {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+    .feature h3 {
+        color: #6c757d;
+    }
+
+    .feature p {
+        color: #495057;
+    }
+
+#footer {
+    color: #fff;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
 }
