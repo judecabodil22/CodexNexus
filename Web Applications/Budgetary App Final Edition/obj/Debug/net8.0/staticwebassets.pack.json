@@ -5,12 +5,164 @@
       "PackagePath": "staticwebassets\\Budgetary App Final Edition.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\css\\Dark-NavBar-Navigation-with-Button.css",
+      "PackagePath": "staticwebassets\\css\\Dark-NavBar-Navigation-with-Button.css"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\css\\Dark-NavBar-Navigation-with-Search.css",
+      "PackagePath": "staticwebassets\\css\\Dark-NavBar-Navigation-with-Search.css"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\css\\Navbar-Centered-Brand-Dark-icons.css",
+      "PackagePath": "staticwebassets\\css\\Navbar-Centered-Brand-Dark-icons.css"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\css\\animate.min.css",
+      "PackagePath": "staticwebassets\\css\\animate.min.css"
+    },
+    {
       "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\FontAwesome.otf",
+      "PackagePath": "staticwebassets\\fonts\\FontAwesome.otf"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-brands-400.eot",
+      "PackagePath": "staticwebassets\\fonts\\fa-brands-400.eot"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-brands-400.svg",
+      "PackagePath": "staticwebassets\\fonts\\fa-brands-400.svg"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-brands-400.ttf",
+      "PackagePath": "staticwebassets\\fonts\\fa-brands-400.ttf"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-brands-400.woff",
+      "PackagePath": "staticwebassets\\fonts\\fa-brands-400.woff"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-brands-400.woff2",
+      "PackagePath": "staticwebassets\\fonts\\fa-brands-400.woff2"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-regular-400.eot",
+      "PackagePath": "staticwebassets\\fonts\\fa-regular-400.eot"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-regular-400.svg",
+      "PackagePath": "staticwebassets\\fonts\\fa-regular-400.svg"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-regular-400.ttf",
+      "PackagePath": "staticwebassets\\fonts\\fa-regular-400.ttf"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-regular-400.woff",
+      "PackagePath": "staticwebassets\\fonts\\fa-regular-400.woff"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-regular-400.woff2",
+      "PackagePath": "staticwebassets\\fonts\\fa-regular-400.woff2"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-solid-900.eot",
+      "PackagePath": "staticwebassets\\fonts\\fa-solid-900.eot"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-solid-900.svg",
+      "PackagePath": "staticwebassets\\fonts\\fa-solid-900.svg"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-solid-900.ttf",
+      "PackagePath": "staticwebassets\\fonts\\fa-solid-900.ttf"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-solid-900.woff",
+      "PackagePath": "staticwebassets\\fonts\\fa-solid-900.woff"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fa-solid-900.woff2",
+      "PackagePath": "staticwebassets\\fonts\\fa-solid-900.woff2"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\font-awesome.min.css",
+      "PackagePath": "staticwebassets\\fonts\\font-awesome.min.css"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fontawesome-all.min.css",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-all.min.css"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fontawesome-webfont.eot",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.eot"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fontawesome-webfont.svg",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.svg"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fontawesome-webfont.ttf",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.ttf"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fontawesome-webfont.woff",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.woff"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fontawesome-webfont.woff2",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.woff2"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\fontawesome5-overrides.min.css",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome5-overrides.min.css"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\line-awesome.eot",
+      "PackagePath": "staticwebassets\\fonts\\line-awesome.eot"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\line-awesome.min.css",
+      "PackagePath": "staticwebassets\\fonts\\line-awesome.min.css"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\line-awesome.svg",
+      "PackagePath": "staticwebassets\\fonts\\line-awesome.svg"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\line-awesome.ttf",
+      "PackagePath": "staticwebassets\\fonts\\line-awesome.ttf"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\line-awesome.woff",
+      "PackagePath": "staticwebassets\\fonts\\line-awesome.woff"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\fonts\\line-awesome.woff2",
+      "PackagePath": "staticwebassets\\fonts\\line-awesome.woff2"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\js\\bs-init.js",
+      "PackagePath": "staticwebassets\\js\\bs-init.js"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\js\\chart.min.js",
+      "PackagePath": "staticwebassets\\js\\chart.min.js"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\js\\jquery.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\js\\script.js",
+      "PackagePath": "staticwebassets\\js\\script.js"
     },
     {
       "Id": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\wwwroot\\js\\site.js",

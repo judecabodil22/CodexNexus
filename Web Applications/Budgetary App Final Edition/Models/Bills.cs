@@ -2,6 +2,18 @@
 {
     public class Bills
     {
-        public int MyProperty { get; set; }
+
+        public int id { get; set; }
+
+        public string name { get; set; }
+        public double amount { get; set; }
+        public int modeofPayment { get; set; }
+        public double startingBudget { get; set; }
+        public double dailyBudget { get; set; }
+
+        public DateTime date { get; set; }
+        public Bills()
+        {
+        }
     }
 }
