@@ -8,6 +8,8 @@
         public string name { get; set; }
         public double amount { get; set; }
         public int modeofPayment { get; set; }
+        
+        public string category { get; set; }
         public double startingBudget { get; set; }
         public double dailyBudget { get; set; }
 
