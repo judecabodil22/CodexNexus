@@ -158,5 +158,14 @@ namespace Budgetary_App_Final_Edition.Controllers
 		{
 			return View();
 		}
+		public IActionResult BillsEdit()
+		{
+			return View();
+		}
+
+		public IActionResult BillsDelete()
+		{
+			return View();
+		}
 	}
 }
