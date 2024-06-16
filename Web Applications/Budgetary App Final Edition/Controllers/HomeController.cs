@@ -1,4 +1,5 @@
 using Budgetary_App_Final_Edition.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -13,6 +14,7 @@ namespace Budgetary_App_Final_Edition.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();
@@ -22,11 +24,6 @@ namespace Budgetary_App_Final_Edition.Controllers
         {
             return View();
         }
-        
-		public IActionResult Dashboard()
-		{
-			return View();
-		}
 
 		public IActionResult About()
 		{
