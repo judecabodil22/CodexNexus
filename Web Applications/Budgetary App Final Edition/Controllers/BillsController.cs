@@ -153,5 +153,10 @@ namespace Budgetary_App_Final_Edition.Controllers
         {
             return _context.Bills.Any(e => e.id == id);
         }
-    }
+
+		public IActionResult BillsCreate()
+		{
+			return View();
+		}
+	}
 }
