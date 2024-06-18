@@ -21,11 +21,12 @@ namespace Budgetary_App_Final_Edition.Controllers
 		}
 		[Authorize]
 		// GET: Bills
-		public async Task<IActionResult> Index()
+		public async Task<IActionResult> Dashboard()
 		{
 			return View(await _context.Bills.ToListAsync());
 		}
-		[Authorize]
+
+        [Authorize]
 		// GET: Bills/Details/5
 		public async Task<IActionResult> Details(int? id)
 		{
@@ -49,10 +50,8 @@ namespace Budgetary_App_Final_Edition.Controllers
 		{
 			return View();
 		}
+
 		[Authorize]
-		// POST: Bills/Create
-		// To protect from overposting attacks, enable the specific properties you want to bind to.
-		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("id,name,amount,modeofPayment,startingBudget,dailyBudget")] Bills bills)
@@ -61,13 +60,17 @@ namespace Budgetary_App_Final_Edition.Controllers
 			{
 				_context.Add(bills);
 				await _context.SaveChangesAsync();
-				return RedirectToAction(nameof(Index));
+				return RedirectToAction(nameof(Dashboard));
 			}
+			else
+			{
+				Console.Write("Cantttttt");
+			}	
 			return View(bills);
 		}
+
 		[Authorize]
 		// GET: Bills/Edit/5
-
 		public async Task<IActionResult> Edit(int? id)
 		{
 			if (id == null)
@@ -156,7 +159,7 @@ namespace Budgetary_App_Final_Edition.Controllers
 			return _context.Bills.Any(e => e.id == id);
 		}
 		[Authorize]
-		public IActionResult BillsCreate()
+		public IActionResult CreateTest()
 		{
 			return View();
 		}
@@ -170,5 +173,6 @@ namespace Budgetary_App_Final_Edition.Controllers
 		{	
 			return View();
 		}
-	}
+        
+    }
 }

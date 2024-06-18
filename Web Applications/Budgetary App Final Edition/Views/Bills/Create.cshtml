@@ -1,53 +1,95 @@
-ï»¿@model Budgetary_App_Final_Edition.Models.Bills
-
+ @model Budgetary_App_Final_Edition.Models.Bills
 @{
-    ViewData["Title"] = "Create";
+	ViewData["Title"] = "Create Bills";
 }
 
-<h1>Create</h1>
+<form asp-action="Create" asp-controller="Bills" method="post">
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	<div class="container-fluid text-center">
+		<div class="row text-center">
+			<div class="col text-center">
+				<section class="text-center text-sm-center text-md-center text-lg-center text-xl-center text-xxl-center position-relative py-4 py-xl-5">
+					<div class="container text-center position-relative">
+						<div class="row d-flex justify-content-center">
+							<div class="col-1 col-md-8 col-lg-6 col-xl-5 col-xxl-12">
+								<div class="row d-flex justify-content-center">
 
-<h4>Bills</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="name" class="control-label"></label>
-                <input asp-for="name" class="form-control" />
-                <span asp-validation-for="name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="amount" class="control-label"></label>
-                <input asp-for="amount" class="form-control" />
-                <span asp-validation-for="amount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="modeofPayment" class="control-label"></label>
-                <input asp-for="modeofPayment" class="form-control" />
-                <span asp-validation-for="modeofPayment" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="startingBudget" class="control-label"></label>
-                <input asp-for="startingBudget" class="form-control" />
-                <span asp-validation-for="startingBudget" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="dailyBudget" class="control-label"></label>
-                <input asp-for="dailyBudget" class="form-control" />
-                <span asp-validation-for="dailyBudget" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+									<div class="col">
+										<div class="card card mb-5">
+											<div class="card-body text-center p-sm-5">
+												<h2 class="text-center mb-4">Budgets</h2>
+												<small class="text-body-secondary">Entering your target budgets will help us determine if your savings and if whether you can last until the next cutoff </small>
+												<hr />
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+												<div class="form-floating mb-3">
+													<input asp-for="startingBudget" id="floatingInput-2" class="form-control form-control" type="number" />
+													<label class="form-label" for="floatingInput">Starting Budget</label>
+													<span asp-validation-for="startingBudget" class="text-danger" />
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+												</div>
+												<div class="form-floating mb-3">
+													<input asp-for="dailyBudget" id="floatingInput-3" class="form-control form-control" type="number" />
+													<label class="form-label" for="floatingInput-1">Daily Budget</label>
+													<span asp-validation-for="dailyBudget" class="text-danger"/>
+												</div>
+												<hr />
+												<div class="mb-3">
+													<div class="dropdown">
+														<button id="mopBtn" class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" style="width: 100%;background: var(--bs-secondary-bg);--bs-primary: ##6c757d;--bs-secondary: #6c757d;--bs-secondary-rgb: 108,117,125;" type="button">Mode of Payment</button>
+														<input asp-for="modeofPayment" type="" id="modeofPayment" name="modeofPayment" value="" />
+														<span asp-validation-for="modeofPayment" class="text-danger" />
+														<div class="dropdown-menu">
+															<a class="dropdown-item" href="#" data-value="1" data-type="modeofPayment">Option A</a>
+															<a class="dropdown-item" href="#" data-value="2" data-type="modeofPayment">Option B</a>
+															<a class="dropdown-item" href="#" data-value="3" data-type="modeofPayment">Option C</a>
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="card mb-5">
+											<div class="card-body text-center p-sm-5">
+												<h2 class="text-center mb-4">Expenses</h2><small class="text-body-secondary">Input your defined expenses whether if it&#39;s recurring or not. Expenses should be defined periodically approximately after 2 weeks or monthly.</small>
+												<hr />
+
+												<div class="form-floating mb-3">
+													<input asp-for="name" id="floatingInput-1" class="form-control form-control" placeholder="Food" />
+													<label class="form-label" for="floatingInput">Expenses Name</label>
+													<span asp-validation-for="name" class="text-danger"/>
+												</div>
+												<div class="form-floating mb-3">
+													<input asp-for="amount" id="floatingInput-4" class="form-control form-control" type="number" placeholder="2000" name="amount" />
+													<label class="form-label" for="floatingInput">Amount</label></div>
+													<span asp-validation-for="amount" class="text-danger"/>
+												<div class="mb-3"></div>
+												<hr />
+												<div class="mb-3">
+													<div class="dropdown">
+														<button id="categoryBtn"class=	"btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: var(--bs-secondary-bg);">Categories</button>
+														<input asp-for="category" type="" id="category" name="category" value="" />
+														<span asp-validation-for="category" class="text-danger" />
+														<div class="dropdown-menu">
+															<a class="dropdown-item" href="#" data-value="1" data-type="category">Category A</a>
+															<a class="dropdown-item" href="#" data-value="2" data-type="category">Category B</a>
+															<a class="dropdown-item" href="#" data-value="3" data-type="category">Category C</a>
+														</div>
+													</div>
+												</div>
+												<div></div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="text-center text-sm-center text-md-center text-lg-center text-xl-center text-xxl-center text-secondary-emphasis text-opacity-50"><button class="btn btn-primary" type="submit" style="background: var(--bs-secondary-bg);width: 22%;">Submit</button></div>
+				</section>
+			</div>
+		</div>
+	</div>
+</form>

@@ -1,12 +1,15 @@
-$(document).ready(function() {
-    $('.dropdown').each(function() {
-        var $dropdown = $(this);
-        var $button = $dropdown.find('.btn');
-        var $menuItems = $dropdown.find('.dropdown-item');
+$(document).ready(function () {
+    $('.dropdown-item').on('click', function () {
+        var selectedText = $(this).text();
+        var selectedValue = $(this).data('value');
+        var type = $(this).data('type');
 
-        $menuItems.click(function() {
-            var selectedText = $(this).text();
-            $button.text(selectedText);
-        });
+        if (type === "modeofPayment") {
+            $('#mopBtn').text(selectedText);
+            $('#modeofPayment').val(selectedValue);
+        } else if (type === "category") {
+            $('#categoryBtn').text(selectedText);
+            $('#category').val(selectedValue);
+        }
     });
 });

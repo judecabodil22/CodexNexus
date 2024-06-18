@@ -14,7 +14,9 @@
         public double dailyBudget { get; set; }
 
         public DateTime date { get; set; }
-        public Bills()
+		public IEnumerable<Bills> BillsList { get; set; }
+
+		public Bills()
         {
         }
     }

@@ -1,0 +1,94 @@
+﻿ @model Budgetary_App_Final_Edition.Models.Bills
+@{
+	ViewData["Title"] = "Create Bills";
+}
+
+
+<div class="row">
+	<div class="col">
+		<section class="position-relative py-4 py-xl-5">
+			<div class="container position-relative">
+				<div class="row d-flex justify-content-center">
+					<div class="col-1 col-md-8 col-lg-6 col-xl-5 col-xxl-12">
+						<form asp-action="Create">
+							<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+							<div class="row d-flex justify-content-center">
+
+								<div class="col">
+									<div class="card card mb-5">
+										<div class="card-body text-center p-sm-5">
+											<h2 class="text-center mb-4">Budgets</h2><small class="text-body-secondary">Entering your target budgets will help us determine if your savings and if whether you can last until the next cutoff&nbsp;</small>
+											<hr>
+
+											<div class="form-floating mb-3">
+												<input class="form-control form-control" asp-for="startingBudget" id="floatingInput-2" placeholder="Internet">
+												<label class="form-label" for="floatingInput">Starting Budget</label>
+												<span asp-validation-for="startingBudget" class="text-danger"></span>
+
+											</div>
+											<div class="form-floating mb-3">
+												<input class="form-control asp-for=" startingBudget" form-control" id="floatingInput-3" placeholder="name@example.com">
+												<label class="form-label" for="floatingInput-1">Daily Budget</label>
+											</div>
+											<hr>
+											<div class="mb-3">
+												<div class="dropdown">
+													<button id="mopBtn" class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" style="width: 100%;background: var(--bs-secondary-bg);--bs-primary: ##6c757d;--bs-secondary: #6c757d;--bs-secondary-rgb: 108,117,125;" type="button">Mode of Payment</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item" href="#">Option A</a>
+														<a class="dropdown-item" href="#">Option B</a>
+														<a class="dropdown-item" href="#">Option C</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col">
+
+									<div class="card mb-5">
+										<div class="card-body text-center p-sm-5">
+											<h2 class="text-center mb-4">Expenses</h2><small class="text-body-secondary">Input your defined expenses whether if it's recurring or not. Expenses should be defined periodically approximately after 2 weeks or monthly.</small>
+											<hr>
+
+											<div class="form-floating mb-3">
+												<input id="floatingInput-1" class="form-control form-control" placeholder="Food" />
+												<label class="form-label" for="floatingInput">Expenses Name</label>
+												<span asp-validation-for="name" class="text-danger"></span>
+
+											</div>
+
+											<div class="form-floating mb-3">
+												<input id="floatingInput-4" class="form-control form-control" type="number" placeholder="2000" name="amount" />
+												<label class="form-label" for="floatingInput">Amount</label>
+												<span asp-validation-for="amount" class="text-danger"></span>
+
+											</div>
+											<div class="mb-3">
+												<div class="dropdown">
+													<button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: var(--bs-secondary-bg);">Categories</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item" href="#">Option A</a>
+														<a class="dropdown-item" href="#">Option B</a>
+														<a class="dropdown-item" href="#">Option C</a>
+													</div>
+												</div>
+											</div>
+											<hr>
+											<div>
+												<button class="btn btn-primary d-block w-100" type="submit" style="background: var(--bs-secondary-bg);">Submit</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
