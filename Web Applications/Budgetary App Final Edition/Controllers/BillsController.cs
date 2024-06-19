@@ -54,35 +54,36 @@ namespace Budgetary_App_Final_Edition.Controllers
 		[Authorize]
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("id,name,amount,modeofPayment,startingBudget,dailyBudget")] Bills bills)
+		public async Task<IActionResult> Create([Bind("id,name,amount,modeofPayment,category,startingBudget,dailyBudget")] Bills bills)
 		{
-			if (ModelState.IsValid)
-			{
+			/*if (ModelState.IsValid)
+			{*/
 				_context.Add(bills);
 				await _context.SaveChangesAsync();
 				return RedirectToAction(nameof(Dashboard));
-			}
+			//Console.Write(bills.name);
+			/*}
 			else
 			{
 				Console.Write("Cantttttt");
 			}	
 			return View(bills);
-		}
+*/		}
 
 		[Authorize]
 		// GET: Bills/Edit/5
 		public async Task<IActionResult> Edit(int? id)
 		{
-			if (id == null)
+			/*if (id == null)
 			{
 				return NotFound();
-			}
+			}*/
 
 			var bills = await _context.Bills.FindAsync(id);
-			if (bills == null)
+			/*if (bills == null)
 			{
 				return NotFound();
-			}
+			}*/
 			return View(bills);
 		}
 		[Authorize]
@@ -91,9 +92,9 @@ namespace Budgetary_App_Final_Edition.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("id,name,amount,modeofPayment,startingBudget,dailyBudget")] Bills bills)
+		public async Task<IActionResult> Edit(int id, [Bind("id,name,amount,modeofPayment,category,startingBudget,dailyBudget")] Bills bills)
 		{
-			if (id != bills.id)
+			/*if (id != bills.id)
 			{
 				return NotFound();
 			}
@@ -101,25 +102,25 @@ namespace Budgetary_App_Final_Edition.Controllers
 			if (ModelState.IsValid)
 			{
 				try
-				{
+				{*/
 					_context.Update(bills);
 					await _context.SaveChangesAsync();
-				}
-				catch (DbUpdateConcurrencyException)
-				{
-					if (!BillsExists(bills.id))
-					{
-						return NotFound();
-					}
-					else
-					{
-						throw;
-					}
-				}
-				return RedirectToAction(nameof(Index));
-			}
-			return View(bills);
-		}
+            /*}
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BillsExists(bills.id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Dashboard));
+        }*/
+            return RedirectToAction(nameof(Dashboard));
+        }
 		[Authorize]
 		// GET: Bills/Delete/5
 		public async Task<IActionResult> Delete(int? id)
@@ -151,7 +152,7 @@ namespace Budgetary_App_Final_Edition.Controllers
 			}
 
 			await _context.SaveChangesAsync();
-			return RedirectToAction(nameof(Index));
+			return RedirectToAction(nameof(Dashboard));
 		}
 		[Authorize]
 		private bool BillsExists(int id)
