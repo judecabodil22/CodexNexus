@@ -1,41 +1,61 @@
+@model Budgetary_App_Final_Edition.Models.Bills
+
+@{
+	ViewData["Title"] = "Edit";
+}
 <div class="container-fluid" style="width: 40%;">
-        <div class="row">
-            <div class="col">
-                <section class="position-relative py-4 py-xl-5">
-                    <div class="container position-relative">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-1 col-md-8 col-lg-6 col-xl-5 col-xxl-12">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                        <div class="card mb-5">
-                                            <div class="card-body p-sm-5">
-                                                <h2 class="text-center mb-4">Edit Expenses</h2>
-                                                <hr>
-                                                <form method="post">
-                                                    <div class="form-floating mb-3"><input id="floatingInput-1" class="form-control form-control" placeholder="Food" /><label class="form-label" for="floatingInput">Expenses Name</label></div>
-                                                    <div class="form-floating mb-3"><input id="floatingInput-4" class="form-control form-control" type="number" placeholder="2000" name="amount" /><label class="form-label" for="floatingInput">Amount</label></div>
-                                                    <div class="mb-3"></div>
-                                                    <div class="mb-3"><div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: var(--bs-secondary-bg);">Categories</button>
-    <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Option A</a>
-        <a class="dropdown-item" href="#">Option B</a>
-        <a class="dropdown-item" href="#">Option C</a>
-    </div>
-</div></div>
-                                                    <hr>
-                                                    <div>
-                                                        <div class="btn-group" role="group" style="width: 100%;"><a class="btn btn-primary d-block w-100" role="button" style="background:var(--bs-secondary-bg);" asp-controller="Bills" asp-action="BillsCreate">Go back to list</a><button class="btn btn-primary d-block w-100" type="submit" style="background:var(--bs-secondary-bg);">Submit</button></div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
-   
+	<div class="row">
+		<div class="col">
+			<section class="position-relative py-4 py-xl-5">
+				<div class="container position-relative">
+					<div class="row d-flex justify-content-center">
+						<div class="col-1 col-md-8 col-lg-6 col-xl-5 col-xxl-12">
+							<div class="row d-flex justify-content-center">
+								<div class="col">
+									<div class="card mb-5">
+										<div class="card-body p-sm-5">
+											<h2 class="text-center mb-4">Edit Expenses</h2>
+											<hr>
+											<form asp-action="BillsEdit" method="post">
+												<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+												<input type="hidden" asp-for="id" />
+												<div class="form-floating mb-3">
+													<input asp-for="name" id="floatingInput-1" class="form-control form-control" placeholder="Food" />
+													<label class="form-label" for="floatingInput">Expenses Name</label>
+													<span asp-validation-for="name" class="text-danger"></span>
+												</div>
+												<div class="form-floating mb-3">
+													<input asp-for="amount" id="floatingInput-4" class="form-control form-control" type="number" placeholder="2000" name="amount" />
+													<label class="form-label" for="floatingInput">Amount</label></div>
+												<span asp-validation-for="amount" class="text-danger"></span>
+												<div class="mb-3"></div>
+												<div class="mb-3">
+													<div class="dropdown">
+														<button id="categoryBtn" class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: var(--bs-secondary-bg);">Categories</button>
+														<input asp-for="category" type="" id="category" name="category" value="" />
+														<div class="dropdown-menu">
+															<a class="dropdown-item" href="#" data-value="1" data-type="category">Option A</a>
+															<a class="dropdown-item" href="#" data-value="2" data-type="category">Option B</a>
+															<a class="dropdown-item" href="#" data-value="3" data-type="category">Option C</a>
+														</div>
+													</div>
+												</div>
+												<hr>
+												<div>
+													<div class="btn-group" role="group" style="width: 100%;">
+														<a class="btn btn-primary d-block w-100" role="button" style="background:var(--bs-secondary-bg);" asp-controller="Bills" asp-action="Dashboard">Go back to list</a>
+														<button class="btn btn-primary d-block w-100" type="submit" style="background:var(--bs-secondary-bg);">Submit</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>

@@ -1,4 +1,10 @@
-    <div class="container-fluid" style="width: 40%;">
+@model Budgetary_App_Final_Edition.Models.Bills
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container-fluid" style="width: 40%;">
         <div class="row">
             <div class="col">
                 <section class="position-relative py-4 py-xl-5">
@@ -8,17 +14,30 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
                                         <div class="card mb-5">
+                                        <form asp-action="BillsDelete">
                                             <div class="card-body text-center p-sm-5">
                                                 <h2 class="text-center mb-4">Delete Expenses</h2><small>Are you sure you want to delete the following?</small>
                                                 <hr>
-                                                <form method="post">
-                                                    <div><label class="form-label fs-6 fw-bold text-start" style="width: 100%;">Expenses Name:</label><label class="form-label text-start" style="width: 100%;">Food</label></div>
-                                                    <div><label class="form-label fs-6 fw-bold text-start" style="width: 100%;">Category:</label><label class="form-label text-start" style="width: 100%;">Utilities</label></div>
-                                                    <div><label class="form-label fs-6 fw-bold text-start" style="width: 100%;">Amount:</label><label class="form-label text-start" style="width: 100%;">200.00</label></div>
-                                                </form>
+                                            
+                                                <input type="hidden" asp-for="id" />
+                                                <div>
+                                                    <label class="form-label fs-6 fw-bold text-start" style="width: 100%;">Expenses Name:</label>
+                                                    <label class="form-label text-start" style="width: 100%;">@Model.name</label>
+                                                    </div>
+                                                    <div>
+                                                        <label class="form-label fs-6 fw-bold text-start" style="width: 100%;">Category:</label>
+                                                        <label class="form-label text-start" style="width: 100%;">@Model.category</label>
+                                                        </div>
+                                                    <div>
+                                                        <label class="form-label fs-6 fw-bold text-start" style="width: 100%;">Amount:</label>
+                                                        <label class="form-label text-start" style="width: 100%;">@Model.amount</label>
+                                                    </div>
+                                                
                                                 <hr>
-                                                <div><button class="btn btn-primary d-block w-100" type="submit" style="background: var(--bs-secondary-bg);width: 50%;">Submit</button></div>
+                                                <div>
+                                                    <button class="btn btn-primary d-block w-100" type="submit" style="background: var(--bs-secondary-bg);width: 50%;">Submit</button></div>
                                             </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
