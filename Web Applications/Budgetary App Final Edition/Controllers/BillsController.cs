@@ -58,6 +58,8 @@ namespace Budgetary_App_Final_Edition.Controllers
         {
             if (ModelState.IsValid)
             {
+                bills.date = DateTime.Today;
+
                 _context.Add(bills);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Dashboard));

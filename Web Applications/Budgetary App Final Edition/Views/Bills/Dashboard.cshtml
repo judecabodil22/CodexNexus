@@ -81,59 +81,8 @@
 
 				@* Expenses Overview Chart *@
 				<div class="card-body">
-					<div id="expensesOverview"class="chart-area" style="filter: invert(0%); color: var(--bs-body-color); height: 197px;">
-						<canvas data-bss-chart='{
-		"type": "line",
-		"data": {
-			"labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
-			"datasets": [{
-				"label": "Earnings",
-				"fill": true,
-				"data": [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000],
-				"backgroundColor": "rgba(78, 115, 223, 0.05)",
-				"borderColor": "rgb(255,255,255)"
-			}]
-		},
-		"options": {
-			"maintainAspectRatio": false,
-			"legend": {
-				"display": false,
-				"labels": {
-					"fontStyle": "normal"
-				}
-			},
-			"title": {
-				"fontStyle": "normal",
-				"fontColor": "#666",
-				"display": false
-			},
-			"scales": {
-				"xAxes": [{
-					"gridLines": {
-						"drawBorder": true,
-						"drawTicks": true,
-						"drawOnChartArea": true
-					},
-					"ticks": {
-						"fontColor": "#ffffff",
-						"fontStyle": "normal",
-						"beginAtZero": false
-					}
-				}],
-				"yAxes": [{
-					"gridLines": {
-						"drawBorder": true,
-						"drawTicks": true
-					},
-					"ticks": {
-						"fontColor": "#ffffff",
-						"fontStyle": "normal",
-						"beginAtZero": false
-					}
-				}]
-			}
-		}
-	}'></canvas>
+					<div class="chart-area" style="filter: invert(0%); color: var(--bs-body-color); height: 197px;">
+						<canvas id="ExpensesOverviewChart"></canvas>
 					</div>
 				</div>
 			</div>
@@ -147,30 +96,7 @@
 				@* Expenses Sources Chart *@
 				<div class="card-body">
 					<div class="chart-area">
-						<canvas data-bss-chart='{
-		"type":"doughnut",
-		"data":{
-			"labels":["Direct","Social","Referral"],
-			"datasets":[{
-				"label":"",
-				"backgroundColor":["#333333","#888888","#dddddd"],
-				"borderColor":["#ffffff","#ffffff","#ffffff"],
-				"data":["68","12","20"]
-			}]
-		},
-		"options":{
-			"maintainAspectRatio":false,
-			"legend":{
-				"display":false,
-				"labels":{
-					"fontStyle":"normal"
-				}
-			},
-			"title":{
-				"fontStyle":"normal"
-			}
-		}
-	}'></canvas>
+						<canvas id="expSrcsChrt"</canvas>
 					</div>
 					<div class="text-center small mt-4"><span class="me-2"><i class="fas fa-circle" style="color: #333333;"></i>&nbsp;Direct</span><span class="me-2"><i class="fas fa-circle" style="color: #888888;"></i>&nbsp;Social</span><span class="me-2"><i class="fas fa-circle" style="color: #dddddd;"></i>&nbsp;Refferal</span></div>
 				</div>
@@ -187,60 +113,8 @@
 				@* Savings Overview *@
 				<div class="card-body">
 					<div class="chart-area" style="filter: invert(0%);color: var(--bs-body-color);height: 197px;">
-						<canvas data-bss-chart='{
-	"type": "line",
-	"data": {
-		"labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
-		"datasets": [{
-			"label": "Earnings",
-			"fill": true,
-			"data": [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000],
-			"backgroundColor": "rgba(78, 115, 223, 0.05)",
-			"borderColor": "rgb(255,255,255)"
-		}]
-	},
-	"options": {
-		"maintainAspectRatio": false,
-		"legend": {
-			"display": false,
-			"labels": {
-				"fontStyle": "normal"
-			}
-		},
-		"title": {
-			"fontStyle": "normal",
-			"fontColor": "#666",
-			"display": false
-		},
-		"scales": {
-			"xAxes": [{
-				"gridLines": {
-					"drawBorder": true,
-					"drawTicks": true,
-					"drawOnChartArea": true
-				},
-				"ticks": {
-					"fontColor": "#ffffff",
-					"fontStyle": "normal",
-					"beginAtZero": false
-				}
-			}],
-			"yAxes": [{
-				"gridLines": {
-					"drawBorder": true,
-					"drawTicks": true
-				},
-				"ticks": {
-					"fontColor": "#ffffff",
-					"fontStyle": "normal",
-					"beginAtZero": false
-				}
-			}]
-		}
-	}
-}'></canvas>
-
-</div>
+						<canvas id="svngOverview"></canvas>
+						</div>
 				</div>
 			</div>
 		</div>
@@ -253,30 +127,7 @@
 				@* Savings Chart (last three months) *@
 				<div class="card-body">
 					<div class="chart-area" style="height: 195px;">
-						<canvas data-bss-chart='{
-		"type": "bar",
-		"data": {
-			"labels": ["January", "February", "March"],
-			"datasets": [{
-				"label": "",
-				"backgroundColor": "rgb(255,255,255)",
-				"borderColor": "#ffffff",
-				"data": [50, 30, 15]
-			}]
-		},
-		"options": {
-			"maintainAspectRatio": false,
-			"legend": {
-				"display": false,
-				"labels": {
-					"fontStyle": "normal"
-				}
-			},
-			"title": {
-				"fontStyle": "normal"
-			}
-		}
-	}'></canvas>
+						<canvas id="svngDonutChrt"></canvas>
 					</div>
 				</div>
 			</div>
