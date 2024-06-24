@@ -76,40 +76,6 @@ namespace Budgetary_App_Final_Edition.Controllers
 
         }
 
-
-        /*[Authorize]
-		// GET: Bills/Delete/5
-		public async Task<IActionResult> Delete(int? id)
-			{
-				if (id == null)
-				{
-					return NotFound();
-				}
-
-				var bills = await _context.Bills
-					.FirstOrDefaultAsync(m => m.id == id);
-				if (bills == null)
-				{
-					return NotFound();
-				}
-
-				return View(bills);
-			}*/
-        /*[Authorize]
-        // POST: Bills/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var bills = await _context.Bills.FindAsync(id);
-            if (bills != null)
-            {
-                _context.Bills.Remove(bills);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Dashboard));
-        }*/
         [Authorize]
         private bool BillsExists(int id)
         {

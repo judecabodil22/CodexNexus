@@ -30,13 +30,13 @@
 												<div class="form-floating mb-3">
 													<input asp-for="dailyBudget" id="floatingInput-3" class="form-control form-control" type="number" />
 													<label class="form-label" for="floatingInput-1">Daily Budget</label>
-													<span asp-validation-for="dailyBudget" class="text-danger"/>
+													<span asp-validation-for="dailyBudget" class="text-danger" />
 												</div>
 												<hr />
 												<div class="mb-3">
 													<div class="dropdown">
 														<button id="mopBtn" class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" style="width: 100%;background: var(--bs-secondary-bg);--bs-primary: ##6c757d;--bs-secondary: #6c757d;--bs-secondary-rgb: 108,117,125;" type="button">Mode of Payment</button>
-														<input asp-for="modeofPayment" type="" id="modeofPayment" name="modeofPayment" value="" />
+														<input asp-for="modeofPayment" type="hidden" id="modeofPayment" name="modeofPayment" value="" />
 														<span asp-validation-for="modeofPayment" class="text-danger" />
 														<div class="dropdown-menu">
 															<a class="dropdown-item" href="#" data-value="1" data-type="modeofPayment">Option A</a>
@@ -56,29 +56,33 @@
 												<hr />
 
 												<div class="form-floating mb-3">
-													<input asp-for="name" id="floatingInput-1" class="form-control form-control" placeholder="Food" />
+													<input asp-for="name" id="floatingInput-1" class="form-control form-control" />
 													<label class="form-label" for="floatingInput">Expenses Name</label>
-													<span asp-validation-for="name" class="text-danger"/>
+													<span asp-validation-for="name" class="text-danger" />
 												</div>
 												<div class="form-floating mb-3">
-													<input asp-for="amount" id="floatingInput-4" class="form-control form-control" type="number" placeholder="2000" name="amount" />
-													<label class="form-label" for="floatingInput">Amount</label></div>
-													<span asp-validation-for="amount" class="text-danger"/>
+													<input asp-for="amount" id="floatingInput-4" class="form-control form-control" type="number" name="amount" />
+													<label class="form-label" for="floatingInput">Amount</label>
+													<span asp-validation-for="amount" class="text-danger" />
+
+												</div>
 												<div class="mb-3"></div>
 												<hr />
 												<div class="mb-3">
 													<div class="dropdown">
-														<button id="categoryBtn"class=	"btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: var(--bs-secondary-bg);">Categories</button>
-														<input asp-for="category" type="" id="category" name="category" value="" />
+														<button id="categoryBtn" class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: var(--bs-secondary-bg);">Categories</button>
+														<input asp-for="category" type="hidden" id="category" name="category" value="" />
 														<span asp-validation-for="category" class="text-danger" />
 														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#" data-value="1" data-type="category">Category A</a>
-															<a class="dropdown-item" href="#" data-value="2" data-type="category">Category B</a>
-															<a class="dropdown-item" href="#" data-value="3" data-type="category">Category C</a>
+															<a class="dropdown-item" href="#" data-value="1" data-type="category">Food</a>
+															<a class="dropdown-item" href="#" data-value="2" data-type="category">Transportation</a>
+															<a class="dropdown-item" href="#" data-value="3" data-type="category">Utilities</a>
+															<a class="dropdown-item" href="#" data-value="3" data-type="category">Others</a>
+
 														</div>
 													</div>
 												</div>
-												<div></div>
+												
 
 											</div>
 										</div>
@@ -89,7 +93,7 @@
 					</div>
 					<div class="text-center text-sm-center text-md-center text-lg-center text-xl-center text-xxl-center text-secondary-emphasis text-opacity-50">
 						<button class="btn btn-primary" type="submit" style="background: var(--bs-secondary-bg);width: 22%;">Submit</button>
-						</div>
+					</div>
 				</section>
 			</div>
 		</div>
