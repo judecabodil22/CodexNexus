@@ -35,13 +35,24 @@
 												<hr />
 												<div class="mb-3">
 													<div class="dropdown">
+
 														<button id="mopBtn" class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" style="width: 100%;background: var(--bs-secondary-bg);--bs-primary: ##6c757d;--bs-secondary: #6c757d;--bs-secondary-rgb: 108,117,125;" type="button">Mode of Payment</button>
+														<script>
+															//var modeofPayment = '@Html.Raw(ViewBag.ModeOfPayment.ToString())';
+
+															if (modeofPayment == 1) {
+																$('#mopBtn').text("Biweekly");
+															}
+															else if (modeofPayment == 2) {
+																$('#mopBtn').text("Monthly");
+															}
+														</script>
 														<input asp-for="modeofPayment" type="hidden" id="modeofPayment" name="modeofPayment" value="" />
 														<span asp-validation-for="modeofPayment" class="text-danger" />
 														<div class="dropdown-menu">
 															<a class="dropdown-item" href="#" data-value="1" data-type="modeofPayment">Biweekly</a>
 															<a class="dropdown-item" href="#" data-value="2" data-type="modeofPayment">Monthly</a>
-															
+
 														</div>
 													</div>
 												</div>
@@ -81,9 +92,7 @@
 
 														</div>
 													</div>
-												</div>
-												
-
+												</div
 											</div>
 										</div>
 									</div>

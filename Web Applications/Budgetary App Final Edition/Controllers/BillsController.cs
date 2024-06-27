@@ -20,6 +20,7 @@ namespace Budgetary_App_Final_Edition.Controllers
 		{
 			_context = context;
 		}
+
 		[Authorize]
 		// GET: Bills
 		public async Task<IActionResult> Dashboard()
@@ -59,12 +60,7 @@ namespace Budgetary_App_Final_Edition.Controllers
 				startingBudget = lastBill.startingBudget;
 				dailyBudget = lastBill.dailyBudget;
 				modeOfPayment = lastBill.modeofPayment;
-
-				/*if(modeOfPayment==1)
-                {
-                    modeOfPayment.ToString("Biweekly");
-                }*/
-
+				Console.WriteLine(modeOfPayment);
 			}
 
 			var bill = new Bills
@@ -74,6 +70,8 @@ namespace Budgetary_App_Final_Edition.Controllers
 				modeofPayment = modeOfPayment
 
 			};
+
+			ViewBag.ModeOfPayment = modeOfPayment;
 
 			return View(bill);
 		}
@@ -217,35 +215,6 @@ namespace Budgetary_App_Final_Edition.Controllers
 			return View(bills);
 		}
 
-		// This action returns data for the chart and dropdown
-
-		[HttpGet("Bills/GetBillsData")]
-		public List<object> GetBillsData()
-		{
-			List<object> data = new List<object>();
-			List<DateTime> dates = _context.Bills.Select(b => b.date).ToList();
-
-
-			List<string> months = dates.Select(date => date.ToString("MMMM")).ToList();
-			data.Add(months);
-
-			List<string> names = _context.Bills.Select(n => n.name).ToList();
-			data.Add(names);
-
-			List<double> amount = _context.Bills.Select(a => a.amount).ToList();
-			data.Add(amount);
-
-			List<double> dailyBudget = _context.Bills.Select(db => db.dailyBudget).ToList();
-			data.Add(dailyBudget);
-
-			List<double> startingBudget = _context.Bills.Select(sb => sb.startingBudget).ToList();
-			data.Add(startingBudget);
-
-			List<string> categories = _context.Bills.Select(c => c.category).ToList();
-			data.Add(categories);
-
-			return data;
-		}
 
 		[HttpGet]
 		public IActionResult GetMonthlyExpensesLine()
@@ -255,16 +224,53 @@ namespace Budgetary_App_Final_Edition.Controllers
 								   .Select(g => new
 								   {
 									   Month = g.Key,
-									   TotalExpenses = g.Sum(b => b.amount)
+									   TotalExpenses = g.Sum(b => b.amount),
+
 								   })
 								   .ToList();
 
+			// Get the oldest date recorded in the current month
+			var currentDate = DateTime.Now;
+			var currentMonth = DateTime.Now.Month;
+			var currentYear = DateTime.Now.Year;
+			var oldestDateThisMonth = _context.Bills
+											  .Where(b => b.date.Month == currentMonth && b.date.Year == currentYear)
+											  .OrderBy(b => b.date)
+											  .Select(b => b.date)
+											  .FirstOrDefault();
+
+			var lastBill = _context.Bills.OrderByDescending(b => b.id).FirstOrDefault();
+
+			var lastDayOfMonth = new DateTime(currentYear, currentMonth, DateTime.DaysInMonth(currentYear, currentMonth));
+			var daysLeft = (lastDayOfMonth - oldestDateThisMonth).Days;
+
+
 			var monthNames = expenses.Select(e => new DateTime(1, e.Month, 1).ToString("MMMM")).ToList();
-			var expensesData = expenses.Select(e => e.TotalExpenses).ToList();
+			var dailyBudget = lastBill?.dailyBudget ?? 0.0;
+
+			var expensesData = expenses.Select(e => e.TotalExpenses + (dailyBudget * daysLeft)).ToList();
 
 
 
-			return Json(new { monthNames, expensesData });
+			var startingBudget = lastBill?.startingBudget ?? 0.0;
+
+			var totalExpense = expensesData.Sum();
+			var actualDaysLeft = (lastDayOfMonth - currentDate).Days + 1;
+
+			var totalBudgetAfterExpenses = new List<double>();
+			foreach (var expense in expenses)
+			{
+				var monthlyBudget = startingBudget - (dailyBudget * daysLeft) - expense.TotalExpenses;
+
+
+
+				totalBudgetAfterExpenses.Add(monthlyBudget);
+			}
+
+			var averageExpenses = totalExpense / monthNames.Count;
+			var averageSavings = totalBudgetAfterExpenses.Average();
+
+			return Json(new { monthNames, expensesData, totalExpense, startingBudget, dailyBudget, oldestDateThisMonth, actualDaysLeft, totalBudgetAfterExpenses, averageExpenses, averageSavings });
 		}
 
 		[HttpGet]

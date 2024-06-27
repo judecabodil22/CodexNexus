@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Budgetary Desktop App Expanded")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+523b8757a0245cfd2afbbb4553ea244b4f3b0906")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fdc2f40baca819a83f599fd62d3991a8276aa0a0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Budgetary Desktop App Expanded")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Budgetary Desktop App Expanded")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

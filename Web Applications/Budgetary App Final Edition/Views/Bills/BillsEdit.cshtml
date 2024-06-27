@@ -32,13 +32,28 @@
 												<div class="mb-3">
 													<div class="dropdown">
 														<button id="categoryBtn" class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: var(--bs-secondary-bg);">Categories</button>
-														<input asp-for="category" type="hidden" id="category" name="category" value="" />
+														<input asp-for="category" type="hidden" id="category" name="category" />
 														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#" data-value="1" data-type="category">Option A</a>
-															<a class="dropdown-item" href="#" data-value="2" data-type="category">Option B</a>
-															<a class="dropdown-item" href="#" data-value="3" data-type="category">Option C</a>
+															<a class="dropdown-item" href="#" data-value="1" data-type="category">Food</a>
+															<a class="dropdown-item" href="#" data-value="2" data-type="category">Transportation</a>
+															<a class="dropdown-item" href="#" data-value="3" data-type="category">Utility</a>
+															<a class="dropdown-item" href="#" data-value="4" data-type="category">Others</a>
 														</div>
 													</div>
+													<script>
+														if ($("#category").val() == 1) {
+															$("#categoryBtn").text("Food");
+														}
+														else if ($("#category").val() == 2) {
+															$("#categoryBtn").text("Transportation");
+														}
+														else if ($("#category").val() == 3) {
+															$("#categoryBtn").text("Utility");
+														}
+														else if ($("#category").val() == 4) {
+															$("#categoryBtn").text("Others");
+														}
+													</script>
 												</div>
 												<hr>
 												<div>
