@@ -60,7 +60,7 @@ namespace Budgetary_App_Final_Edition.Controllers
 				startingBudget = lastBill.startingBudget;
 				dailyBudget = lastBill.dailyBudget;
 				modeOfPayment = lastBill.modeofPayment;
-				Console.WriteLine(modeOfPayment);
+				
 			}
 
 			var bill = new Bills
@@ -250,8 +250,6 @@ namespace Budgetary_App_Final_Edition.Controllers
 
 			var expensesData = expenses.Select(e => e.TotalExpenses + (dailyBudget * daysLeft)).ToList();
 
-
-
 			var startingBudget = lastBill?.startingBudget ?? 0.0;
 
 			var totalExpense = expensesData.Sum();
@@ -261,8 +259,6 @@ namespace Budgetary_App_Final_Edition.Controllers
 			foreach (var expense in expenses)
 			{
 				var monthlyBudget = startingBudget - (dailyBudget * daysLeft) - expense.TotalExpenses;
-
-
 
 				totalBudgetAfterExpenses.Add(monthlyBudget);
 			}
@@ -305,6 +301,64 @@ namespace Budgetary_App_Final_Edition.Controllers
 			}
 
 			return Json(new { expensesData, expenseCategories });
+		}
+
+
+		[HttpGet]
+		public IActionResult GetPastThreeMonthsSavings()
+		{
+			var currentMonth = DateTime.Now.Month;
+			var currentYear = DateTime.Now.Year;
+			var startDate = new DateTime(currentYear, currentMonth, 1).AddMonths(-2); // Three months including the current one
+			var endDate = new DateTime(currentYear, currentMonth, DateTime.DaysInMonth(currentYear, currentMonth));
+			var monthNames = new List<string>();
+
+			// Get expenses for the last three months
+			var expenses = _context.Bills
+								   .Where(b => b.date >= startDate && b.date <= endDate)
+								   .GroupBy(b => new { b.date.Year, b.date.Month })
+								   .Select(g => new
+								   {
+									   Year = g.Key.Year,
+									   Month = g.Key.Month,
+									   TotalExpenses = g.Sum(b => b.amount)
+								   })
+								   .OrderBy(g => g.Year).ThenBy(g => g.Month)
+								   .ToList();
+
+			var totalBudgetAfterExpenses = new List<double>();
+			var lastBill = _context.Bills.OrderByDescending(b => b.id).FirstOrDefault();
+			var startingBudget = lastBill?.startingBudget ?? 0.0;
+			var dailyBudget = lastBill?.dailyBudget ?? 0.0;
+
+			for (int i = 0; i < 3; i++)
+			{
+				var monthToCalculate = startDate.AddMonths(i).Month;
+				var yearToCalculate = startDate.AddMonths(i).Year;
+				var daysInMonth = DateTime.DaysInMonth(yearToCalculate, monthToCalculate);
+
+				var expenseForMonth = expenses.FirstOrDefault(e => e.Year == yearToCalculate && e.Month == monthToCalculate);
+				var totalExpensesForMonth = expenseForMonth?.TotalExpenses ?? 0.0;
+
+				var totalDaysLeft = (monthToCalculate == currentMonth && yearToCalculate == currentYear)
+									? (endDate - DateTime.Now).Days + 1
+									: daysInMonth;
+
+				var monthlyBudget = startingBudget - (dailyBudget * totalDaysLeft) - totalExpensesForMonth;
+				totalBudgetAfterExpenses.Add(monthlyBudget);
+
+				var monthName = new DateTime(yearToCalculate, monthToCalculate, 1).ToString("MMMM yyyy");
+				monthNames.Add(monthName);
+			}
+
+			var averageSavings = totalBudgetAfterExpenses.Average();
+
+			return Json(new
+			{
+				totalBudgetAfterExpenses,
+				monthNames,
+				averageSavings
+			});
 		}
 	}
 }

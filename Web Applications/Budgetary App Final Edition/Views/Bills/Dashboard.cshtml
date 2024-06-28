@@ -44,11 +44,11 @@
 							<div class="text-uppercase text-info fw-bold text-xs mb-1"><span style="color: var(--bs-body-bg);">SAVINGS:EXPENSES</span></div>
 							<div class="row g-0 align-items-center">
 								<div class="col-auto">
-									<div class="text-dark fw-bold h5 mb-0 me-3"><span>50%</span></div>
+									<div class="text-dark fw-bold h5 mb-0 me-3"><span id="savingsToRatio">50%</span></div>
 								</div>
 								<div class="col">
 									<div class="progress bg-body progress-sm" data-bs-theme="dark" style="color: var(--bs-progress-bar-color);background: var(--bs-progress-bar-color);border-color: var(--bs-progress-bar-color);">
-										<div class="progress-bar bg-light" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span class="visually-hidden">50%</span></div>
+										<div id="ratioProgress" class="progress-bar bg-light" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span class="visually-hidden"></span></div>
 									</div>
 								</div>
 							</div>
@@ -111,7 +111,7 @@
 		<div class="col-lg-7 col-xl-8">
 			<div class="card shadow mb-4" style="height: 278.188px;">
 				<div class="card-header d-flex justify-content-between align-items-center" style="background:var(--bs-body-color);">
-					<h6 class="fw-bold" style="color: var(--bs-body-bg);margin-bottom: 5px;margin-top: 5px;">Estimated Savings Overview</h6>
+					<h6 class="fw-bold" style="color: var(--bs-body-bg);margin-bottom: 5px;margin-top: 5px;">Actual Savings Overview</h6>
 				</div>
 
 				@* Savings Overview *@
@@ -125,7 +125,7 @@
 		<div class="col-lg-5 col-xl-4">
 			<div class="card shadow mb-4" style="height: 276.188px;">
 				<div class="card-header d-flex justify-content-between align-items-center" style="background: var(--bs-body-color);">
-					<h6 class="fw-bold" style="color: var(--bs-body-bg);">Savings (Last three months)</h6>
+					<h6 class="fw-bold" style="color: var(--bs-body-bg);">Predicted Savings based on (last three months)</h6>
 				</div>
 
 				@* Savings Chart (last three months) *@

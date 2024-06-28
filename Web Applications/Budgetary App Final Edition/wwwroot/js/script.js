@@ -35,7 +35,14 @@ $(document).ready(function () {
             $("#averageSavings").text(numberWithCommas(data.averageSavings));
             $("#averageExpenses").text(numberWithCommas(data.averageExpenses));
 
+            
 
+            var ratio = (data.averageSavings / data.averageExpenses)*100;
+           
+            $("#ratioProgress").attr("aria-valuenow", ratio).css("width", ratio + "%");
+
+
+            $("#savingsToRatio").text(Math.floor(ratio)+"%");
 
             const expOverviewChrt = document.getElementById('ExpensesOverviewChart');
             new Chart(expOverviewChrt, {
@@ -149,12 +156,6 @@ $(document).ready(function () {
         }
     });
 
-
-    /*
-	
-    const svngDonutChrt = document.getElementById('svngDonutChrt');*/
-
-
     $.ajax({
         url: 'GetMonthlyExpensesPie',
         method: 'GET',
@@ -198,36 +199,41 @@ $(document).ready(function () {
         }
     });
 
+    $.ajax({
+        url: 'GetPastThreeMonthsSavings',
+        method: 'GET',
+        success: function (data) {
 
-    new Chart(svngDonutChrt, {
-        "type": "bar",
-        "data": {
-            "labels": ["January", "February", "March"],
-            "datasets": [{
-                "label": "",
-                "backgroundColor": "rgb(255,255,255)",
-                "borderColor": "#ffffff",
-                "data": [50, 30, 15]
-            }]
-        },
-        "options": {
-            "maintainAspectRatio": false,
-            "legend": {
-                "display": false,
-                "labels": {
-                    "fontStyle": "normal"
+            const svngDonutChrt = document.getElementById('svngDonutChrt');
+            var monthNames = data.monthNames;
+            var averageSavings = data.totalBudgetAfterExpenses;
+
+            new Chart(svngDonutChrt, {
+                "type": "bar",
+                "data": {
+                    "labels": monthNames,
+                    "datasets": [{
+                        "label": "",
+                        "backgroundColor": "rgb(255,255,255)",
+                        "borderColor": "#ffffff",
+                        "data": averageSavings
+                    }]
+                },
+                "options": {
+                    "maintainAspectRatio": false,
+                    "legend": {
+                        "display": false,
+                        "labels": {
+                            "fontStyle": "normal"
+                        }
+                    },
+                    "title": {
+                        "fontStyle": "normal"
+                    }
                 }
-            },
-            "title": {
-                "fontStyle": "normal"
-            }
+            })
         }
     })
-
-
-
-
-
-
+    
 });
 
