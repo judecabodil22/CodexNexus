@@ -21,6 +21,7 @@
                                         <th class="text-center">Starting Budget</th>
                                         <th class="text-center">Daily Budget</th>
                                         <th class="text-center">Date</th>
+                                        <th class="text-center">Mode of Payment</th>
                                         <th class="text-center filter-false sorter-false">Actions</th>
                                     </tr>
                                 </thead>
@@ -35,6 +36,7 @@
                                             <td>@Html.DisplayFor(modelItem => item.startingBudget)</td>
                                             <td>@Html.DisplayFor(modelItem => item.dailyBudget)</td>
                                             <td>@item.date.ToString("MMMM dd yyyy")</td>
+                                            <td>@Html.DisplayFor(modelItem=> item.modeofPayment)</td>
                                             <td class="text-center align-middle">
                                                 <a class="btn btnMaterial btn-flat success semicircle" role="button" asp-route-id="@item.id" asp-controller="Bills" asp-action="BillsEdit">
                                                     <i class="fas fa-pen"></i>

@@ -3,7 +3,7 @@
 	ViewData["Title"] = "Create Bills";
 }
 
-<form asp-action="Create" asp-controller="Bills" method="post">
+<form  id="billForm"  asp-action="Create" asp-controller="Bills" method="post">
 	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 	<div class="container-fluid text-center">
 		<div class="row text-center">
@@ -22,13 +22,13 @@
 												<hr />
 
 												<div class="form-floating mb-3">
-													<input asp-for="startingBudget" id="floatingInput-2" class="form-control form-control" type="number" />
+													<input id="startingBudget" asp-for="startingBudget" id="floatingInput-2" class="form-control form-control" type="number" required />
 													<label class="form-label" for="floatingInput">Starting Budget</label>
 													<span asp-validation-for="startingBudget" class="text-danger" />
 
 												</div>
 												<div class="form-floating mb-3">
-													<input asp-for="dailyBudget" id="floatingInput-3" class="form-control form-control" type="number" />
+													<input id="dailyBudget" asp-for="dailyBudget" id="floatingInput-3" class="form-control form-control" type="number" required />
 													<label class="form-label" for="floatingInput-1">Daily Budget</label>
 													<span asp-validation-for="dailyBudget" class="text-danger" />
 												</div>
@@ -38,7 +38,7 @@
 
 														<button id="mopBtn" class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" style="width: 100%;background: var(--bs-secondary-bg);--bs-primary: ##6c757d;--bs-secondary: #6c757d;--bs-secondary-rgb: 108,117,125;" type="button">Mode of Payment</button>
 														<script>
-															//var modeofPayment = '@Html.Raw(ViewBag.ModeOfPayment.ToString())';
+															var modeofPayment = '@Html.Raw(ViewBag.ModeOfPayment.ToString())';
 
 															if (modeofPayment == 1) {
 																$('#mopBtn').text("Biweekly");
@@ -46,8 +46,9 @@
 															else if (modeofPayment == 2) {
 																$('#mopBtn').text("Monthly");
 															}
+
 														</script>
-														<input asp-for="modeofPayment" type="hidden" id="modeofPayment" name="modeofPayment" value="" />
+														<input id ="modeofPayment" asp-for="modeofPayment" type="hidden" id="modeofPayment" name="modeofPayment" />
 														<span asp-validation-for="modeofPayment" class="text-danger" />
 														<div class="dropdown-menu">
 															<a class="dropdown-item" href="#" data-value="1" data-type="modeofPayment">Biweekly</a>
@@ -67,12 +68,12 @@
 												<hr />
 
 												<div class="form-floating mb-3">
-													<input asp-for="name" id="floatingInput-1" class="form-control form-control" />
+													<input id="name" asp-for="name" id="floatingInput-1" class="form-control form-control" required />
 													<label class="form-label" for="floatingInput">Expenses Name</label>
 													<span asp-validation-for="name" class="text-danger" />
 												</div>
 												<div class="form-floating mb-3">
-													<input asp-for="amount" id="floatingInput-4" class="form-control form-control" type="number" name="amount" />
+													<input id="amount" asp-for="amount" id="floatingInput-4" class="form-control form-control" type="number" name="amount" required />
 													<label class="form-label" for="floatingInput">Amount</label>
 													<span asp-validation-for="amount" class="text-danger" />
 
@@ -92,7 +93,7 @@
 
 														</div>
 													</div>
-												</div
+												</div>
 											</div>
 										</div>
 									</div>
@@ -101,7 +102,7 @@
 						</div>
 					</div>
 					<div class="text-center text-sm-center text-md-center text-lg-center text-xl-center text-xxl-center text-secondary-emphasis text-opacity-50">
-						<button class="btn btn-primary" type="submit" style="background: var(--bs-secondary-bg);width: 22%;">Submit</button>
+						<button id="submitBtn" class="btn btn-primary" type="submit" style="background: var(--bs-secondary-bg);width: 22%;">Submit</button>
 					</div>
 				</section>
 			</div>
