@@ -117,4 +117,8 @@ packages/
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
 
+*/bin/
+*/obj/
+
+
 # End of automatically generated section

@@ -3,7 +3,7 @@
 	ViewData["Title"] = "Create Bills";
 }
 
-<form  id="billForm"  asp-action="Create" asp-controller="Bills" method="post">
+<form id="billForm" asp-action="Create" asp-controller="Bills" method="post">
 	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 	<div class="container-fluid text-center">
 		<div class="row text-center">
@@ -24,18 +24,17 @@
 												<div class="form-floating mb-3">
 													<input id="startingBudget" asp-for="startingBudget" id="floatingInput-2" class="form-control form-control" type="number" required />
 													<label class="form-label" for="floatingInput">Starting Budget</label>
-													<span asp-validation-for="startingBudget" class="text-danger" />
+													<span id="startingBudgetValidation" asp-validation-for="startingBudget" class="text-danger" />
 
 												</div>
 												<div class="form-floating mb-3">
 													<input id="dailyBudget" asp-for="dailyBudget" id="floatingInput-3" class="form-control form-control" type="number" required />
 													<label class="form-label" for="floatingInput-1">Daily Budget</label>
-													<span asp-validation-for="dailyBudget" class="text-danger" />
+													<span id="dailyBudgetValidation" asp-validation-for="dailyBudget" class="text-danger" />
 												</div>
 												<hr />
 												<div class="mb-3">
 													<div class="dropdown">
-
 														<button id="mopBtn" class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" style="width: 100%;background: var(--bs-secondary-bg);--bs-primary: ##6c757d;--bs-secondary: #6c757d;--bs-secondary-rgb: 108,117,125;" type="button">Mode of Payment</button>
 														<script>
 															var modeofPayment = '@Html.Raw(ViewBag.ModeOfPayment.ToString())';
@@ -48,13 +47,14 @@
 															}
 
 														</script>
-														<input id ="modeofPayment" asp-for="modeofPayment" type="hidden" id="modeofPayment" name="modeofPayment" />
-														<span asp-validation-for="modeofPayment" class="text-danger" />
+														<input id="modeofPayment" asp-for="modeofPayment" type="hidden" id="modeofPayment" name="modeofPayment" />
 														<div class="dropdown-menu">
 															<a class="dropdown-item" href="#" data-value="1" data-type="modeofPayment">Biweekly</a>
 															<a class="dropdown-item" href="#" data-value="2" data-type="modeofPayment">Monthly</a>
 
 														</div>
+														<span id="modeofPaymentValidation" asp-validation-for="modeofPayment" class="text-danger" />
+
 													</div>
 												</div>
 
@@ -70,12 +70,12 @@
 												<div class="form-floating mb-3">
 													<input id="name" asp-for="name" id="floatingInput-1" class="form-control form-control" required />
 													<label class="form-label" for="floatingInput">Expenses Name</label>
-													<span asp-validation-for="name" class="text-danger" />
+													<span id="nameValidation" asp-validation-for="name" class="text-danger" />
 												</div>
 												<div class="form-floating mb-3">
 													<input id="amount" asp-for="amount" id="floatingInput-4" class="form-control form-control" type="number" name="amount" required />
 													<label class="form-label" for="floatingInput">Amount</label>
-													<span asp-validation-for="amount" class="text-danger" />
+													<span id="amountValidation" asp-validation-for="amount" class="text-danger" />
 
 												</div>
 												<div class="mb-3"></div>
@@ -84,14 +84,14 @@
 													<div class="dropdown">
 														<button id="categoryBtn" class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: var(--bs-secondary-bg);">Categories</button>
 														<input asp-for="category" type="hidden" id="category" name="category" value="" />
-														<span asp-validation-for="category" class="text-danger" />
+
 														<div class="dropdown-menu">
 															<a class="dropdown-item" href="#" data-value="1" data-type="category">Food</a>
 															<a class="dropdown-item" href="#" data-value="2" data-type="category">Transportation</a>
 															<a class="dropdown-item" href="#" data-value="3" data-type="category">Utilities</a>
 															<a class="dropdown-item" href="#" data-value="4" data-type="category">Others</a>
-
 														</div>
+														<span id="categoryValidation" asp-validation-for="category" class="text-danger" />
 													</div>
 												</div>
 											</div>
@@ -102,7 +102,7 @@
 						</div>
 					</div>
 					<div class="text-center text-sm-center text-md-center text-lg-center text-xl-center text-xxl-center text-secondary-emphasis text-opacity-50">
-						<button id="submitBtn" class="btn btn-primary" type="submit" style="background: var(--bs-secondary-bg);width: 22%;">Submit</button>
+						<button id="submitBtn" class="btn btn-primary" type="button" style="background: var(--bs-secondary-bg);width: 22%;">Submit</button>
 					</div>
 				</section>
 			</div>

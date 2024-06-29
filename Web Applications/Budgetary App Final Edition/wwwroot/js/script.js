@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    $('.dropdown-toggle').dropdown();
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
@@ -17,10 +18,56 @@ $(document).ready(function () {
         }
     });
 
+    $("#submitBtn").click(function (e) {
+        e.preventDefault();
+        $('.text-danger').text('');
+
+        var isValid = true;
+
+        var startingBudget = $('#startingBudget').val();
+        var dailyBudget = $('#dailyBudget').val();
+        var modeofPayment = $("#modeofPayment").val();
+        var name = $("#name").val();
+        var amount = $("#amount").val();
+        var category = $("#category").val();
+       
+
+        if (!startingBudget || startingBudget <= 0) {
+            $("#startingBudgetValidation").text('Starting Budget is required and must be greater than zero.');
+            isValid = false;
+        }
+        if (!dailyBudget || dailyBudget <= 0) {
+            $("#dailyBudgetValidation").text('Daily Budget is required and must be greater than zero.');
+            isValid = false;
+        }
+        if (!modeofPayment) {
+            $("#modeofPaymentValidation").text('Mode of Payment is required.');
+            isValid = false;
+        }
+        if (!name) {
+            $("#nameValidation").text('Expense Name is required.');
+            isValid = false;
+        }
+        if (!amount || amount <= 0) {
+            $("#amountValidation").text('Amount is required and must be greater than zero.');
+            isValid = false;
+        }
+        if (!category) {
+            alert("no category selected");
+            $("#categoryValidation").text('Expense Category is required.');
+            isValid = false;
+            
+        }
+
+        /*if (isValid) {
+            $('#billForm').submit();
+        }*/
+    });
+
 
 
    /* $('#submitBtn').click(function () {
-        alert("this is a test");
+       
         // Clear previous validation messages
         $('.text-danger').text('');
 
