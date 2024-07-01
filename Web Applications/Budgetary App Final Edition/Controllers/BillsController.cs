@@ -9,6 +9,7 @@ using Budgetary_App_Final_Edition.Data;
 using Budgetary_App_Final_Edition.Models;
 using Microsoft.AspNetCore.Authorization;
 using SQLitePCL;
+using System.Runtime.ExceptionServices;
 
 namespace Budgetary_App_Final_Edition.Controllers
 {
@@ -60,7 +61,7 @@ namespace Budgetary_App_Final_Edition.Controllers
 				startingBudget = lastBill.startingBudget;
 				dailyBudget = lastBill.dailyBudget;
 				modeOfPayment = lastBill.modeofPayment;
-				
+
 			}
 
 			var bill = new Bills
@@ -224,8 +225,7 @@ namespace Budgetary_App_Final_Edition.Controllers
 								   .Select(g => new
 								   {
 									   Month = g.Key,
-									   TotalExpenses = g.Sum(b => b.amount),
-
+									   TotalExpenses = g.Sum(b => b.amount),							
 								   })
 								   .ToList();
 
@@ -239,7 +239,15 @@ namespace Budgetary_App_Final_Edition.Controllers
 											  .Select(b => b.date)
 											  .FirstOrDefault();
 
-			var lastBill = _context.Bills.OrderByDescending(b => b.id).FirstOrDefault();
+			if (oldestDateThisMonth == default)
+			{
+				oldestDateThisMonth = currentDate;
+			}
+
+			var lastBill = _context.Bills
+									.Where(b => b.date.Month == currentMonth && b.date.Year == currentYear)
+									.OrderByDescending(b => b.date)
+									.FirstOrDefault();
 
 			var lastDayOfMonth = new DateTime(currentYear, currentMonth, DateTime.DaysInMonth(currentYear, currentMonth));
 			var daysLeft = (lastDayOfMonth - oldestDateThisMonth).Days;
@@ -251,7 +259,32 @@ namespace Budgetary_App_Final_Edition.Controllers
 			var expensesData = expenses.Select(e => e.TotalExpenses + (dailyBudget * daysLeft)).ToList();
 
 			var startingBudget = lastBill?.startingBudget ?? 0.0;
+			if (startingBudget == 0.0 || dailyBudget == 0.0)
+			{
+				var lastBudgetLastMonth = _context.Bills
+					.Where(b => b.date < new DateTime(currentYear, currentMonth, 1))
+					.OrderByDescending(b => b.date)
+					.FirstOrDefault();
 
+				startingBudget = lastBudgetLastMonth?.startingBudget ?? 0.0;
+				dailyBudget = lastBudgetLastMonth?.dailyBudget ?? 0.0;
+
+				// Calculate daysLeft based on last month's first and last entries
+				var oldestDateLastMonth = _context.Bills
+					.Where(b => b.date.Month == lastBudgetLastMonth.date.Month && b.date.Year == lastBudgetLastMonth.date.Year)
+					.OrderBy(b => b.date)
+					.Select(b => b.date)
+					.FirstOrDefault();
+
+				var newestDateLastMonth = _context.Bills
+					.Where(b => b.date.Month == lastBudgetLastMonth.date.Month && b.date.Year == lastBudgetLastMonth.date.Year)
+					.OrderByDescending(b => b.date)
+					.Select(b => b.date)
+					.FirstOrDefault();
+
+				daysLeft = (newestDateLastMonth - oldestDateLastMonth).Days;
+
+			}
 			var totalExpense = expensesData.Sum();
 			var actualDaysLeft = (lastDayOfMonth - currentDate).Days + 1;
 
@@ -265,6 +298,28 @@ namespace Budgetary_App_Final_Edition.Controllers
 
 			var averageExpenses = totalExpense / monthNames.Count;
 			var averageSavings = totalBudgetAfterExpenses.Average();
+
+			if (averageSavings < 0)
+			{
+				var lastRecordLastMonth = _context.Bills
+					.Where(b => b.date < new DateTime(currentYear, currentMonth, 1))
+					.OrderByDescending(b => b.date)
+					.FirstOrDefault();
+
+				averageSavings = lastRecordLastMonth?.startingBudget ?? 0.0;
+			}
+
+			/*if (averageSavings < 0)
+			{
+				averageSavings = 0;
+			}*/
+
+			//Console.WriteLine(averageExpenses);
+			//Console.WriteLine(totalExpense);
+			//Console.WriteLine(monthNames.Count);
+			Console.WriteLine(totalExpense);
+
+
 
 			return Json(new { monthNames, expensesData, totalExpense, startingBudget, dailyBudget, oldestDateThisMonth, actualDaysLeft, totalBudgetAfterExpenses, averageExpenses, averageSavings });
 		}
@@ -309,27 +364,19 @@ namespace Budgetary_App_Final_Edition.Controllers
 		{
 			var currentMonth = DateTime.Now.Month;
 			var currentYear = DateTime.Now.Year;
-			var startDate = new DateTime(currentYear, currentMonth, 1).AddMonths(-2); // Three months including the current one
+
+			// Calculate start date as three months ago from the current month
+			var startDate = DateTime.Now.AddMonths(-2);
 			var endDate = new DateTime(currentYear, currentMonth, DateTime.DaysInMonth(currentYear, currentMonth));
 			var monthNames = new List<string>();
 
-			// Get expenses for the last three months
-			var expenses = _context.Bills
-								   .Where(b => b.date >= startDate && b.date <= endDate)
-								   .GroupBy(b => new { b.date.Year, b.date.Month })
-								   .Select(g => new
-								   {
-									   Year = g.Key.Year,
-									   Month = g.Key.Month,
-									   TotalExpenses = g.Sum(b => b.amount)
-								   })
-								   .OrderBy(g => g.Year).ThenBy(g => g.Month)
-								   .ToList();
+			// Get bills for the last three months
+			var billsLastThreeMonths = _context.Bills
+				.Where(b => b.date >= startDate && b.date <= endDate)
+				.OrderBy(b => b.date)
+				.ToList();
 
 			var totalBudgetAfterExpenses = new List<double>();
-			var lastBill = _context.Bills.OrderByDescending(b => b.id).FirstOrDefault();
-			var startingBudget = lastBill?.startingBudget ?? 0.0;
-			var dailyBudget = lastBill?.dailyBudget ?? 0.0;
 
 			for (int i = 0; i < 3; i++)
 			{
@@ -337,14 +384,73 @@ namespace Budgetary_App_Final_Edition.Controllers
 				var yearToCalculate = startDate.AddMonths(i).Year;
 				var daysInMonth = DateTime.DaysInMonth(yearToCalculate, monthToCalculate);
 
-				var expenseForMonth = expenses.FirstOrDefault(e => e.Year == yearToCalculate && e.Month == monthToCalculate);
-				var totalExpensesForMonth = expenseForMonth?.TotalExpenses ?? 0.0;
+				// Filter bills for the current month being calculated
+				var billsForMonth = billsLastThreeMonths
+					.Where(b => b.date.Month == monthToCalculate && b.date.Year == yearToCalculate)
+					.ToList();
 
-				var totalDaysLeft = (monthToCalculate == currentMonth && yearToCalculate == currentYear)
+				var totalExpensesForMonth = billsForMonth.Sum(b => b.amount);
+
+				// Calculate total days left based on whether it's the current month or a past month
+				var totalDaysLeft = (yearToCalculate == currentYear && monthToCalculate == currentMonth)
 									? (endDate - DateTime.Now).Days + 1
 									: daysInMonth;
 
-				var monthlyBudget = startingBudget - (dailyBudget * totalDaysLeft) - totalExpensesForMonth;
+				var lastBill = _context.Bills
+									.Where(b => b.date.Month == currentMonth && b.date.Year == currentYear)
+									.OrderByDescending(b => b.date)
+									.FirstOrDefault();
+
+				var startingBudget = lastBill?.startingBudget ?? 0.0;
+				var dailyBudget = lastBill?.dailyBudget ?? 0.0;
+				var daysLeft = totalDaysLeft; // Initialize daysLeft with totalDaysLeft
+
+				// If startingBudget or dailyBudget is zero, fetch from last recorded month
+				if (startingBudget == 0.0 || dailyBudget == 0.0)
+				{
+					var lastBudgetLastMonth = _context.Bills
+					.Where(b => b.date < new DateTime(currentYear, currentMonth, 1))
+					.OrderByDescending(b => b.date)
+					.FirstOrDefault();
+
+					startingBudget = lastBudgetLastMonth?.startingBudget ?? 0.0;
+					dailyBudget = lastBudgetLastMonth?.dailyBudget ?? 0.0;
+
+					var oldestDateLastMonth = DateTime.MinValue;
+					var newestDateLastMonth = DateTime.MinValue;
+					daysLeft = 0;
+
+					if (lastBudgetLastMonth != null)
+					{
+						oldestDateLastMonth = _context.Bills
+							.Where(b => b.date.Month == lastBudgetLastMonth.date.Month && b.date.Year == lastBudgetLastMonth.date.Year)
+							.OrderBy(b => b.date)
+							.Select(b => b.date)
+							.FirstOrDefault();
+
+						newestDateLastMonth = _context.Bills
+							.Where(b => b.date.Month == lastBudgetLastMonth.date.Month && b.date.Year == lastBudgetLastMonth.date.Year)
+							.OrderByDescending(b => b.date)
+							.Select(b => b.date)
+							.FirstOrDefault();
+
+						if (oldestDateLastMonth != DateTime.MinValue && newestDateLastMonth != DateTime.MinValue)
+						{
+							daysLeft = (newestDateLastMonth - oldestDateLastMonth).Days;
+						}
+					}
+					else
+					{
+						// Handle the case where lastBudgetLastMonth is null, perhaps by setting default values or logging an error.
+						// Example:
+						daysLeft = 0; // or any default value you want to assign
+					}
+
+					// Calculate daysLeft based on last month's first and last entries
+					daysLeft = (newestDateLastMonth - oldestDateLastMonth).Days;
+				}
+
+				var monthlyBudget = startingBudget - (dailyBudget * daysLeft) - totalExpensesForMonth;
 				totalBudgetAfterExpenses.Add(monthlyBudget);
 
 				var monthName = new DateTime(yearToCalculate, monthToCalculate, 1).ToString("MMMM yyyy");

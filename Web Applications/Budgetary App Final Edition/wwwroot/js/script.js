@@ -21,7 +21,7 @@ $(document).ready(function () {
     $("#submitBtn").click(function (e) {
         e.preventDefault();
         $('.text-danger').text('');
-
+        alert("hari");
         var isValid = true;
 
         var startingBudget = $('#startingBudget').val();
@@ -59,70 +59,11 @@ $(document).ready(function () {
             
         }
 
-        /*if (isValid) {
+        if (isValid) {
             $('#billForm').submit();
-        }*/
+        }
     });
 
-
-
-   /* $('#submitBtn').click(function () {
-       
-        // Clear previous validation messages
-        $('.text-danger').text('');
-
-        // Perform validation
-        var isValid = true;
-        var startingBudget = $('#startingBudget').val();
-        var dailyBudget = $('#dailyBudget').val();
-        var expenseName = $('#expenseName').val();
-        var amount = $('#amount').val();
-        var modeofPayment = $('#modeofPayment').val();
-        var category = $('#category').val();
-
-        if (!startingBudget || startingBudget <= 0) {
-            $('#startingBudget').next('.text-danger').text('Starting Budget is required and must be greater than zero.');
-            isValid = false;
-        }
-        if (!dailyBudget || dailyBudget <= 0) {
-            $('#dailyBudget').next('.text-danger').text('Daily Budget is required and must be greater than zero.');
-            isValid = false;
-        }
-        if (!expenseName) {
-            $('#name').next('.text-danger').text('Expenses Name is required.');
-            isValid = false;
-        }
-        if (!amount || amount <= 0) {
-            $('#amount').next('.text-danger').text('Amount is required and must be greater than zero.');
-            isValid = false;
-        }
-        if (!modeofPayment) {
-            $('#modeofPayment').next('.text-danger').text('Mode of Payment is required.');
-            isValid = false;
-        }
-        if (!category) {
-            $('#category').next('.text-danger').text('Category is required.');
-            isValid = false;
-        }
-
-        // If valid, submit the form
-        if (isValid) {
-            alert("form valid");
-            $('#billForm').submit();
-        }
-        else {
-            alert("form invalid");
-        }
-    });*/
-           
-        
-        
-
-
-   
-
-
-   
 
     $.ajax({
 
