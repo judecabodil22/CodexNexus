@@ -8,24 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\judec\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\judec\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\judec\\Source\\Repos\\C-Sharp-Apps\\Console Applications\\Budgetary\\Budgetary.csproj",
+      "projectUniqueName": "C:\\Users\\judec\\source\\repos\\judecabodil22\\Codexnexus\\Console Applications\\Budgetary\\Budgetary.csproj",
       "projectName": "Budgetary",
-      "projectPath": "C:\\Users\\judec\\Source\\Repos\\C-Sharp-Apps\\Console Applications\\Budgetary\\Budgetary.csproj",
+      "projectPath": "C:\\Users\\judec\\source\\repos\\judecabodil22\\Codexnexus\\Console Applications\\Budgetary\\Budgetary.csproj",
       "packagesPath": "C:\\Users\\judec\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\judec\\Source\\Repos\\C-Sharp-Apps\\Console Applications\\Budgetary\\obj\\",
+      "outputPath": "C:\\Users\\judec\\source\\repos\\judecabodil22\\Codexnexus\\Console Applications\\Budgetary\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
         "C:\\Users\\judec\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -50,7 +45,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -71,7 +67,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

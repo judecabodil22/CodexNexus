@@ -11,11 +11,12 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-Budgetary_App_Final_Edition-22c32cde-40fa-4b52-937a-00785afb2164")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Budgetary App Final Edition")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1cc01bb197cb8414dad12f858b8cd4cc1bb40143")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2606e8287ba318ef406939c04a2d514a7f58156a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Budgetary App Final Edition")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Budgetary App Final Edition")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

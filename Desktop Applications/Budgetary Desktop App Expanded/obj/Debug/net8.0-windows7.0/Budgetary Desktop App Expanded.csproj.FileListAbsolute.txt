@@ -47,3 +47,52 @@ C:\Users\judec\source\repos\C-Sharp-Apps\Desktop Applications\Budgetary Desktop 
 C:\Users\judec\source\repos\C-Sharp-Apps\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.pdb
 C:\Users\judec\source\repos\C-Sharp-Apps\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.genruntimeconfig.cache
 C:\Users\judec\source\repos\C-Sharp-Apps\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\ref\Budgetary Desktop App Expanded.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.exe
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\x64\pdfium.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.deps.json
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.runtimeconfig.json
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.pdb
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\BouncyCastle.Cryptography.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\itext.barcodes.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\itext.bouncy-castle-connector.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\itext.forms.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\itext.io.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\itext.kernel.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\itext.layout.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\itext.pdfa.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\itext.pdfua.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\itext.sign.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\itext.styledxmlparser.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\itext.svg.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\itext.bouncy-castle-adapter.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\itext.commons.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\Microsoft.Extensions.Logging.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\Microsoft.Extensions.Options.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\Microsoft.Extensions.Primitives.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\Newtonsoft.Json.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\PdfiumViewer.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\de\PdfiumViewer.resources.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\bin\Debug\net8.0-windows7.0\nl\PdfiumViewer.resources.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.csproj.AssemblyReference.cache
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary_Desktop_App_Expanded.AboutForm.resources
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary_Desktop_App_Expanded.AddExpensesForm.resources
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary_Desktop_App_Expanded.MainForm.resources
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary_Desktop_App_Expanded.PdfPreviewForm.resources
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.csproj.GenerateResource.cache
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.AssemblyInfoInputs.cache
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.AssemblyInfo.cs
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.csproj.CoreCompileInputs.cache
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.sourcelink.json
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetar.A83F8BFE.Up2Date
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\refint\Budgetary Desktop App Expanded.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.pdb
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\Budgetary Desktop App Expanded.genruntimeconfig.cache
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Desktop Applications\Budgetary Desktop App Expanded\obj\Debug\net8.0-windows7.0\ref\Budgetary Desktop App Expanded.dll

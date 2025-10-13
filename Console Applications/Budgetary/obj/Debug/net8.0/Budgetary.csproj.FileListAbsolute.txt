@@ -26,3 +26,18 @@ C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\obj\
 C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.pdb
 C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.genruntimeconfig.cache
 C:\Users\judec\OneDrive\Desktop\C-Sharp Apps\Console Applications\Budgetary\obj\Debug\net8.0\ref\Budgetary.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\bin\Debug\net8.0\Budgetary.exe
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\bin\Debug\net8.0\Budgetary.deps.json
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\bin\Debug\net8.0\Budgetary.runtimeconfig.json
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\bin\Debug\net8.0\Budgetary.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\bin\Debug\net8.0\Budgetary.pdb
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.AssemblyInfoInputs.cache
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.AssemblyInfo.cs
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.csproj.CoreCompileInputs.cache
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.sourcelink.json
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\obj\Debug\net8.0\refint\Budgetary.dll
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.pdb
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\obj\Debug\net8.0\Budgetary.genruntimeconfig.cache
+C:\Users\judec\source\repos\judecabodil22\Codexnexus\Console Applications\Budgetary\obj\Debug\net8.0\ref\Budgetary.dll

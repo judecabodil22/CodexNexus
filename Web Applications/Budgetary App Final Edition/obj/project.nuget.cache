@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LyzzD1TQ78o=",
+  "dgSpecHash": "gMgaLVJW9ak=",
   "success": true,
-  "projectFilePath": "C:\\Users\\judec\\source\\repos\\C-Sharp-Apps\\Web Applications\\Budgetary App Final Edition\\Budgetary App Final Edition.csproj",
+  "projectFilePath": "C:\\Users\\judec\\source\\repos\\judecabodil22\\Codexnexus\\Web Applications\\Budgetary App Final Edition\\Budgetary App Final Edition.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\judec\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\judec\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
