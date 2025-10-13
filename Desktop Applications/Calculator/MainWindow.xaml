@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="Calculator" Height="703" Width="956"
-        Icon="/CodexNexus - Calculator.ico" ResizeMode="NoResize">
+        Title="Calculator" Height="703" Width="956" Icon="/CodexNexus - Calculator.ico"
+        >
     <Grid Margin="0,0,0,-6">
 
         <Button x:Name="_1DivideByNumber_Btn" Content="1/x" HorizontalAlignment="Left" Margin="16,217,0,0" VerticalAlignment="Top" Height="76" Width="151" FontSize="25" Click="_1DivideByNumber_Btn_Click" Background="#FF294D6F" Foreground="#FFF3F3F3"/>
