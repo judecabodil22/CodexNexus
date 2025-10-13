@@ -8,14 +8,7 @@
         Title="Calculator" Height="703" Width="956"
         Icon="/CodexNexus - Calculator.ico" ResizeMode="NoResize">
     <Grid Margin="0,0,0,-6">
-        <Button Content="7" HorizontalAlignment="Left" Margin="16,217,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
-        <Button Content="8" HorizontalAlignment="Left" Margin="172,217,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
-        <Button Content="9" HorizontalAlignment="Left" Margin="328,217,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
-        <Button Content="X" HorizontalAlignment="Left" Margin="484,217,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
-        <Button Content="7" HorizontalAlignment="Left" Margin="16,134,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
-        <Button Content="8" HorizontalAlignment="Left" Margin="172,134,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
-        <Button Content="9" HorizontalAlignment="Left" Margin="328,134,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
-        <Button Content="X" HorizontalAlignment="Left" Margin="484,134,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+
         <Button x:Name="_1DivideByNumber_Btn" Content="1/x" HorizontalAlignment="Left" Margin="16,217,0,0" VerticalAlignment="Top" Height="76" Width="151" FontSize="25" Click="_1DivideByNumber_Btn_Click" Background="#FF294D6F" Foreground="#FFF3F3F3"/>
         <Button x:Name="Raised_Btn" Content="x^2" HorizontalAlignment="Left" Margin="172,217,0,0" VerticalAlignment="Top" Height="76" Width="151" FontSize="25" Click="Raised_Btn_Click" Background="#FF294D6F" Foreground="#FFF3F3F3"/>
         <Button x:Name="Root_Btn" Content="^2√x" HorizontalAlignment="Left" Margin="328,217,0,0" VerticalAlignment="Top" Height="76" Width="151" FontSize="25" Click="Root_Btn_Click" Background="#FF294D6F" Foreground="#FFF3F3F3"/>
@@ -40,14 +33,7 @@
         <Button x:Name="Eight_Btn" Content="8" HorizontalAlignment="Left" Margin="172,298,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Eight_Btn_Click" FontSize="25" Background="#FF294D6F" Foreground="#FFF3F3F3"/>
         <Button x:Name="Nine_Btn" Content="9" HorizontalAlignment="Left" Margin="328,298,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Nine_Btn_Click" FontSize="25" Background="#FF294D6F" Foreground="#FFF3F3F3"/>
         <Button x:Name="Multiply_Btn" Content="X" HorizontalAlignment="Left" Margin="484,298,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Multiply_Btn_Click" FontSize="25" Background="#FF294D6F" Foreground="#FFF3F3F3"/>
-        <Button Content="7" HorizontalAlignment="Left" Margin="16,545,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
-        <Button Content="8" HorizontalAlignment="Left" Margin="172,545,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
-        <Button Content="9" HorizontalAlignment="Left" Margin="328,545,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
-        <Button Content="X" HorizontalAlignment="Left" Margin="484,545,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
-        <Button Content="7" HorizontalAlignment="Left" Margin="16,462,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
-        <Button Content="8" HorizontalAlignment="Left" Margin="172,462,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
-        <Button Content="9" HorizontalAlignment="Left" Margin="328,462,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
-        <Button Content="X" HorizontalAlignment="Left" Margin="484,462,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+
         <Button x:Name="ChangeOperands_Btn" Content="+/-" HorizontalAlignment="Left" Margin="16,545,0,0" VerticalAlignment="Top" Height="76" Width="151" FontSize="25" Background="#FF294D6F" Foreground="#FFF3F3F3"/>
         <Button x:Name="Zero_Btn" Content="0" HorizontalAlignment="Left" Margin="172,545,0,0" VerticalAlignment="Top" Height="76" Width="151" FontSize="25" Background="#FF294D6F" Foreground="#FFF3F3F3"/>
         <Button x:Name="Decimal_Btn" Content="." HorizontalAlignment="Left" Margin="328,545,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Decimal_Btn_Click" FontSize="25" Background="#FF294D6F" Foreground="#FFF3F3F3"/>
