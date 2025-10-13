@@ -1,0 +1,63 @@
+﻿<Window x:Class="Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calculator"
+        mc:Ignorable="d"
+        Title="Calculator" Height="758" Width="956">
+    <Grid Margin="0,0,310,0">
+        <Button Content="7" HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="8" HorizontalAlignment="Left" Margin="166,300,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="9" HorizontalAlignment="Left" Margin="322,300,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="X" HorizontalAlignment="Left" Margin="478,300,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="7" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="8" HorizontalAlignment="Left" Margin="166,217,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="9" HorizontalAlignment="Left" Margin="322,217,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="X" HorizontalAlignment="Left" Margin="478,217,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button x:Name="_1DivideByNumber_Btn" Content="1/x" HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button x:Name="Raised_Btn" Content="x^2" HorizontalAlignment="Left" Margin="166,300,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button x:Name="Root_Btn" Content="^2√x" HorizontalAlignment="Left" Margin="322,300,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button x:Name="Divide_Btn" Content="÷" HorizontalAlignment="Left" Margin="478,300,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Divide_Btn_Click"/>
+        <Button x:Name="Modulo_Btn" Content="%" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Modulo_Btn_Click"/>
+        <Button x:Name="ClearEntry_Btn" Content="CE" HorizontalAlignment="Left" Margin="166,217,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="ClearEntry_Btn_Click"/>
+        <Button x:Name="ClearAll_Btn" Content="C" HorizontalAlignment="Left" Margin="322,217,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="ClearAll_Btn_Click"/>
+        <Button x:Name="ClearLast_Btn" Content="&lt;-" HorizontalAlignment="Left" Margin="478,217,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="7" HorizontalAlignment="Left" Margin="10,464,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="8" HorizontalAlignment="Left" Margin="166,464,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="9" HorizontalAlignment="Left" Margin="322,464,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="X" HorizontalAlignment="Left" Margin="478,464,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="7" HorizontalAlignment="Left" Margin="10,381,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="8" HorizontalAlignment="Left" Margin="166,381,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="9" HorizontalAlignment="Left" Margin="322,381,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="X" HorizontalAlignment="Left" Margin="478,381,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button x:Name="Four_Btn" Content="4" HorizontalAlignment="Left" Margin="10,464,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Four_Btn_Click"/>
+        <Button x:Name="Five_Btn" Content="5" HorizontalAlignment="Left" Margin="166,464,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Five_Btn_Click"/>
+        <Button x:Name="Six_Btn" Content="6" HorizontalAlignment="Left" Margin="322,464,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Six_Btn_Click"/>
+        <Button x:Name="Subtract_Btn" Content="-" HorizontalAlignment="Left" Margin="478,464,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Subtract_Btn_Click"/>
+        <Button x:Name="Seven_Btn" Content="7" HorizontalAlignment="Left" Margin="10,381,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Seven_Btn_Click"/>
+        <Button x:Name="Eight_Btn" Content="8" HorizontalAlignment="Left" Margin="166,381,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Eight_Btn_Click"/>
+        <Button x:Name="Nine_Btn" Content="9" HorizontalAlignment="Left" Margin="322,381,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Nine_Btn_Click"/>
+        <Button x:Name="Multiply_Btn" Content="X" HorizontalAlignment="Left" Margin="478,381,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Multiply_Btn_Click"/>
+        <Button Content="7" HorizontalAlignment="Left" Margin="10,628,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="8" HorizontalAlignment="Left" Margin="166,628,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="9" HorizontalAlignment="Left" Margin="322,628,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="X" HorizontalAlignment="Left" Margin="478,628,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="7" HorizontalAlignment="Left" Margin="10,545,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="8" HorizontalAlignment="Left" Margin="166,545,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="9" HorizontalAlignment="Left" Margin="322,545,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button Content="X" HorizontalAlignment="Left" Margin="478,545,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button x:Name="ChangeOperands_Btn" Content="+/-" HorizontalAlignment="Left" Margin="10,628,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button x:Name="Zero_Btn" Content="0" HorizontalAlignment="Left" Margin="166,628,0,0" VerticalAlignment="Top" Height="76" Width="151"/>
+        <Button x:Name="Decimal_Btn" Content="." HorizontalAlignment="Left" Margin="322,628,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Decimal_Btn_Click"/>
+        <Button x:Name="Equal_Btn" HorizontalAlignment="Left" Margin="478,628,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Equal_Btn_Click">
+            <TextBlock TextWrapping="Wrap" Text="="/>
+        </Button>
+        <Button x:Name="One_Btn" Content="1" HorizontalAlignment="Left" Margin="10,545,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="One_Btn_Click"/>
+        <Button x:Name="Two_Btn" Content="2" HorizontalAlignment="Left" Margin="166,545,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Two_Btn_Click"/>
+        <Button x:Name="Three_Btn" Content="3" HorizontalAlignment="Left" Margin="322,545,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Three_Btn_Click"/>
+        <Button x:Name="Add_Btn" Content="+" HorizontalAlignment="Left" Margin="478,545,0,0" VerticalAlignment="Top" Height="76" Width="151" Click="Add_Btn_Click"/>
+        <TextBox x:Name="TextBoxAnswer_Btn" Margin="10,83,0,0" TextWrapping="Wrap" Text="242141414" VerticalAlignment="Top" Width="619" Height="93" HorizontalAlignment="Left" FontSize="72" FontFamily="Cascadia Mono SemiLight" TextAlignment="Right"/>
+        <TextBlock x:Name="Operation_Text" HorizontalAlignment="Left" Margin="462,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="test" Width="167" TextAlignment="Right"/>
+    </Grid>
+</Window>
