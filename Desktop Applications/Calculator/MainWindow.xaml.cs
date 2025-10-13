@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -22,18 +23,23 @@ namespace Calculator
     public partial class MainWindow : Window
     {
 
-        decimal firstOperation = 0;
-        decimal secondOperation = 0;
-        bool inOperation = false;
-        int operation = 0;
+        private decimal firstOperation = 0;
+        private decimal secondOperation = 0;
+        private bool inOperation = false;
+        private int operation = 0;
+        
+        private ObservableCollection<string> operationsHistory = new ObservableCollection<string>();
+
         public MainWindow()
         {
             InitializeComponent();
             TextBoxAnswer_Btn.Text = "0";
+            HistoryList.ItemsSource = operationsHistory;
         }
 
         private void testIfTextBoxIsZero(string number)
-        {
+        {   
+
             if (TextBoxAnswer_Btn.Text == "0")
             {
                 TextBoxAnswer_Btn.Text = number;
@@ -54,21 +60,50 @@ namespace Calculator
                 {
                     answer = firstOperation + secondOperation;
                     Operation_Text.Text = firstOperation.ToString() + " + " + secondOperation.ToString() + " = " + answer;
+                    operationsHistory.Add(Operation_Text.Text);
+
                 }
                 else if (operation == 2)
                 {
                     answer = firstOperation - secondOperation;
                     Operation_Text.Text = firstOperation.ToString() + " - " + secondOperation.ToString() + " = " + answer;
+                    operationsHistory.Add(Operation_Text.Text);
                 }
                 else if (operation == 3)
                 {
                     answer = firstOperation * secondOperation;
                     Operation_Text.Text = firstOperation.ToString() + " * " + secondOperation.ToString() + " = " + answer;
+                    operationsHistory.Add(Operation_Text.Text);
                 }
                 else if (operation == 4)
                 {
                     answer = firstOperation / secondOperation;
                     Operation_Text.Text = firstOperation.ToString() + " / " + secondOperation.ToString() + " = " + answer;
+                    operationsHistory.Add(Operation_Text.Text);
+                }
+                else if (operation == 5)
+                {
+                    answer = 1 / firstOperation;
+                    Operation_Text.Text = "1 / " + firstOperation.ToString() + " = " + answer;
+                    operationsHistory.Add(Operation_Text.Text);
+                }
+                else if (operation == 6)
+                {
+                    answer = firstOperation * firstOperation;
+                    Operation_Text.Text = $"sqr({firstOperation})";
+                    operationsHistory.Add(Operation_Text.Text);
+                }
+                else if (operation == 7)
+                {
+                    answer = (decimal)Math.Sqrt((double)firstOperation);
+                    Operation_Text.Text = "√ " + firstOperation.ToString() + " = " + answer;
+                    operationsHistory.Add(Operation_Text.Text);
+                }
+                else if (operation == 8)
+                {
+                    answer = firstOperation % secondOperation;
+                    Operation_Text.Text = firstOperation.ToString() + " % " + secondOperation.ToString() + " = " + answer;
+                    operationsHistory.Add(Operation_Text.Text);
                 }
             }
 
@@ -146,23 +181,7 @@ namespace Calculator
             TextBoxAnswer_Btn.Text = "0";
         }
 
-        private void Modulo_Btn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         //Operations
-        private void Add_Btn_Click(object sender, RoutedEventArgs e)
-        {
-            
-                
-                operation = 1;
-                firstOperation = Decimal.Parse(TextBoxAnswer_Btn.Text);
-                TextBoxAnswer_Btn.Text = "0";
-                Operation_Text.Text = firstOperation.ToString() + " + ";
-            
-        }
-
         private void Equal_Btn_Click(object sender, RoutedEventArgs e)
         {
             if (TextBoxAnswer_Btn.Text != "0" && inOperation == true)
@@ -170,6 +189,18 @@ namespace Calculator
                 secondOperation = Decimal.Parse(TextBoxAnswer_Btn.Text);
                 TextBoxAnswer_Btn.Text = Operations(firstOperation, secondOperation, operation);
                 inOperation = false;
+            }
+        }
+        
+        private void Add_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (TextBoxAnswer_Btn.Text != "0")
+            {
+                inOperation = true;
+                operation = 1;
+                firstOperation = Decimal.Parse(TextBoxAnswer_Btn.Text);
+                TextBoxAnswer_Btn.Text = "0";
+                Operation_Text.Text = firstOperation.ToString() + " + ";
             }
         }
 
@@ -206,6 +237,71 @@ namespace Calculator
                 firstOperation = Decimal.Parse(TextBoxAnswer_Btn.Text);
                 TextBoxAnswer_Btn.Text = "0";
                 Operation_Text.Text = firstOperation.ToString() + " / ";
+            }
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void _1DivideByNumber_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (TextBoxAnswer_Btn.Text != "0")
+            {
+                inOperation = true;
+                operation = 5;
+                firstOperation = Decimal.Parse(TextBoxAnswer_Btn.Text);
+                Operation_Text.Text = "1 / " + firstOperation.ToString();
+                TextBoxAnswer_Btn.Text = Operations(firstOperation, 0, operation);
+            }
+        }
+
+        private void Raised_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (TextBoxAnswer_Btn.Text != "0")
+            {
+                inOperation = true;
+                operation = 6;
+                firstOperation = Decimal.Parse(TextBoxAnswer_Btn.Text);
+                Operation_Text.Text = $"{firstOperation} * {firstOperation}";
+                TextBoxAnswer_Btn.Text = Operations(firstOperation, 0, operation);
+            }
+        }
+
+        private void Root_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (TextBoxAnswer_Btn.Text != "0")
+            {
+                inOperation = true;
+                operation = 7;
+                firstOperation = Decimal.Parse(TextBoxAnswer_Btn.Text);
+                Operation_Text.Text = $"√ {firstOperation}";
+                TextBoxAnswer_Btn.Text = Operations(firstOperation, 0, operation);
+            }
+        }
+        private void Modulo_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            if(TextBoxAnswer_Btn.Text != "0")
+            {
+                inOperation = true;
+                operation = 8;
+                firstOperation = Decimal.Parse(TextBoxAnswer_Btn.Text);
+                TextBoxAnswer_Btn.Text = "0";
+                Operation_Text.Text = firstOperation.ToString() + " % ";
+            }
+
+        }
+
+        private void ClearLast_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            if(TextBoxAnswer_Btn.Text.Length > 1)
+            {
+                TextBoxAnswer_Btn.Text = TextBoxAnswer_Btn.Text.Remove(TextBoxAnswer_Btn.Text.Length - 1);
+            }
+            else
+            {
+                TextBoxAnswer_Btn.Text = "0";
             }
         }
     }
