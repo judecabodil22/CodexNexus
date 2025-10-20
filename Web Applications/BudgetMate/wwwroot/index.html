@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetMate - Expense & Budget Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container-fluid {
+            margin-top: 20px;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .card {
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+            padding: 1rem 1.25rem;
+        }
+        .summary-card {
+            border-left: 5px solid #007bff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .summary-card .card-body {
+            flex-grow: 1;
+        }
+        .summary-card .h3 {
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+        .btn-action {
+            margin-right: 5px;
+        }
+        .chart-container {
+            height: 300px; /* Fixed height for charts */
+            position: relative;
+        }
+        #top-category, #budget-rollover, #predictive-alert {
+            font-size: 1.75rem;
+            font-weight: bold;
+        }
+        .alert-warning-custom {
+            background-color: #fff3cd;
+            border-color: #ffecb5;
+            color: #664d03;
+        }
+        .form-check-label {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">💰 BudgetMate</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#addExpenseSection">Expenses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#incomeSection">Income</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#goalsSection">Goals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#reportsSection">Reports</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        
+        <div class="row mb-4 text-center">
+            <div class="col-md-3">
+                <div class="card summary-card">
+                    <div class="card-body">
+                        <h5 class="card-title text-muted">Total Balance</h5>
+                        <p class="h3 text-success" id="total-balance">$0.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card summary-card">
+                    <div class="card-body">
+                        <h5 class="card-title text-muted">Monthly Income</h5>
+                        <p class="h3 text-primary" id="total-income">$0.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card summary-card">
+                    <div class="card-body">
+                        <h5 class="card-title text-muted">Monthly Expenses</h5>
+                        <p class="h3 text-danger" id="total-expenses">$0.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card summary-card">
+                    <div class="card-body">
+                        <h5 class="card-title text-muted">Budget Left</h5>
+                        <p class="h3 text-info" id="budget-left">$0.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card summary-card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title text-muted">Top Spending Category</h5>
+                        <p class="text-primary" id="top-category">Loading...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card summary-card text-center alert-warning-custom">
+                    <div class="card-body">
+                        <h5 class="card-title text-muted">Budget Rollover</h5>
+                        <p class="text-secondary" id="budget-rollover">$0.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card summary-card text-center alert-danger">
+                    <div class="card-body">
+                        <h5 class="card-title text-muted">Projected Overspend</h5>
+                        <p class="text-white" id="predictive-alert">$0.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        Spending by Category (This Month)
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="categorySpendingChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        Spending Trend (Last 6 Months)
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="spendingTrendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4 shadow-sm" id="filterSection">
+            <div class="card-header">
+                Filter Data
+            </div>
+            <div class="card-body">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-4">
+                        <label for="startDate" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="startDate">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="endDate" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="endDate">
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-info w-100" onclick="applyFilter()">Apply Filter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4 shadow-sm" id="addExpenseSection">
+            <div class="card-header">
+                Add New Expense
+            </div>
+            <div class="card-body">
+                <form id="addExpenseForm">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="description" class="form-label visually-hidden">Description</label>
+                            <input type="text" class="form-control" id="description" placeholder="Description (e.g., Dinner at Cafe)" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="amount" class="form-label visually-hidden">Amount</label>
+                            <input type="number" class="form-control" id="amount" placeholder="Amount" step="0.01" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="category" class="form-label visually-hidden">Category</label>
+                            <select class="form-select" id="category" required>
+                                <option value="" disabled selected>Category...</option>
+                                <option value="Food">Food</option>
+                                <option value="Transport">Transport</option>
+                                <option value="Housing">Housing</option>
+                                <option value="Utilities">Utilities</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Health">Health</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="date" class="form-label visually-hidden">Date</label>
+                            <input type="date" class="form-control" id="date" required>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary w-100">Add</button>
+                        </div>
+                    </div>
+                    <div class="row g-3 mt-2">
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="isRecurringExpense">
+                                <label class="form-check-label" for="isRecurringExpense">
+                                    Recurring Expense?
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3" id="recurringExpenseFrequencyDiv" style="display:none;">
+                            <select class="form-select" id="recurringExpenseFrequency">
+                                <option value="monthly">Monthly</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="annually">Annually</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mb-4 shadow-sm" id="incomeSection">
+            <div class="card-header">
+                Record New Income
+            </div>
+            <div class="card-body">
+                <form id="addIncomeForm">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="incomeDescription" class="form-label visually-hidden">Description</label>
+                            <input type="text" class="form-control" id="incomeDescription" placeholder="Description (e.g., Salary, Freelance)" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="incomeAmount" class="form-label visually-hidden">Amount</label>
+                            <input type="number" class="form-control" id="incomeAmount" placeholder="Amount" step="0.01" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="incomeSource" class="form-label visually-hidden">Source</label>
+                            <select class="form-select" id="incomeSource" required>
+                                <option value="" disabled selected>Source...</option>
+                                <option value="Salary">Salary</option>
+                                <option value="Freelance">Freelance</option>
+                                <option value="Investment">Investment</option>
+                                <option value="Gift">Gift</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="incomeDate" class="form-label visually-hidden">Date</label>
+                            <input type="date" class="form-control" id="incomeDate" required>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-end">
+                            <button type="submit" class="btn btn-success w-100">Add</button>
+                        </div>
+                    </div>
+                    <div class="row g-3 mt-2">
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="isRecurringIncome">
+                                <label class="form-check-label" for="isRecurringIncome">
+                                    Recurring Income?
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3" id="recurringIncomeFrequencyDiv" style="display:none;">
+                            <select class="form-select" id="recurringIncomeFrequency">
+                                <option value="monthly">Monthly</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="bi-weekly">Bi-Weekly</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mb-4 shadow-sm" id="goalsSection">
+            <div class="card-header">
+                Savings Goals
+            </div>
+            <div class="card-body">
+                <form id="addGoalForm" class="mb-4">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="goalName" placeholder="Goal Name (e.g., New Car)" required>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control" id="goalTargetAmount" placeholder="Target Amount" step="0.01" required>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="date" class="form-control" id="goalTargetDate" required>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-secondary w-100">Set Goal</button>
+                        </div>
+                    </div>
+                </form>
+
+                <h5>Active Goals:</h5>
+                <div id="activeGoalsList">
+                    <div class="card mb-2">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>New Laptop</strong> - Target: $1500.00 by 2025-01-01
+                                <br>
+                                Current Progress: <span class="text-success">$500.00</span> / <span class="text-muted">33%</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-danger">Remove</button>
+                        </div>
+                        <div class="progress" style="height: 5px;">
+                            <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm" id="reportsSection">
+            <div class="card-header">
+                Transaction History
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Category/Source</th>
+                                <th>Date</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionTableBody">
+                            <tr>
+                                <td><span class="badge bg-danger">Expense</span></td>
+                                <td>Coffee at Starbucks</td>
+                                <td class="text-danger">-$5.50</td>
+                                <td>Food</td>
+                                <td>2024-10-20</td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-warning btn-action" onclick="editTransaction(1, 'expense')">Edit</button>
+                                    <button class="btn btn-sm btn-danger btn-action" onclick="deleteTransaction(1, 'expense')">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-primary">Income</span></td>
+                                <td>Freelance Work</td>
+                                <td class="text-success">+$300.00</td>
+                                <td>Freelance</td>
+                                <td>2024-10-18</td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-warning btn-action" onclick="editTransaction(5, 'income')">Edit</button>
+                                    <button class="btn btn-sm btn-danger btn-action" onclick="deleteTransaction(5, 'income')">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-danger">Expense</span></td>
+                                <td>Monthly Rent Payment</td>
+                                <td class="text-danger">-$1200.00</td>
+                                <td>Housing</td>
+                                <td>2024-10-01</td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-warning btn-action" onclick="editTransaction(2, 'expense')">Edit</button>
+                                    <button class="btn btn-sm btn-danger btn-action" onclick="deleteTransaction(2, 'expense')">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-danger">Expense</span></td>
+                                <td>Groceries</td>
+                                <td class="text-danger">-$85.20</td>
+                                <td>Food</td>
+                                <td>2024-10-15</td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-warning btn-action" onclick="editTransaction(3, 'expense')">Edit</button>
+                                    <button class="btn btn-sm btn-danger btn-action" onclick="deleteTransaction(3, 'expense')">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-primary">Income</span></td>
+                                <td>Salary</td>
+                                <td class="text-success">+$2500.00</td>
+                                <td>Salary</td>
+                                <td>2024-10-25</td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-warning btn-action" onclick="editTransaction(6, 'income')">Edit</button>
+                                    <button class="btn btn-sm btn-danger btn-action" onclick="deleteTransaction(6, 'income')">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        const API_BASE_URL_EXPENSES = '/api/expenses'; 
+        const API_BASE_URL_INCOME = '/api/income'; // Assuming you'll have an income API
+        const API_BASE_URL_GOALS = '/api/goals'; // Assuming you'll have a goals API
+
+        // --- Chart.js Initialization ---
+        const categorySpendingCtx = document.getElementById('categorySpendingChart').getContext('2d');
+        const spendingTrendCtx = document.getElementById('spendingTrendChart').getContext('2d');
+
+        let categorySpendingChart;
+        let spendingTrendChart;
+
+        function initializeCharts() {
+            // Category Spending Chart (Pie/Donut)
+            categorySpendingChart = new Chart(categorySpendingCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Food', 'Housing', 'Transport', 'Utilities', 'Entertainment', 'Shopping', 'Health', 'Other'],
+                    datasets: [{
+                        label: 'Spending by Category',
+                        data: [350, 1200, 150, 80, 100, 200, 50, 70], // Sample data
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.8)', // Food
+                            'rgba(54, 162, 235, 0.8)', // Housing
+                            'rgba(255, 206, 86, 0.8)', // Transport
+                            'rgba(75, 192, 192, 0.8)', // Utilities
+                            'rgba(153, 102, 255, 0.8)', // Entertainment
+                            'rgba(255, 159, 64, 0.8)', // Shopping
+                            'rgba(199, 199, 199, 0.8)', // Health
+                            'rgba(83, 102, 255, 0.8)'  // Other
+                        ],
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        },
+                        title: {
+                            display: false,
+                            text: 'Spending by Category'
+                        }
+                    }
+                }
+            });
+
+            // Spending Trend Chart (Line)
+            spendingTrendChart = new Chart(spendingTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'], // Sample months
+                    datasets: [{
+                        label: 'Total Expenses',
+                        data: [1500, 1800, 1600, 2000, 1750, 1900], // Sample data
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        fill: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Total Income',
+                        data: [3000, 3200, 3100, 3500, 3000, 3200], // Sample data
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: false,
+                            text: 'Spending Trend Over Time'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Event Listeners and Functions ---
+
+        // Show/hide recurring expense frequency
+        document.getElementById('isRecurringExpense').addEventListener('change', function() {
+            document.getElementById('recurringExpenseFrequencyDiv').style.display = this.checked ? 'block' : 'none';
+        });
+
+        // Show/hide recurring income frequency
+        document.getElementById('isRecurringIncome').addEventListener('change', function() {
+            document.getElementById('recurringIncomeFrequencyDiv').style.display = this.checked ? 'block' : 'none';
+        });
+
+        // Placeholder for applying date filter
+        function applyFilter() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            alert(`Applying filter from ${startDate || 'beginning'} to ${endDate || 'now'}. (Requires API call to fetch filtered data)`);
+            // Here you would typically make an API call to load filtered expenses/income
+            // e.g., loadExpenses(`?startDate=${startDate}&endDate=${endDate}`);
+            // And then update the summary cards and charts.
+            updateSummaryCards(); // For demo, update with sample data
+            updateChartsWithSampleData(); // For demo, update charts
+        }
+
+        // Dummy data for summary cards
+        function updateSummaryCards() {
+            document.getElementById('total-balance').innerText = `$${(Math.random() * 5000 + 1000).toFixed(2)}`;
+            document.getElementById('total-income').innerText = `$${(Math.random() * 3000 + 1500).toFixed(2)}`;
+            document.getElementById('total-expenses').innerText = `$${(Math.random() * 1500 + 500).toFixed(2)}`;
+            document.getElementById('budget-left').innerText = `$${(Math.random() * 1000 + 200).toFixed(2)}`;
+            document.getElementById('top-category').innerText = ['Food', 'Housing', 'Transport', 'Utilities'][Math.floor(Math.random() * 4)];
+            document.getElementById('budget-rollover').innerText = `$${(Math.random() * 200).toFixed(2)} monthly`;
+            const projectedOverspend = (Math.random() * 300 - 150); // Can be positive or negative
+            document.getElementById('predictive-alert').innerText = projectedOverspend > 0 ? `-$${projectedOverspend.toFixed(2)}` : `+$${Math.abs(projectedOverspend).toFixed(2)}`;
+            document.getElementById('predictive-alert').closest('.card').classList.toggle('alert-danger', projectedOverspend > 0);
+            document.getElementById('predictive-alert').closest('.card').classList.toggle('bg-success', projectedOverspend <= 0);
+            document.getElementById('predictive-alert').closest('.card').classList.toggle('text-white', true); // Ensure text color for success
+        }
+
+        // Function to update chart data (for demonstration purposes)
+        function updateChartsWithSampleData() {
+            categorySpendingChart.data.datasets[0].data = [
+                Math.random() * 400, Math.random() * 1500, Math.random() * 200, Math.random() * 100,
+                Math.random() * 150, Math.random() * 250, Math.random() * 70, Math.random() * 90
+            ];
+            categorySpendingChart.update();
+
+            const newExpenseData = Array.from({length: 6}, () => Math.random() * 1000 + 1000);
+            const newIncomeData = Array.from({length: 6}, () => Math.random() * 1500 + 2500);
+            spendingTrendChart.data.datasets[0].data = newExpenseData;
+            spendingTrendChart.data.datasets[1].data = newIncomeData;
+            spendingTrendChart.update();
+        }
+
+        // API interaction placeholders
+        async function handleAddExpense(event) {
+            event.preventDefault();
+            const newExpense = {
+                description: document.getElementById('description').value,
+                amount: parseFloat(document.getElementById('amount').value),
+                category: document.getElementById('category').value,
+                date: document.getElementById('date').value,
+                isRecurring: document.getElementById('isRecurringExpense').checked,
+                frequency: document.getElementById('isRecurringExpense').checked ? document.getElementById('recurringExpenseFrequency').value : null,
+            };
+            console.log('Adding Expense:', newExpense);
+            alert('Expense added! (Check console and implement actual API POST to ' + API_BASE_URL_EXPENSES + ')');
+            // try { /* await fetch(...) */ } catch (error) { ... }
+            document.getElementById('addExpenseForm').reset();
+            updateSummaryCards(); // Update summaries for demo
+            updateChartsWithSampleData(); // Update charts for demo
+        }
+
+        async function handleAddIncome(event) {
+            event.preventDefault();
+            const newIncome = {
+                description: document.getElementById('incomeDescription').value,
+                amount: parseFloat(document.getElementById('incomeAmount').value),
+                source: document.getElementById('incomeSource').value,
+                date: document.getElementById('incomeDate').value,
+                isRecurring: document.getElementById('isRecurringIncome').checked,
+                frequency: document.getElementById('isRecurringIncome').checked ? document.getElementById('recurringIncomeFrequency').value : null,
+            };
+            console.log('Adding Income:', newIncome);
+            alert('Income added! (Check console and implement actual API POST to ' + API_BASE_URL_INCOME + ')');
+            // try { /* await fetch(...) */ } catch (error) { ... }
+            document.getElementById('addIncomeForm').reset();
+            updateSummaryCards(); // Update summaries for demo
+            updateChartsWithSampleData(); // Update charts for demo
+        }
+
+        async function handleAddGoal(event) {
+            event.preventDefault();
+            const newGoal = {
+                name: document.getElementById('goalName').value,
+                targetAmount: parseFloat(document.getElementById('goalTargetAmount').value),
+                targetDate: document.getElementById('goalTargetDate').value,
+                currentAmount: 0 // Starting progress
+            };
+            console.log('Setting Goal:', newGoal);
+            alert('Goal set! (Check console and implement actual API POST to ' + API_BASE_URL_GOALS + ')');
+            // try { /* await fetch(...) */ } catch (error) { ... }
+            document.getElementById('addGoalForm').reset();
+            // You'd also refresh the goals list here
+        }
+
+        function editTransaction(id, type) {
+            alert(`Edit ${type} ID: ${id} (Requires API GET and PUT)`);
+        }
+
+        function deleteTransaction(id, type) {
+            if (confirm(`Are you sure you want to delete ${type} ID: ${id}?`)) {
+                alert(`Deleting ${type} ID: ${id} (Requires API DELETE)`);
+                // try { /* await fetch(... DELETE ...) */ } catch (error) { ... }
+                // Reload transactions or remove row from DOM
+            }
+        }
+
+        // Initialize on page load
+        window.onload = function() {
+            initializeCharts();
+            updateSummaryCards(); // Populate initial dummy data
+            document.getElementById('addExpenseForm').addEventListener('submit', handleAddExpense);
+            document.getElementById('addIncomeForm').addEventListener('submit', handleAddIncome);
+            document.getElementById('addGoalForm').addEventListener('submit', handleAddGoal);
+            // Set default date for Add Expense/Income forms to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
+            document.getElementById('incomeDate').value = today;
+        };
+    </script>
+</body>
+</html>
