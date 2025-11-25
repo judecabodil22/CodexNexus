@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "imgSrc": "https://picsum.photos/id/1018/800/600",
+    "title": "Three Days in Tokyo: Neon Lights & Sushi",
+    "metaData": "Japan | October 2025",
+    "content": "The energy is electric! A whirlwind tour through temples, high-tech arcades, and the best ramen I've ever had. We navigated the Shibuya crossing, explored the quiet beauty of the Meiji Jingu shrine, and discovered hidden jazz clubs in Shinjuku."
+  },
+  {
+    "id": 2,
+    "imgSrc": "https://picsum.photos/id/1025/800/600",
+    "title": "Hiking the Swiss Alps: Silence and Snow",
+    "metaData": "Switzerland | September 2025",
+    "content": "Waking up to mountain air and stunning views. A challenging but deeply rewarding trek through the Bernese Oberland. The crisp air and the sound of cowbells were the only company for miles. We stayed in a cozy hut overlooking Grindelwald."
+  },
+  {
+    "id": 3,
+    "imgSrc": "https://picsum.photos/id/1032/800/600",
+    "title": "Marrakech Markets and Sahara Sunsets",
+    "metaData": "Morocco | August 2025",
+    "content": "From the bustling souks of the city to the quiet, star-filled skies of the desert—a truly transformative experience. The vibrant colors and aromatic spices of the Jemaa el-Fnaa square were unforgettable, followed by a peaceful camel ride at dusk."
+  },
+  {
+    "id": 4,
+    "imgSrc": "https://picsum.photos/id/1043/800/600",
+    "title": "Coastal Drive on the Great Ocean Road",
+    "metaData": "Australia | July 2025",
+    "content": "Chasing the waves and capturing the rugged beauty of the Twelve Apostles. This epic road trip offered breathtaking cliffside views and charming small towns. We even spotted a few sleepy koalas in the eucalyptus trees!"
+  },
+  {
+    "id": 5,
+    "imgSrc": "https://picsum.photos/id/1053/800/600",
+    "title": "The Ancient City of Petra: Lost in Time",
+    "metaData": "Jordan | June 2025",
+    "content": "Walking through the Siq and seeing the Treasury emerge was truly humbling. The rose-red city carved into the rock face feels like a hidden world. We spent the day hiking up to the Monastery and felt the weight of history."
+  },
+  {
+    "id": 6,
+    "imgSrc": "https://picsum.photos/id/1063/800/600",
+    "title": "A Taste of Tuscany: Wine, Hills, and Relaxation",
+    "metaData": "Italy | May 2025",
+    "content": "Life moves slower here. We stayed on a beautiful farm, learned to make pasta, and enjoyed endless glasses of Chianti. The rolling hills at sunset are exactly as beautiful as the postcards promise."
+  },
+  {
+    "id": 7,
+    "imgSrc": "https://picsum.photos/id/1074/800/600",
+    "title": "The Colors of Cartagena: A Caribbean Dream",
+    "metaData": "Colombia | April 2025",
+    "content": "The walled city is an explosion of color, music, and history. We wandered the colonial streets, enjoyed fresh fruit from palenqueras, and soaked up the vibrant atmosphere. The heat is worth it for the energy of this place."
+  },
+  {
+    "id": 8,
+    "imgSrc": "https://picsum.photos/id/1079/800/600",
+    "title": "Exploring Iceland's South Coast: Waterfalls and Ice",
+    "metaData": "Iceland | March 2025",
+    "content": "A land of fire and ice! We drove along the ring road, stopping at powerful waterfalls like Skógafoss and walking on a black sand beach. The sheer ruggedness of the landscape is overwhelming and beautiful."
+  },
+  {
+    "id": 9,
+    "imgSrc": "https://picsum.photos/id/1083/800/600",
+    "title": "Kyoto's Zen Gardens and Bamboo Forests",
+    "metaData": "Japan | February 2025",
+    "content": "A quieter contrast to Tokyo. The Arashiyama Bamboo Grove felt like stepping into another world, and the tranquility of the ancient temples provided the perfect respite. Found the best green tea ice cream here!"
+  },
+  {
+    "id": 10,
+    "imgSrc": "https://picsum.photos/id/977/800/600",
+    "title": "A Week Sailing the Greek Islands",
+    "metaData": "Greece | January 2025",
+    "content": "Island hopping through the Cyclades was the perfect winter escape. Turquoise waters, white-washed villages, and incredible seafood. Waking up to the view of the Aegean Sea every day was a dream come true."
+  }
+]
