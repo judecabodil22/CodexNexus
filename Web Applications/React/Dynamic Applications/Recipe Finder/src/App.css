@@ -40,3 +40,45 @@
 .read-the-docs {
   color: #888;
 }
+/* --- Submit Button Styles --- */
+
+.submit-button {
+  /* Dimensions & Layout */
+  display: block; /* Makes the button take up its own line, good for the centered design */
+  width: 100%; /* Full width within its container */
+  padding: 0.8em 1.5em; /* Vertical and horizontal padding */
+  margin-top: 1.5em; /* Add some space above the button */
+
+  /* Appearance */
+  border-radius: 8px; /* Slightly rounded corners */
+  border: 1px solid transparent; /* Start with a transparent border */
+  font-size: 1em;
+  font-weight: 600; /* Bolder text */
+  font-family: inherit; /* Inherit the main font */
+  cursor: pointer; /* Indicate it's clickable */
+
+  /* Colors */
+  background-color: #646cff; /* Use the main blue accent color */
+  color: #ffffff; /* White text for contrast */
+  
+  /* Transition for smooth hover effect */
+  transition: all 0.25s; 
+}
+
+.submit-button:hover {
+  /* Darken the background slightly on hover */
+  background-color: #535af0; 
+  /* Add a shadow similar to the logo for consistency */
+  box-shadow: 0 0 1em #646cffaa;
+}
+
+.submit-button:focus,
+.submit-button:focus-visible {
+  /* Ensure a clear focus state for accessibility */
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.submit-button:active {
+  /* Provide an active (click) state feedback */
+  transform: translateY(1px);
+}
