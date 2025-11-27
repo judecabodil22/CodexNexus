@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import './App.css';
 import Footer from './components/footer';
 import RecipeList from './components/RecipeList';
 import RecipeDetails from './components/RecipeDetails';
 import IngredientDisplay from './components/IngredientDisplay';
+import recipes from './recipesData.js';
 // --- MOCK DATA ---
 const MOCK_RECIPES = [
     { id: 1, name: "NUKA-COLA QUANTUM MIX", ingredients: ["Nuka-Cola", "Rad-X"], steps: ["Mix one part Nuka-Cola with one part Rad-X.", "Shake vigorously.", "Consume to gain temporary energy boost."] },
@@ -13,15 +15,15 @@ const MOCK_RECIPES = [
 ];
 
 const MOCK_INGREDIENTS = [
-    { id: 1, name: "MUTFRUIT" },
-    { id: 2, name: "HUBFLOWER" },
-    { id: 3, name: "TATO" },
-    { id: 4, name: "BLOATFLY MEAT" },
-    { id: 5, name: "NUKE COLA" },
+    { "id": 1, "name": "ALL-PURPOSE FLOUR" },
+    { "id": 2, "name": "BROWN SUGAR" },
+    { "id": 3, "name": "GARLIC CLOVES" },
+    { "id": 4, "name": "EXTRA VIRGIN OLIVE OIL" },
+    { "id": 5, "name": "CHICKEN BREAST" }
 ];
 
 const App = () => {
-    const [viewMode, setViewMode] = useState('INGREDIENT_LOAD'); 
+    const [viewMode, setViewMode] = useState('INGREDIENT_LOAD');
     const [selectedFile, setSelectedFile] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -29,30 +31,30 @@ const App = () => {
 
     if (viewMode === 'INGREDIENT_LOAD') {
         content = (
-            <IngredientDisplay 
-                ingredients={MOCK_INGREDIENTS} 
-                onComplete={() => setViewMode('SEARCH')} 
+            <IngredientDisplay
+                ingredients={MOCK_INGREDIENTS}
+                onComplete={() => setViewMode('SEARCH')}
             />
         );
     } else if (selectedFile) {
         content = <RecipeDetails file={selectedFile} onBack={() => setSelectedFile(null)} />;
     } else {
         content = (
-            <RecipeList 
-                recipes={MOCK_RECIPES}
+            <RecipeList
+                recipes={recipes}
                 onSelectRecipe={setSelectedFile}
                 searchTerm={searchTerm}
                 onSearchTermChange={setSearchTerm}
             />
         );
     }
-    
+
     return (
         <div id="root">
             {content}
-           
+
             <Footer />
-          
+
         </div>
     );
 };
