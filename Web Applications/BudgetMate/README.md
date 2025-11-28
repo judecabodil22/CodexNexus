@@ -1,4 +1,4 @@
-# 💰 BudgetMate
+<img width="1919" height="950" alt="image" src="https://github.com/user-attachments/assets/d2551d50-4adc-4dfb-ac8d-5c71f47aa4e4" /># 💰 BudgetMate
 
 BudgetMate is a modern, premium personal finance application designed to make tracking expenses, managing budgets, and reaching financial goals effortless and beautiful. Built with a robust .NET backend and a dynamic React frontend, it offers a seamless experience for users who want to take control of their finances.
 
@@ -61,7 +61,19 @@ BudgetMate is a modern, premium personal finance application designed to make tr
 
 ## 📸 Screenshots
 
-*(Add screenshots of the Dashboard, Calendar, and Savings Goals here)*
+<img width="1917" height="949" alt="image" src="https://github.com/user-attachments/assets/b524f7fc-147b-42f5-813f-98185b6e7578" />
+
+<img width="1919" height="949" alt="image" src="https://github.com/user-attachments/assets/13ab3292-db3d-450d-9e77-3a2971ad2e8e" />
+
+<img width="1919" height="948" alt="image" src="https://github.com/user-attachments/assets/831b18cc-d5e6-469e-9cf6-8e73853a8ff6" />
+
+<img width="1919" height="950" alt="image" src="https://github.com/user-attachments/assets/ff37168a-56bf-44a0-b4a6-b3bbfa5de218" />
+
+<img width="1919" height="946" alt="image" src="https://github.com/user-attachments/assets/566158a6-8c6e-4ee6-bfeb-15936225c76c" />
+
+<img width="1919" height="950" alt="image" src="https://github.com/user-attachments/assets/4947fd5a-2e1f-4142-9589-0d988c3b0158" />
+
+
 
 ## 🤝 Contributing
 
