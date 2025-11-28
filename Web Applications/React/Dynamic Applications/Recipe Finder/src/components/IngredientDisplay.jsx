@@ -1,12 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
 
-export default function IngredientDisplay ({ ingredients, onComplete }){
+export default function IngredientDisplay({ ingredients, onComplete }) {
     useEffect(() => {
-        // Set a timer to transition to the main search screen after 4 seconds
         const timer = setTimeout(() => {
             onComplete();
-        }, 4000); 
+        }, 4000);
 
         return () => clearTimeout(timer);
     }, [onComplete]);
@@ -17,11 +16,11 @@ export default function IngredientDisplay ({ ingredients, onComplete }){
             <h2 className="section-header">[[ INVENTORY CHECK INITIATED ]]</h2>
             <ul className="ingredient-list">
                 {ingredients.map((item, index) => (
-                    <li 
+                    <li
                         key={item.id}
                         className="ingredient-list-item"
                         // Dynamic CSS variable for staggered fade-in
-                        style={{'--item-delay': `${index * 0.2 + 0.5}s`}} 
+                        style={{ '--item-delay': `${index * 0.2 + 0.5}s` }}
                     >
                         {`> LOADING ASSET ${item.name}... [OK]`}
                     </li>

@@ -14,7 +14,6 @@ export default function RecipeDetails({ file, onBack }) {
                 {file.ingredients && file.ingredients.map((ingredient, index) => (
                     <li
                         key={index}
-                        // Dynamic CSS Variables for Animation Delay & Duration
                         style={{
                             '--li-animation-delay': `${index * 0.05}s`,
                             '--li-animation-duration': `${ingredient.length * 0.03}s`
@@ -30,9 +29,8 @@ export default function RecipeDetails({ file, onBack }) {
                 {file.steps.map((step, index) => (
                     <li
                         key={index}
-                        // Dynamic CSS Variables for Animation Delay & Duration
                         style={{
-                            '--li-animation-delay': `${(index * 0.1) + 1}s`, // Delay steps until after ingredients (approx)
+                            '--li-animation-delay': `${(index * 0.1) + 1}s`,
                             '--li-animation-duration': `${step.length * 0.03}s`
                         }}
                     >

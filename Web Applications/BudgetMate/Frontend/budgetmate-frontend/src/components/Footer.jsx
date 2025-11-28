@@ -1,0 +1,15 @@
+import React from 'react';
+import { Heart } from 'lucide-react';
+
+export default function Footer() {
+    return (
+        <footer className="mt-12 pb-8 text-center text-slate-500 text-sm animate-fade-in delay-300">
+            <div className="flex items-center justify-center gap-2 mb-2">
+                <span>Made with</span>
+                <Heart size={16} className="text-red-500 fill-red-500" />
+                <span>by BudgetMate Team</span>
+            </div>
+            <p>&copy; {new Date().getFullYear()} BudgetMate. All rights reserved.</p>
+        </footer>
+    );
+}

@@ -9,7 +9,8 @@ import {
     ArcElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    Filler
 } from 'chart.js';
 
 ChartJS.register(
@@ -20,93 +21,137 @@ ChartJS.register(
     ArcElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    Filler
 );
 
-export default function Charts() {
-    const doughnutData = useMemo(() => ({
-        labels: ['Food', 'Housing', 'Transport', 'Utilities', 'Entertainment', 'Shopping', 'Health', 'Other'],
-        datasets: [{
-            data: [350, 1200, 150, 80, 100, 200, 50, 70],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.8)',
-                'rgba(54, 162, 235, 0.8)',
-                'rgba(255, 206, 86, 0.8)',
-                'rgba(75, 192, 192, 0.8)',
-                'rgba(153, 102, 255, 0.8)',
-                'rgba(255, 159, 64, 0.8)',
-                'rgba(199, 199, 199, 0.8)',
-                'rgba(83, 102, 255, 0.8)'
-            ],
-            borderColor: '#fff',
-            borderWidth: 2
-        }]
-    }), []);
+export default function Charts({ expenses = [] }) {
+    const doughnutData = useMemo(() => {
+        const categories = {};
+        expenses.forEach(e => {
+            categories[e.category] = (categories[e.category] || 0) + e.amount;
+        });
 
-    const lineData = useMemo(() => ({
-        labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-        datasets: [
-            {
-                label: 'Total Expenses',
-                data: [1500, 1800, 1600, 2000, 1750, 1900],
-                borderColor: 'rgba(255, 99, 132, 1)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                fill: true,
-                tension: 0.3
+        return {
+            labels: Object.keys(categories),
+            datasets: [{
+                data: Object.values(categories),
+                backgroundColor: [
+                    'rgba(59, 130, 246, 0.8)',   // Blue
+                    'rgba(168, 85, 247, 0.8)',   // Purple
+                    'rgba(236, 72, 153, 0.8)',   // Pink
+                    'rgba(249, 115, 22, 0.8)',   // Orange
+                    'rgba(34, 197, 94, 0.8)',    // Green
+                    'rgba(234, 179, 8, 0.8)',    // Yellow
+                    'rgba(99, 102, 241, 0.8)',   // Indigo
+                    'rgba(100, 116, 139, 0.8)'   // Slate
+                ],
+                borderColor: '#ffffff',
+                borderWidth: 2,
+                hoverOffset: 4
+            }]
+        };
+    }, [expenses]);
+
+    const lineData = useMemo(() => {
+        const monthly = {};
+        expenses.forEach(e => {
+            const date = new Date(e.date);
+            const monthYear = date.toLocaleString('default', { month: 'short' });
+            monthly[monthYear] = (monthly[monthYear] || 0) + e.amount;
+        });
+
+        return {
+            labels: Object.keys(monthly),
+            datasets: [
+                {
+                    label: 'Expenses',
+                    data: Object.values(monthly),
+                    borderColor: '#6366f1', // Indigo 500
+                    backgroundColor: (context) => {
+                        const ctx = context.chart.ctx;
+                        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+                        gradient.addColorStop(0, 'rgba(99, 102, 241, 0.4)');
+                        gradient.addColorStop(1, 'rgba(99, 102, 241, 0.0)');
+                        return gradient;
+                    },
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#6366f1',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }
+            ]
+        };
+    }, [expenses]);
+
+    const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    usePointStyle: true,
+                    padding: 20,
+                    font: {
+                        family: "'Inter', sans-serif",
+                        size: 12
+                    }
+                }
             },
-            {
-                label: 'Total Income',
-                data: [3000, 3200, 3100, 3500, 3000, 3200],
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: true,
-                tension: 0.3
+            tooltip: {
+                backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                padding: 12,
+                titleFont: { size: 13, weight: 600 },
+                bodyFont: { size: 12 },
+                cornerRadius: 8,
+                displayColors: false
             }
-        ]
-    }), []);
-
-    const doughnutOptions = useMemo(() => ({
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { position: 'right' },
-            title: { display: false }
         }
-    }), []);
+    };
 
-    const lineOptions = useMemo(() => ({
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { position: 'top' },
-            title: { display: false }
-        },
-        scales: { y: { beginAtZero: true } }
-    }), []);
+    const lineOptions = {
+        ...commonOptions,
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: '#f1f5f9',
+                    drawBorder: false
+                },
+                ticks: {
+                    font: { size: 11 },
+                    color: '#64748b'
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    font: { size: 11 },
+                    color: '#64748b'
+                }
+            }
+        }
+    };
 
     return (
-        <div>
-            <div className="row mb-4">
-                <div className="col-md-6">
-                    <div className="card shadow-sm">
-                        <div className="card-header">Spending by Category (This Month)</div>
-                        <div className="card-body">
-                            <div className="chart-container" style={{ height: 300 }}>
-                                <Doughnut data={doughnutData} options={doughnutOptions} />
-                            </div>
-                        </div>
-                    </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div className="glass-card p-6 animate-fade-in delay-100">
+                <h3 className="text-lg font-bold text-slate-800 mb-6">Spending by Category</h3>
+                <div className="h-[300px] flex items-center justify-center">
+                    <Doughnut data={doughnutData} options={commonOptions} />
                 </div>
+            </div>
 
-                <div className="col-md-6">
-                    <div className="card shadow-sm">
-                        <div className="card-header">Spending Trend (Last 6 Months)</div>
-                        <div className="card-body">
-                            <div className="chart-container" style={{ height: 300 }}>
-                                <Line data={lineData} options={lineOptions} />
-                            </div>
-                        </div>
-                    </div>
+            <div className="glass-card p-6 animate-fade-in delay-200">
+                <h3 className="text-lg font-bold text-slate-800 mb-6">Monthly Trend</h3>
+                <div className="h-[300px]">
+                    <Line data={lineData} options={lineOptions} />
                 </div>
             </div>
         </div>
