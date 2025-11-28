@@ -9,6 +9,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Toast from './components/Toast';
 import Footer from './components/Footer';
+import Settings from './components/Settings';
+import Reports from './components/Reports';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -19,6 +21,22 @@ const App = () => {
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [authView, setAuthView] = useState('login'); // 'login' or 'register'
     const [isLoading, setIsLoading] = useState(false);
+    const [activeView, setActiveView] = useState('dashboard'); // 'dashboard', 'reports', 'settings'
+
+    const [budget, setBudget] = useState(() => {
+        const saved = localStorage.getItem('budget');
+        return saved ? Number(saved) : 2000;
+    });
+
+    const getUsername = () => {
+        if (!token) return 'User';
+        try {
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            return payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] || 'User';
+        } catch {
+            return 'User';
+        }
+    };
 
     const showToast = (message, type = 'success') => {
         setToast({ message, type });
@@ -34,6 +52,7 @@ const App = () => {
         setToken(null);
         localStorage.removeItem('token');
         setExpenses([]);
+        setActiveView('dashboard');
         showToast('Logged out.');
     };
 
@@ -103,16 +122,36 @@ const App = () => {
 
     return (
         <>
-            <NavigationBar onLogout={handleLogout} />
+            <NavigationBar
+                onLogout={handleLogout}
+                activeView={activeView}
+                onViewChange={setActiveView}
+                username={getUsername()}
+            />
             <div className="container mx-auto px-4 py-8 max-w-7xl">
-                <ExpenseCards expenses={expenses} />
-                <Charts expenses={expenses} />
-                <CRUD
-                    expenses={expenses}
-                    onRefresh={fetchExpenses}
-                    showToast={showToast}
-                    token={token}
-                />
+                {activeView === 'dashboard' && (
+                    <div className="animate-fade-in">
+                        <ExpenseCards expenses={expenses} budget={budget} setBudget={setBudget} />
+                        <Charts expenses={expenses} />
+                        <CRUD
+                            expenses={expenses}
+                            onRefresh={fetchExpenses}
+                            showToast={showToast}
+                            token={token}
+                        />
+                    </div>
+                )}
+                {activeView === 'reports' && (
+                    <Reports expenses={expenses} />
+                )}
+                {activeView === 'settings' && (
+                    <Settings
+                        budget={budget}
+                        setBudget={setBudget}
+                        username={getUsername()}
+                        onLogout={handleLogout}
+                    />
+                )}
                 <Footer />
             </div>
             {toast && (

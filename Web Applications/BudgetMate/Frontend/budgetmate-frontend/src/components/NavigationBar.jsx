@@ -1,7 +1,9 @@
 import React from 'react';
 import { Wallet, LogOut } from 'lucide-react';
 
-export default function NavigationBar({ onLogout }) {
+export default function NavigationBar({ onLogout, activeView, onViewChange, username = 'User' }) {
+  const initials = username.substring(0, 2).toUpperCase();
+
   return (
     <nav className="sticky top-4 z-50 mx-4">
       <div className="glass-card px-6 py-4 flex items-center justify-between">
@@ -18,13 +20,31 @@ export default function NavigationBar({ onLogout }) {
         </div>
 
         <div className="hidden md:flex items-center gap-1 bg-slate-100/50 p-1 rounded-xl">
-          <button className="px-4 py-2 bg-white text-blue-600 shadow-sm rounded-lg text-sm font-semibold transition-all">
+          <button
+            onClick={() => onViewChange('dashboard')}
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${activeView === 'dashboard'
+              ? 'bg-white text-blue-600 shadow-sm'
+              : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+              }`}
+          >
             Dashboard
           </button>
-          <button className="px-4 py-2 text-slate-600 hover:text-slate-900 hover:bg-white/50 rounded-lg text-sm font-medium transition-all">
+          <button
+            onClick={() => onViewChange('reports')}
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${activeView === 'reports'
+              ? 'bg-white text-blue-600 shadow-sm'
+              : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+              }`}
+          >
             Reports
           </button>
-          <button className="px-4 py-2 text-slate-600 hover:text-slate-900 hover:bg-white/50 rounded-lg text-sm font-medium transition-all">
+          <button
+            onClick={() => onViewChange('settings')}
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${activeView === 'settings'
+              ? 'bg-white text-blue-600 shadow-sm'
+              : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+              }`}
+          >
             Settings
           </button>
         </div>
@@ -32,7 +52,7 @@ export default function NavigationBar({ onLogout }) {
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 p-[2px]">
             <div className="h-full w-full rounded-full bg-white flex items-center justify-center">
-              <span className="font-bold text-slate-700">JD</span>
+              <span className="font-bold text-slate-700">{initials}</span>
             </div>
           </div>
           <button

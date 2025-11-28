@@ -21,9 +21,12 @@ A modern, full-stack personal finance application designed to help you track exp
 
 - **Dashboard Overview:** Visualize your spending with dynamic charts (Doughnut & Line graphs).
 - **Expense Tracking:** Add, edit, and delete transactions with ease.
+- **Detailed Reports:** View spending breakdowns and export your data to CSV.
 - **Budget Goals:** Set and adjust your monthly budget with an interactive slider.
+- **Settings & Personalization:** Manage your profile and customize your experience.
 - **Smart Categorization:** Automatically categorize expenses (Food, Transport, Utilities, etc.).
 - **Secure Authentication:** User registration and login protected by JWT.
+- **Data Isolation:** Multi-tenant architecture ensures users only see their own data.
 - **Responsive Design:** Fully optimized for desktop and mobile devices.
 
 ## 🛠️ Getting Started
