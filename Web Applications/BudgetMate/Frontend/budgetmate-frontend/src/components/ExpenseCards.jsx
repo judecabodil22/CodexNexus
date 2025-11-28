@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import { DollarSign, TrendingUp, Activity, Target } from 'lucide-react';
 
 export default function ExpenseCards({ expenses = [] }) {
-    const [budget, setBudget] = useState(2000); // Default budget, could be persisted later
+    const [budget, setBudget] = useState(() => {
+        const saved = localStorage.getItem('budget');
+        return saved ? Number(saved) : 2000;
+    });
+
+    React.useEffect(() => {
+        localStorage.setItem('budget', budget);
+    }, [budget]);
 
     const totalExpenses = expenses.reduce((acc, curr) => acc + curr.amount, 0);
 

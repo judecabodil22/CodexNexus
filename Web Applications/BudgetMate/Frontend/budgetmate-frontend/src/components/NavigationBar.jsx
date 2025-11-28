@@ -1,7 +1,7 @@
 import React from 'react';
-import { Wallet, PieChart, TrendingUp, Settings } from 'lucide-react';
+import { Wallet, LogOut } from 'lucide-react';
 
-export default function NavigationBar() {
+export default function NavigationBar({ onLogout }) {
   return (
     <nav className="sticky top-4 z-50 mx-4">
       <div className="glass-card px-6 py-4 flex items-center justify-between">
@@ -35,6 +35,13 @@ export default function NavigationBar() {
               <span className="font-bold text-slate-700">JD</span>
             </div>
           </div>
+          <button
+            onClick={onLogout}
+            className="p-2 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-500 transition-colors"
+            title="Logout"
+          >
+            <LogOut size={20} />
+          </button>
         </div>
       </div>
     </nav>
