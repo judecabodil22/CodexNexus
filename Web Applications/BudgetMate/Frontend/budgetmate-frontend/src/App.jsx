@@ -11,6 +11,9 @@ import Toast from './components/Toast';
 import Footer from './components/Footer';
 import Settings from './components/Settings';
 import Reports from './components/Reports';
+import CalendarView from './components/CalendarView';
+import Subscriptions from './components/Subscriptions';
+import SavingsGoals from './components/SavingsGoals';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -143,6 +146,19 @@ const App = () => {
                 )}
                 {activeView === 'reports' && (
                     <Reports expenses={expenses} />
+                )}
+                {activeView === 'calendar' && (
+                    <CalendarView expenses={expenses} />
+                )}
+                {activeView === 'subscriptions' && (
+                    <Subscriptions
+                        onRefresh={fetchExpenses}
+                        token={token}
+                        showToast={showToast}
+                    />
+                )}
+                {activeView === 'savings' && (
+                    <SavingsGoals showToast={showToast} />
                 )}
                 {activeView === 'settings' && (
                     <Settings

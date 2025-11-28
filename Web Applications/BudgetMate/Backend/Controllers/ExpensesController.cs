@@ -50,6 +50,20 @@ namespace BudgetMate.Controllers
             return CreatedAtAction(nameof(GetExpense), new { id = expense.Id }, expense);
         }
 
+        [HttpPost("batch")] // Creates multiple expenses
+        public async Task<ActionResult<IEnumerable<Expense>>> CreateExpenses(IEnumerable<Expense> expenses)
+        {
+            var userId = GetCurrentUserId();
+            foreach (var expense in expenses)
+            {
+                expense.UserId = userId;
+                expense.Id = 0; // Ensure ID is 0 so it's treated as new
+                _context.Expenses.Add(expense);
+            }
+            await _context.SaveChangesAsync();
+            return Ok(expenses);
+        }
+
         [HttpPut("{id}")] //Updates an existing expense
         public async Task<IActionResult> UpdateExpense(int id, Expense expense)
         {

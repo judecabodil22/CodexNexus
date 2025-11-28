@@ -53,8 +53,8 @@ export default function Reports({ expenses = [] }) {
         <div className="animate-fade-in space-y-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
                 <div>
-                    <h2 className="text-2xl font-bold text-slate-800">Financial Reports</h2>
-                    <p className="text-slate-500">Detailed analysis of your spending habits</p>
+                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">Financial Reports</h2>
+                    <p className="text-slate-300 font-medium">Detailed analysis of your spending habits</p>
                 </div>
                 <button
                     onClick={downloadCSV}
@@ -141,7 +141,7 @@ export default function Reports({ expenses = [] }) {
                                             <div className="w-full bg-slate-100 rounded-full h-1.5">
                                                 <div
                                                     className={`h-1.5 rounded-full ${index === 0 ? 'bg-red-400' :
-                                                            index === 1 ? 'bg-orange-400' : 'bg-blue-400'
+                                                        index === 1 ? 'bg-orange-400' : 'bg-blue-400'
                                                         }`}
                                                     style={{ width: `${cat.percentage}%` }}
                                                 ></div>

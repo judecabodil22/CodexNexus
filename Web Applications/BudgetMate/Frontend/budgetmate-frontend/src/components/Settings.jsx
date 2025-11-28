@@ -10,8 +10,8 @@ export default function Settings({ budget, setBudget, username, onLogout }) {
 
     return (
         <div className="animate-fade-in max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-slate-800 mb-2">Settings</h2>
-            <p className="text-slate-500 mb-8">Manage your preferences and account</p>
+            <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400 mb-2">Settings</h2>
+            <p className="text-slate-300 font-medium mb-8">Manage your preferences and account</p>
 
             <div className="space-y-6">
                 {/* Profile Section */}
