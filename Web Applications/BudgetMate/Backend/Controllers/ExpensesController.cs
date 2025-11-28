@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using BudgetMate.Models;
 using Microsoft.EntityFrameworkCore;
-
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 
 namespace BudgetMate.Controllers
@@ -19,16 +19,19 @@ namespace BudgetMate.Controllers
             _context = context;
         }
 
-        [HttpGet] //Get all expenses
+        [HttpGet] //Get all expenses for current user
         public async Task<ActionResult<IEnumerable<Expense>>> GetExpenses()
         {
-            return await _context.Expenses.ToListAsync();
+            var userId = GetCurrentUserId();
+            return await _context.Expenses.Where(e => e.UserId == userId).ToListAsync();
         }
 
         [HttpGet("{id}")] //Get expense by ID
         public async Task<ActionResult<Expense>> GetExpense(int id)
         {
-            var expense = await _context.Expenses.FindAsync(id);
+            var userId = GetCurrentUserId();
+            var expense = await _context.Expenses.FirstOrDefaultAsync(e => e.Id == id && e.UserId == userId);
+
             if (expense == null)
             {
                 return NotFound();
@@ -39,9 +42,26 @@ namespace BudgetMate.Controllers
         [HttpPost] //Creates a new expense
         public async Task<ActionResult<Expense>> CreateExpense(Expense expense)
         {
+            var userId = GetCurrentUserId();
+            expense.UserId = userId;
+            
             _context.Expenses.Add(expense);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetExpense), new { id = expense.Id }, expense);
+        }
+
+        [HttpPost("batch")] // Creates multiple expenses
+        public async Task<ActionResult<IEnumerable<Expense>>> CreateExpenses(IEnumerable<Expense> expenses)
+        {
+            var userId = GetCurrentUserId();
+            foreach (var expense in expenses)
+            {
+                expense.UserId = userId;
+                expense.Id = 0; // Ensure ID is 0 so it's treated as new
+                _context.Expenses.Add(expense);
+            }
+            await _context.SaveChangesAsync();
+            return Ok(expenses);
         }
 
         [HttpPut("{id}")] //Updates an existing expense
@@ -51,14 +71,25 @@ namespace BudgetMate.Controllers
             {
                 return BadRequest();
             }
+
+            var userId = GetCurrentUserId();
+            var existingExpense = await _context.Expenses.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id && e.UserId == userId);
+
+            if (existingExpense == null)
+            {
+                return NotFound();
+            }
+
+            expense.UserId = userId; // Ensure UserId doesn't change
             _context.Entry(expense).State = EntityState.Modified;
+
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!_context.Expenses.Any(e => e.Id == id))
+                if (!_context.Expenses.Any(e => e.Id == id && e.UserId == userId))
                 {
                     return NotFound();
                 }
@@ -73,7 +104,9 @@ namespace BudgetMate.Controllers
         [HttpDelete("{id}")] //Deletes an expense
         public async Task<IActionResult> DeleteExpense(int id)
         {
-            var expense = await _context.Expenses.FindAsync(id);
+            var userId = GetCurrentUserId();
+            var expense = await _context.Expenses.FirstOrDefaultAsync(e => e.Id == id && e.UserId == userId);
+            
             if (expense == null)
             {
                 return NotFound();
@@ -83,5 +116,14 @@ namespace BudgetMate.Controllers
             return NoContent();
         }
 
+        private int GetCurrentUserId()
+        {
+            var idClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (idClaim != null && int.TryParse(idClaim.Value, out int userId))
+            {
+                return userId;
+            }
+            throw new UnauthorizedAccessException("User ID not found in token");
+        }
     }
 }

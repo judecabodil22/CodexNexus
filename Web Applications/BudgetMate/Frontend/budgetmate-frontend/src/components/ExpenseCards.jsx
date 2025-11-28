@@ -1,16 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DollarSign, TrendingUp, Activity, Target } from 'lucide-react';
 
-export default function ExpenseCards({ expenses = [] }) {
-    const [budget, setBudget] = useState(() => {
-        const saved = localStorage.getItem('budget');
-        return saved ? Number(saved) : 2000;
-    });
-
-    React.useEffect(() => {
-        localStorage.setItem('budget', budget);
-    }, [budget]);
-
+export default function ExpenseCards({ expenses = [], budget, setBudget }) {
     const totalExpenses = expenses.reduce((acc, curr) => acc + curr.amount, 0);
 
     // Calculate top category
