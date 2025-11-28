@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using BudgetMate.Models;
 using Microsoft.EntityFrameworkCore;
 
+using Microsoft.AspNetCore.Authorization;
+
 namespace BudgetMate.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ExpensesController : ControllerBase
     {
         private readonly AppDbContext _context;
