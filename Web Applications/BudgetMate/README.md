@@ -23,8 +23,8 @@ BudgetMate is a modern, premium personal finance application designed to make tr
 
 ### Backend
 *   **ASP.NET Core Web API**: A high-performance, cross-platform framework for building the RESTful API.
-*   **Entity Framework Core**: For efficient database access and management.
-*   **SQL Server**: Robust relational database for storing user data securely.
+*   **Google Cloud Firestore**: A flexible, scalable NoSQL cloud database for storing user data.
+*   **Google Cloud Run**: For serverless container deployment.
 *   **JWT Authentication**: Secure user login and session management.
 
 ## 🚀 Getting Started
@@ -32,7 +32,7 @@ BudgetMate is a modern, premium personal finance application designed to make tr
 ### Prerequisites
 *   Node.js (v16+)
 *   .NET 8.0 SDK
-*   SQL Server (LocalDB or Express)
+*   Google Cloud Platform Account (for Firestore and Cloud Run)
 
 ### Installation
 
@@ -43,13 +43,13 @@ BudgetMate is a modern, premium personal finance application designed to make tr
     ```
 
 2.  **Setup Backend**
+    *   Ensure you have a Google Cloud Project with Firestore enabled.
+    *   Set up your `appsettings.json` or environment variables with your Firestore Project ID.
     ```bash
     cd Backend
     dotnet restore
-    dotnet ef database update
     dotnet run
     ```
-    The API will start at `http://localhost:5204`.
 
 3.  **Setup Frontend**
     ```bash
@@ -58,6 +58,11 @@ BudgetMate is a modern, premium personal finance application designed to make tr
     npm run dev
     ```
     The app will be available at `http://localhost:5173`.
+
+### Deployment
+
+*   **Backend**: Deployed to Google Cloud Run.
+*   **Frontend**: Deployed to GitHub Pages.
 
 ## 📸 Screenshots
 

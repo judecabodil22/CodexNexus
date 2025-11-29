@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../config';
 import { Plus, Trash2, Check, AlertCircle, Calendar, DollarSign, Zap, Music, Tv, Wifi, Home, Smartphone, CreditCard, RefreshCw } from 'lucide-react';
 
 const PRESET_SUBS = [
@@ -58,7 +59,7 @@ export default function Subscriptions({ onRefresh, token, showToast }) {
         };
 
         try {
-            const response = await fetch('/api/Expenses', {
+            const response = await fetch(`${API_BASE_URL}/api/Expenses`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -202,8 +203,8 @@ export default function Subscriptions({ onRefresh, token, showToast }) {
 
                             <div className="flex items-center gap-4 mb-6">
                                 <div className={`p-4 rounded-2xl ${status === 'paid' ? 'bg-emerald-100 text-emerald-600' :
-                                        status === 'overdue' ? 'bg-red-100 text-red-600' :
-                                            'bg-blue-100 text-blue-600'
+                                    status === 'overdue' ? 'bg-red-100 text-red-600' :
+                                        'bg-blue-100 text-blue-600'
                                     }`}>
                                     <Icon size={28} />
                                 </div>
@@ -236,8 +237,8 @@ export default function Subscriptions({ onRefresh, token, showToast }) {
                                 <button
                                     onClick={() => handlePay(sub)}
                                     className={`w-full py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all transform active:scale-95 shadow-lg ${status === 'overdue'
-                                            ? 'bg-red-500 hover:bg-red-600 text-white shadow-red-500/30'
-                                            : 'bg-slate-800 hover:bg-slate-900 text-white shadow-slate-500/30'
+                                        ? 'bg-red-500 hover:bg-red-600 text-white shadow-red-500/30'
+                                        : 'bg-slate-800 hover:bg-slate-900 text-white shadow-slate-500/30'
                                         }`}
                                 >
                                     <RefreshCw size={18} />

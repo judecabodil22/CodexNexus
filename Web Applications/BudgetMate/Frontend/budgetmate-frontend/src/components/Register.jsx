@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from '../config';
 import { Lock, User, UserPlus } from 'lucide-react';
 
 export default function Register({ onRegisterSuccess, onSwitchToLogin }) {
@@ -15,7 +16,7 @@ export default function Register({ onRegisterSuccess, onSwitchToLogin }) {
         }
 
         try {
-            const response = await fetch('/api/Auth/register', {
+            const response = await fetch(`${API_BASE_URL}/api/Auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username: formData.username, password: formData.password })

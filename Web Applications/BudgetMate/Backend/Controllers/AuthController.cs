@@ -1,8 +1,7 @@
-using BudgetMate.Data;
 using BudgetMate.Dtos;
 using BudgetMate.Models;
+using BudgetMate.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -14,19 +13,20 @@ namespace BudgetMate.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly FirestoreService _firestoreService;
         private readonly IConfiguration _configuration;
 
-        public AuthController(AppDbContext context, IConfiguration configuration)
+        public AuthController(FirestoreService firestoreService, IConfiguration configuration)
         {
-            _context = context;
+            _firestoreService = firestoreService;
             _configuration = configuration;
         }
 
         [HttpPost("register")]
         public async Task<ActionResult<User>> Register(UserDto request)
         {
-            if (await _context.Users.AnyAsync(u => u.Username == request.Username))
+            var existingUser = await _firestoreService.GetUserByUsernameAsync(request.Username);
+            if (existingUser != null)
             {
                 return BadRequest("Username already exists.");
             }
@@ -39,8 +39,7 @@ namespace BudgetMate.Controllers
                 PasswordHash = passwordHash
             };
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            await _firestoreService.AddUserAsync(user);
 
             return Ok("User registered successfully.");
         }
@@ -48,7 +47,7 @@ namespace BudgetMate.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(UserDto request)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
+            var user = await _firestoreService.GetUserByUsernameAsync(request.Username);
 
             if (user == null)
             {
@@ -70,7 +69,7 @@ namespace BudgetMate.Controllers
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+                new Claim(ClaimTypes.NameIdentifier, user.Id)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(

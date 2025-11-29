@@ -1,9 +1,8 @@
-﻿using BudgetMate.Data;
-using Microsoft.AspNetCore.Mvc;
-using BudgetMate.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
+﻿using BudgetMate.Models;
+using BudgetMate.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BudgetMate.Controllers
 {
@@ -12,27 +11,28 @@ namespace BudgetMate.Controllers
     [Authorize]
     public class ExpensesController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly FirestoreService _firestoreService;
 
-        public ExpensesController(AppDbContext context)
+        public ExpensesController(FirestoreService firestoreService)
         {
-            _context = context;
+            _firestoreService = firestoreService;
         }
 
         [HttpGet] //Get all expenses for current user
         public async Task<ActionResult<IEnumerable<Expense>>> GetExpenses()
         {
             var userId = GetCurrentUserId();
-            return await _context.Expenses.Where(e => e.UserId == userId).ToListAsync();
+            var expenses = await _firestoreService.GetExpensesByUserIdAsync(userId);
+            return Ok(expenses);
         }
 
         [HttpGet("{id}")] //Get expense by ID
-        public async Task<ActionResult<Expense>> GetExpense(int id)
+        public async Task<ActionResult<Expense>> GetExpense(string id)
         {
             var userId = GetCurrentUserId();
-            var expense = await _context.Expenses.FirstOrDefaultAsync(e => e.Id == id && e.UserId == userId);
+            var expense = await _firestoreService.GetExpenseByIdAsync(id);
 
-            if (expense == null)
+            if (expense == null || expense.UserId != userId)
             {
                 return NotFound();
             }
@@ -45,8 +45,11 @@ namespace BudgetMate.Controllers
             var userId = GetCurrentUserId();
             expense.UserId = userId;
             
-            _context.Expenses.Add(expense);
-            await _context.SaveChangesAsync();
+            // Firestore generates ID if not provided, or we can let the service handle it.
+            // The service AddExpenseAsync adds it and returns the ID.
+            string id = await _firestoreService.AddExpenseAsync(expense);
+            expense.Id = id;
+
             return CreatedAtAction(nameof(GetExpense), new { id = expense.Id }, expense);
         }
 
@@ -54,18 +57,20 @@ namespace BudgetMate.Controllers
         public async Task<ActionResult<IEnumerable<Expense>>> CreateExpenses(IEnumerable<Expense> expenses)
         {
             var userId = GetCurrentUserId();
+            var createdExpenses = new List<Expense>();
+
             foreach (var expense in expenses)
             {
                 expense.UserId = userId;
-                expense.Id = 0; // Ensure ID is 0 so it's treated as new
-                _context.Expenses.Add(expense);
+                string id = await _firestoreService.AddExpenseAsync(expense);
+                expense.Id = id;
+                createdExpenses.Add(expense);
             }
-            await _context.SaveChangesAsync();
-            return Ok(expenses);
+            return Ok(createdExpenses);
         }
 
         [HttpPut("{id}")] //Updates an existing expense
-        public async Task<IActionResult> UpdateExpense(int id, Expense expense)
+        public async Task<IActionResult> UpdateExpense(string id, Expense expense)
         {
             if (id != expense.Id)
             {
@@ -73,55 +78,40 @@ namespace BudgetMate.Controllers
             }
 
             var userId = GetCurrentUserId();
-            var existingExpense = await _context.Expenses.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id && e.UserId == userId);
+            var existingExpense = await _firestoreService.GetExpenseByIdAsync(id);
 
-            if (existingExpense == null)
+            if (existingExpense == null || existingExpense.UserId != userId)
             {
                 return NotFound();
             }
 
             expense.UserId = userId; // Ensure UserId doesn't change
-            _context.Entry(expense).State = EntityState.Modified;
+            await _firestoreService.UpdateExpenseAsync(expense);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Expenses.Any(e => e.Id == id && e.UserId == userId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
             return NoContent();
         }
 
         [HttpDelete("{id}")] //Deletes an expense
-        public async Task<IActionResult> DeleteExpense(int id)
+        public async Task<IActionResult> DeleteExpense(string id)
         {
             var userId = GetCurrentUserId();
-            var expense = await _context.Expenses.FirstOrDefaultAsync(e => e.Id == id && e.UserId == userId);
+            var expense = await _firestoreService.GetExpenseByIdAsync(id);
             
-            if (expense == null)
+            if (expense == null || expense.UserId != userId)
             {
                 return NotFound();
             }
-            _context.Expenses.Remove(expense);
-            await _context.SaveChangesAsync();
+
+            await _firestoreService.DeleteExpenseAsync(id);
             return NoContent();
         }
 
-        private int GetCurrentUserId()
+        private string GetCurrentUserId()
         {
             var idClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if (idClaim != null && int.TryParse(idClaim.Value, out int userId))
+            if (idClaim != null)
             {
-                return userId;
+                return idClaim.Value;
             }
             throw new UnauthorizedAccessException("User ID not found in token");
         }
