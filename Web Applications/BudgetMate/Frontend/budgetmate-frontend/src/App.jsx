@@ -15,6 +15,7 @@ import Reports from './components/Reports';
 import CalendarView from './components/CalendarView';
 import Subscriptions from './components/Subscriptions';
 import SavingsGoals from './components/SavingsGoals';
+import BudgetPlanning from './components/BudgetPlanning';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -26,6 +27,7 @@ const App = () => {
     const [authView, setAuthView] = useState('login'); // 'login' or 'register'
     const [isLoading, setIsLoading] = useState(false);
     const [activeView, setActiveView] = useState('dashboard'); // 'dashboard', 'reports', 'settings'
+    const [userProfile, setUserProfile] = useState(null);
 
     const [budget, setBudget] = useState(() => {
         const saved = localStorage.getItem('budget');
@@ -60,6 +62,21 @@ const App = () => {
         showToast('Logged out.');
     };
 
+    const fetchProfile = async () => {
+        if (!token) return;
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/User/profile`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setUserProfile(data);
+            }
+        } catch (error) {
+            console.error('Error fetching profile:', error);
+        }
+    };
+
     const fetchExpenses = async () => {
         if (!token) return;
         setIsLoading(true);
@@ -85,6 +102,7 @@ const App = () => {
     useEffect(() => {
         if (token) {
             fetchExpenses();
+            fetchProfile();
         }
     }, [token]);
 
@@ -135,7 +153,7 @@ const App = () => {
             <div className="container mx-auto px-4 py-8 max-w-7xl">
                 {activeView === 'dashboard' && (
                     <div className="animate-fade-in">
-                        <ExpenseCards expenses={expenses} budget={budget} setBudget={setBudget} />
+                        <ExpenseCards expenses={expenses} budget={budget} setBudget={setBudget} userProfile={userProfile} />
                         <Charts expenses={expenses} />
                         <CRUD
                             expenses={expenses}
@@ -144,6 +162,9 @@ const App = () => {
                             token={token}
                         />
                     </div>
+                )}
+                {activeView === 'budget' && (
+                    <BudgetPlanning token={token} showToast={showToast} />
                 )}
                 {activeView === 'reports' && (
                     <Reports expenses={expenses} />

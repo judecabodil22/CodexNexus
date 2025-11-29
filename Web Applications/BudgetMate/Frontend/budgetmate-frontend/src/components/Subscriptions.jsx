@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import API_BASE_URL from '../config';
-import { Plus, Trash2, Check, AlertCircle, Calendar, DollarSign, Zap, Music, Tv, Wifi, Home, Smartphone, CreditCard, RefreshCw } from 'lucide-react';
+import { Plus, Trash2, Check, AlertCircle, Calendar, Zap, Music, Tv, Wifi, Home, Smartphone, CreditCard, RefreshCw } from 'lucide-react';
 
 const PRESET_SUBS = [
     { name: 'Netflix', icon: Tv, category: 'Entertainment', defaultAmount: 15.99 },
@@ -112,7 +112,7 @@ export default function Subscriptions({ onRefresh, token, showToast }) {
                 <div className="flex items-center gap-4">
                     <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20">
                         <span className="text-slate-400 text-xs uppercase font-bold tracking-wider">Monthly Total</span>
-                        <p className="text-xl font-bold text-white">${totalMonthly.toFixed(2)}</p>
+                        <p className="text-xl font-bold text-white">₱{totalMonthly.toFixed(2)}</p>
                     </div>
                     <button
                         onClick={() => setIsFormOpen(!isFormOpen)}
@@ -217,7 +217,7 @@ export default function Subscriptions({ onRefresh, token, showToast }) {
                             <div className="flex justify-between items-end mb-6">
                                 <div>
                                     <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Amount</p>
-                                    <p className="text-2xl font-bold text-slate-800">${sub.amount.toFixed(2)}</p>
+                                    <p className="text-2xl font-bold text-slate-800">₱{sub.amount.toFixed(2)}</p>
                                 </div>
                                 <div className="text-right">
                                     <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Due Date</p>

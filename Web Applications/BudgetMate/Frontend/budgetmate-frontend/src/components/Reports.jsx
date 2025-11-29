@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Download, TrendingUp, TrendingDown, DollarSign, Calendar, PieChart } from 'lucide-react';
+import { Download, TrendingUp, TrendingDown, PhilippinePeso, Calendar, PieChart } from 'lucide-react';
 
 export default function Reports({ expenses = [] }) {
     // Calculate metrics
@@ -72,11 +72,11 @@ export default function Reports({ expenses = [] }) {
                         <div>
                             <p className="text-slate-500 text-sm font-medium">Total Spending</p>
                             <h3 className="text-2xl font-bold text-slate-800 mt-1">
-                                ${metrics.total.toFixed(2)}
+                                ₱{metrics.total.toFixed(2)}
                             </h3>
                         </div>
                         <div className="p-3 bg-blue-100 rounded-xl text-blue-600">
-                            <DollarSign size={24} />
+                            <PhilippinePeso size={24} />
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@ export default function Reports({ expenses = [] }) {
                         <div>
                             <p className="text-slate-500 text-sm font-medium">Avg. Transaction</p>
                             <h3 className="text-2xl font-bold text-slate-800 mt-1">
-                                ${metrics.average.toFixed(2)}
+                                ₱{metrics.average.toFixed(2)}
                             </h3>
                         </div>
                         <div className="p-3 bg-purple-100 rounded-xl text-purple-600">
@@ -100,7 +100,7 @@ export default function Reports({ expenses = [] }) {
                         <div>
                             <p className="text-slate-500 text-sm font-medium">Largest Expense</p>
                             <h3 className="text-2xl font-bold text-slate-800 mt-1">
-                                ${metrics.maxTransaction?.amount.toFixed(2) || '0.00'}
+                                ₱{metrics.maxTransaction?.amount.toFixed(2) || '0.00'}
                             </h3>
                             <p className="text-xs text-slate-400 mt-1 truncate max-w-[150px]">
                                 {metrics.maxTransaction?.description || '-'}
@@ -135,7 +135,7 @@ export default function Reports({ expenses = [] }) {
                                 {metrics.categoryData.map((cat, index) => (
                                     <tr key={cat.name} className="hover:bg-slate-50/50 transition-colors">
                                         <td className="py-4 pl-2 font-medium text-slate-700">{cat.name}</td>
-                                        <td className="py-4 text-right text-slate-600">${cat.amount.toFixed(2)}</td>
+                                        <td className="py-4 text-right text-slate-600">₱{cat.amount.toFixed(2)}</td>
                                         <td className="py-4 text-right text-slate-500 pr-2">{cat.percentage.toFixed(1)}%</td>
                                         <td className="py-4 px-4">
                                             <div className="w-full bg-slate-100 rounded-full h-1.5">

@@ -1,6 +1,6 @@
 /* --- script.js --- */
 
-const API_BASE_URL_EXPENSES = '/api/expenses'; 
+const API_BASE_URL_EXPENSES = '/api/expenses';
 const API_BASE_URL_INCOME = '/api/income'; // Assuming you'll have an income API
 const API_BASE_URL_GOALS = '/api/goals'; // Assuming you'll have a goals API
 
@@ -95,12 +95,12 @@ function initializeCharts() {
 // --- Event Listeners and Functions ---
 
 // Show/hide recurring expense frequency
-document.getElementById('isRecurringExpense').addEventListener('change', function() {
+document.getElementById('isRecurringExpense').addEventListener('change', function () {
     document.getElementById('recurringExpenseFrequencyDiv').style.display = this.checked ? 'block' : 'none';
 });
 
 // Show/hide recurring income frequency
-document.getElementById('isRecurringIncome').addEventListener('change', function() {
+document.getElementById('isRecurringIncome').addEventListener('change', function () {
     document.getElementById('recurringIncomeFrequencyDiv').style.display = this.checked ? 'block' : 'none';
 });
 
@@ -118,14 +118,14 @@ function applyFilter() {
 
 // Dummy data for summary cards
 function updateSummaryCards() {
-    document.getElementById('total-balance').innerText = `$${(Math.random() * 5000 + 1000).toFixed(2)}`;
-    document.getElementById('total-income').innerText = `$${(Math.random() * 3000 + 1500).toFixed(2)}`;
-    document.getElementById('total-expenses').innerText = `$${(Math.random() * 1500 + 500).toFixed(2)}`;
-    document.getElementById('budget-left').innerText = `$${(Math.random() * 1000 + 200).toFixed(2)}`;
+    document.getElementById('total-balance').innerText = `₱${(Math.random() * 5000 + 1000).toFixed(2)}`;
+    document.getElementById('total-income').innerText = `₱${(Math.random() * 3000 + 1500).toFixed(2)}`;
+    document.getElementById('total-expenses').innerText = `₱${(Math.random() * 1500 + 500).toFixed(2)}`;
+    document.getElementById('budget-left').innerText = `₱${(Math.random() * 1000 + 200).toFixed(2)}`;
     document.getElementById('top-category').innerText = ['Food', 'Housing', 'Transport', 'Utilities'][Math.floor(Math.random() * 4)];
-    document.getElementById('budget-rollover').innerText = `$${(Math.random() * 200).toFixed(2)} monthly`;
+    document.getElementById('budget-rollover').innerText = `₱${(Math.random() * 200).toFixed(2)} monthly`;
     const projectedOverspend = (Math.random() * 300 - 150); // Can be positive or negative
-    document.getElementById('predictive-alert').innerText = projectedOverspend > 0 ? `-$${projectedOverspend.toFixed(2)}` : `+$${Math.abs(projectedOverspend).toFixed(2)}`;
+    document.getElementById('predictive-alert').innerText = projectedOverspend > 0 ? `-₱${projectedOverspend.toFixed(2)}` : `+₱${Math.abs(projectedOverspend).toFixed(2)}`;
     document.getElementById('predictive-alert').closest('.card').classList.toggle('alert-danger', projectedOverspend > 0);
     document.getElementById('predictive-alert').closest('.card').classList.toggle('bg-success', projectedOverspend <= 0);
     document.getElementById('predictive-alert').closest('.card').classList.toggle('text-white', true); // Ensure text color for success
@@ -139,8 +139,8 @@ function updateChartsWithSampleData() {
     ];
     categorySpendingChart.update();
 
-    const newExpenseData = Array.from({length: 6}, () => Math.random() * 1000 + 1000);
-    const newIncomeData = Array.from({length: 6}, () => Math.random() * 1500 + 2500);
+    const newExpenseData = Array.from({ length: 6 }, () => Math.random() * 1000 + 1000);
+    const newIncomeData = Array.from({ length: 6 }, () => Math.random() * 1500 + 2500);
     spendingTrendChart.data.datasets[0].data = newExpenseData;
     spendingTrendChart.data.datasets[1].data = newIncomeData;
     spendingTrendChart.update();
@@ -198,10 +198,10 @@ async function handleAddGoal(event) {
 }
 
 // Initial setup on page load
-window.onload = function() {
+window.onload = function () {
     initializeCharts();
     updateSummaryCards(); // Load initial dummy data
-    
+
     // Attach form submission handlers
     document.getElementById('addExpenseForm').addEventListener('submit', handleAddExpense);
     document.getElementById('addIncomeForm').addEventListener('submit', handleAddIncome);

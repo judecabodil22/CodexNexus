@@ -63,7 +63,7 @@ export default function Settings({ budget, setBudget, username, onLogout }) {
                     <div className="space-y-6">
                         <div>
                             <label className="block text-sm font-medium text-slate-700 mb-2">
-                                Monthly Budget Goal: <span className="font-bold text-blue-600">${budget}</span>
+                                Monthly Budget Goal: <span className="font-bold text-blue-600">₱{budget}</span>
                             </label>
                             <input
                                 type="range"
@@ -75,8 +75,8 @@ export default function Settings({ budget, setBudget, username, onLogout }) {
                                 className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                             />
                             <div className="flex justify-between text-xs text-slate-400 mt-2">
-                                <span>$500</span>
-                                <span>$10,000</span>
+                                <span>₱500</span>
+                                <span>₱10,000</span>
                             </div>
                         </div>
 

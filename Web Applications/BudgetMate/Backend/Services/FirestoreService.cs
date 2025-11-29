@@ -40,6 +40,16 @@ namespace BudgetMate.Services
             return snapshot.Documents[0].ConvertTo<User>();
         }
 
+        public async Task UpdateUserAsync(User user)
+        {
+            if (string.IsNullOrEmpty(user.Id))
+            {
+                throw new ArgumentException("User ID cannot be null or empty for update.");
+            }
+            DocumentReference docRef = _firestoreDb.Collection(UsersCollection).Document(user.Id);
+            await docRef.SetAsync(user, SetOptions.MergeAll);
+        }
+
         // Expense Operations
         public async Task<string> AddExpenseAsync(Expense expense)
         {

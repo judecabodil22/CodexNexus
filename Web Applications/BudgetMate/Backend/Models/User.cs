@@ -17,5 +17,14 @@ namespace BudgetMate.Models
         [Required]
         [FirestoreProperty]
         public string PasswordHash { get; set; } = string.Empty;
+
+        [FirestoreProperty]
+        public decimal Salary { get; set; }
+
+        [FirestoreProperty]
+        public string PayCycle { get; set; } = "Monthly";
+
+        [FirestoreProperty]
+        public string SavingsRule { get; set; } = "50/30/20";
     }
 }

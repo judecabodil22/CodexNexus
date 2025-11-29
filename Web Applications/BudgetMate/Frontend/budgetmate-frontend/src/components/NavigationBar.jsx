@@ -7,6 +7,7 @@ export default function NavigationBar({ onLogout, activeView, onViewChange, user
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'budget', label: 'Budget', icon: Wallet },
     { id: 'reports', label: 'Reports', icon: PieChart },
     { id: 'calendar', label: 'Calendar', icon: Calendar },
     { id: 'subscriptions', label: 'Subs', icon: CreditCard },
