@@ -1,4 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
+import API_BASE_URL from './config';
 
 import './index.css';
 import NavigationBar from './components/NavigationBar';
@@ -63,7 +64,7 @@ const App = () => {
         if (!token) return;
         setIsLoading(true);
         try {
-            const response = await fetch('/api/Expenses', {
+            const response = await fetch(`${API_BASE_URL}/api/Expenses`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {

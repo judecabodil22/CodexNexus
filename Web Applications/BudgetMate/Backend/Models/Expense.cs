@@ -1,25 +1,33 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Google.Cloud.Firestore;
+using System.ComponentModel.DataAnnotations;
 
 namespace BudgetMate.Models
 {
+    [FirestoreData]
     public class Expense
     {
-        [Key]
-        public int Id { get; set; }
+        [FirestoreDocumentId]
+        public string Id { get; set; }
 
         [Required]
         [MaxLength(100)]
+        [FirestoreProperty]
         public string Category { get; set; }
+
         [MaxLength(255)]
+        [FirestoreProperty]
         public string Description { get; set; }
 
         [Required]
+        [FirestoreProperty]
         public decimal Amount { get; set; }
 
         [Required]
-        public DateTime Date { get; set; } = DateTime.Now;
+        [FirestoreProperty]
+        public DateTime Date { get; set; } = DateTime.UtcNow;
 
-        public int UserId { get; set; }
+        [FirestoreProperty]
+        public string UserId { get; set; }
 
     }
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from '../config';
 import { Plus, Trash2, Edit2, Calendar, Tag, DollarSign, Save, X, Search, Coffee, Car, Home, Zap, Film, ShoppingBag, Heart, HelpCircle, ListPlus, Send } from 'lucide-react';
 
 const CategoryIcons = {
@@ -33,13 +34,13 @@ export default function CRUD({ expenses, onRefresh, showToast, token }) {
     const expense = {
       ...formData,
       amount: parseFloat(formData.amount),
-      id: editingId || 0
+      id: editingId || null
     };
 
     if (editingId) {
       // Edit existing transaction immediately
       try {
-        const response = await fetch(`/api/Expenses/${editingId}`, {
+        const response = await fetch(`${API_BASE_URL}/api/Expenses/${editingId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -71,7 +72,7 @@ export default function CRUD({ expenses, onRefresh, showToast, token }) {
     if (pendingTransactions.length === 0) return;
 
     try {
-      const response = await fetch('/api/Expenses/batch', {
+      const response = await fetch(`${API_BASE_URL}/api/Expenses/batch`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -131,7 +132,7 @@ export default function CRUD({ expenses, onRefresh, showToast, token }) {
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this expense?')) return;
     try {
-      const response = await fetch(`/api/Expenses/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/Expenses/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from '../config';
 import { Lock, User, ArrowRight } from 'lucide-react';
 
 export default function Login({ onLogin, onSwitchToRegister }) {
@@ -10,7 +11,7 @@ export default function Login({ onLogin, onSwitchToRegister }) {
         setError('');
 
         try {
-            const response = await fetch('/api/Auth/login', {
+            const response = await fetch(`${API_BASE_URL}/api/Auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
