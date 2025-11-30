@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Trash2, Target, TrendingUp, DollarSign, Award, Gift, Plane, Smartphone, Home, Car, Monitor, Coffee } from 'lucide-react';
+import { Plus, Trash2, Target, TrendingUp, Award, Gift, Plane, Smartphone, Home, Car, Monitor, Coffee } from 'lucide-react';
 
 const GOAL_ICONS = {
     'General': Target,
@@ -178,7 +178,7 @@ export default function SavingsGoals({ showToast }) {
                                 </div>
                                 <div className="text-right">
                                     <p className="text-xs text-slate-400 font-bold uppercase">Target</p>
-                                    <p className="font-bold text-slate-700">${goal.targetAmount.toLocaleString()}</p>
+                                    <p className="font-bold text-slate-700">₱{goal.targetAmount.toLocaleString()}</p>
                                 </div>
                             </div>
 
@@ -216,9 +216,9 @@ export default function SavingsGoals({ showToast }) {
                             </div>
 
                             <div className="flex justify-between items-center mb-4 text-sm">
-                                <span className="text-slate-500 font-medium">Current: <span className="text-slate-800 font-bold">${goal.currentAmount.toLocaleString()}</span></span>
+                                <span className="text-slate-500 font-medium">Current: <span className="text-slate-800 font-bold">₱{goal.currentAmount.toLocaleString()}</span></span>
                                 <span className="text-slate-400 text-xs">
-                                    ${(goal.targetAmount - goal.currentAmount).toLocaleString()} to go
+                                    ₱{(goal.targetAmount - goal.currentAmount).toLocaleString()} to go
                                 </span>
                             </div>
 
@@ -229,13 +229,13 @@ export default function SavingsGoals({ showToast }) {
                                         onClick={() => handleUpdateProgress(goal.id, 10)}
                                         className="py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-bold transition-colors"
                                     >
-                                        +$10
+                                        +₱10
                                     </button>
                                     <button
                                         onClick={() => handleUpdateProgress(goal.id, 50)}
                                         className="py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-bold transition-colors"
                                     >
-                                        +$50
+                                        +₱50
                                     </button>
                                     <button
                                         onClick={() => {

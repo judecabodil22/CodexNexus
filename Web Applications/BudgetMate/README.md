@@ -9,7 +9,8 @@ BudgetMate is a modern, premium personal finance application designed to make tr
 *   **📅 Visual Calendar**: See your spending habits on a monthly calendar. Click on any date to view a detailed breakdown of that day's expenses.
 *   **🔄 Subscriptions Manager**: Never miss a bill again. Track recurring expenses like Netflix, Rent, and Utilities. See what's paid, due today, or overdue at a glance.
 *   **🎯 Savings Goals**: Create visual "piggy banks" for your dreams (e.g., "New Laptop", "Vacation"). Watch your progress grow with animated circular indicators.
-*   **📈 Detailed Reports**: Analyze your spending by category with beautiful bar charts and data visualizations.
+*   **� Budget Planning**: Input your salary and pay cycle to automatically calculate a budget plan based on popular rules like 50/30/20.
+*   **�📈 Detailed Reports**: Analyze your spending by category with beautiful bar charts and data visualizations.
 *   **🎨 Premium Design**: Enjoy a sleek, glassmorphism-inspired UI with smooth animations, vibrant gradients, and a fully responsive layout.
 
 ## 🛠️ Tech Stack

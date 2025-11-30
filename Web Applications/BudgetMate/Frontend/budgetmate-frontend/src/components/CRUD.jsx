@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import API_BASE_URL from '../config';
-import { Plus, Trash2, Edit2, Calendar, Tag, DollarSign, Save, X, Search, Coffee, Car, Home, Zap, Film, ShoppingBag, Heart, HelpCircle, ListPlus, Send } from 'lucide-react';
+import { Plus, Trash2, Edit2, Calendar, Tag, PhilippinePeso, Save, X, Search, Coffee, Car, Home, Zap, Film, ShoppingBag, Heart, HelpCircle, ListPlus, Send } from 'lucide-react';
 
 const CategoryIcons = {
   Food: Coffee,
@@ -199,7 +199,7 @@ export default function CRUD({ expenses, onRefresh, showToast, token }) {
                 />
               </div>
               <div className="relative">
-                <DollarSign className="absolute left-3 top-3.5 text-slate-400" size={18} />
+                <PhilippinePeso className="absolute left-3 top-3.5 text-slate-400" size={18} />
                 <input
                   type="number"
                   id="amount"
@@ -280,7 +280,7 @@ export default function CRUD({ expenses, onRefresh, showToast, token }) {
                       <tr key={t.tempId}>
                         <td className="p-3">{t.category}</td>
                         <td className="p-3">{t.description}</td>
-                        <td className="p-3 text-right font-medium">${t.amount.toFixed(2)}</td>
+                        <td className="p-3 text-right font-medium">₱{t.amount.toFixed(2)}</td>
                         <td className="p-3 text-center">
                           <div className="flex justify-center gap-2">
                             <button onClick={() => handleEditPending(t)} className="text-blue-400 hover:text-blue-600">
@@ -333,7 +333,7 @@ export default function CRUD({ expenses, onRefresh, showToast, token }) {
                         {new Date(expense.date).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
                       </td>
                       <td className="p-4 text-right font-bold text-slate-700">
-                        -${expense.amount.toFixed(2)}
+                        -₱{expense.amount.toFixed(2)}
                       </td>
                       <td className="p-4 text-center">
                         <div className="flex justify-center gap-2">

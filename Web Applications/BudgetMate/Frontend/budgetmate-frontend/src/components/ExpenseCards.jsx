@@ -1,7 +1,7 @@
 import React from 'react';
-import { DollarSign, TrendingUp, Activity, Target } from 'lucide-react';
+import { PhilippinePeso, TrendingUp, Activity, Target, Wallet } from 'lucide-react';
 
-export default function ExpenseCards({ expenses = [], budget, setBudget }) {
+export default function ExpenseCards({ expenses = [], budget, setBudget, userProfile }) {
     const totalExpenses = expenses.reduce((acc, curr) => acc + curr.amount, 0);
 
     // Calculate top category
@@ -14,6 +14,14 @@ export default function ExpenseCards({ expenses = [], budget, setBudget }) {
 
     const budgetProgress = Math.min((totalExpenses / budget) * 100, 100);
     const isOverBudget = totalExpenses > budget;
+
+    const savingsAmount = userProfile?.salary ? (userProfile.salary * (
+        userProfile.savingsRule === '50/30/20' ? 0.2 :
+            userProfile.savingsRule === '70/20/10' ? 0.2 : // Usually 20% savings
+                userProfile.savingsRule === '60/20/20' ? 0.2 :
+                    userProfile.savingsRule === '80/20' ? 0.2 :
+                        userProfile.savingsRule === '50/50' ? 0.5 : 0.2
+    )) : 0;
 
     const Card = ({ title, value, subtext, icon: Icon, colorClass, delay, children }) => (
         <div className={`glass-card p-6 animate-fade-in ${delay} flex flex-col justify-between h-full`}>
@@ -42,9 +50,9 @@ export default function ExpenseCards({ expenses = [], budget, setBudget }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <Card
                 title="Total Expenses"
-                value={`$${totalExpenses.toFixed(2)}`}
-                subtext={`of $${budget} monthly budget`}
-                icon={DollarSign}
+                value={`₱${totalExpenses.toFixed(2)}`}
+                subtext={`of ₱${budget} monthly budget`}
+                icon={PhilippinePeso}
                 colorClass="bg-blue-500"
                 delay=""
             >
@@ -65,31 +73,42 @@ export default function ExpenseCards({ expenses = [], budget, setBudget }) {
                 delay="delay-100"
             />
 
-            <Card
-                title="Transactions"
-                value={expenses.length}
-                subtext="Recorded entries"
-                icon={Activity}
-                colorClass="bg-orange-500"
-                delay="delay-200"
-            />
+            {savingsAmount > 0 ? (
+                <Card
+                    title="Projected Savings"
+                    value={`₱${savingsAmount.toLocaleString()}`}
+                    subtext={`Based on ${userProfile.savingsRule}`}
+                    icon={Wallet}
+                    colorClass="bg-emerald-500"
+                    delay="delay-200"
+                />
+            ) : (
+                <Card
+                    title="Transactions"
+                    value={expenses.length}
+                    subtext="Recorded entries"
+                    icon={Activity}
+                    colorClass="bg-orange-500"
+                    delay="delay-200"
+                />
+            )}
 
             <Card
                 title="Budget Goal"
-                value={`$${budget}`}
+                value={`₱${budget}`}
                 subtext="Click to adjust limit"
                 icon={Target}
-                colorClass="bg-emerald-500"
+                colorClass="bg-pink-500"
                 delay="delay-300"
             >
                 <input
                     type="range"
                     min="500"
-                    max="5000"
+                    max={userProfile?.salary ? userProfile.salary : 5000}
                     step="100"
                     value={budget}
                     onChange={(e) => setBudget(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-pink-500"
                 />
             </Card>
         </div>

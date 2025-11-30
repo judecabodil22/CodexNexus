@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, DollarSign, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, PhilippinePeso, X } from 'lucide-react';
 
 export default function CalendarView({ expenses }) {
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -74,7 +74,7 @@ export default function CalendarView({ expenses }) {
                         </span>
                         {dayData && (
                             <span className="text-xs font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded-md">
-                                -${Math.round(dayData.total)}
+                                -₱{Math.round(dayData.total)}
                             </span>
                         )}
                     </div>
@@ -156,7 +156,7 @@ export default function CalendarView({ expenses }) {
                         <div className="space-y-4">
                             <div className="bg-gradient-to-r from-red-500 to-pink-500 p-4 rounded-xl text-white shadow-lg shadow-red-500/20">
                                 <p className="text-red-100 text-sm font-medium mb-1">Total Spent</p>
-                                <p className="text-3xl font-bold">${selectedDayData.total.toFixed(2)}</p>
+                                <p className="text-3xl font-bold">₱{selectedDayData.total.toFixed(2)}</p>
                             </div>
 
                             <div className="space-y-3 mt-4">
@@ -171,7 +171,7 @@ export default function CalendarView({ expenses }) {
                                                     <p className="text-xs text-slate-400">{item.category}</p>
                                                 </div>
                                             </div>
-                                            <span className="font-bold text-slate-700">-${item.amount.toFixed(2)}</span>
+                                            <span className="font-bold text-slate-700">-₱{item.amount.toFixed(2)}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -180,7 +180,7 @@ export default function CalendarView({ expenses }) {
                     ) : (
                         <div className="text-center py-12 text-slate-400">
                             <div className="bg-slate-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <DollarSign size={24} className="text-slate-300" />
+                                <PhilippinePeso size={24} className="text-slate-300" />
                             </div>
                             <p>No transactions recorded for this date.</p>
                         </div>
