@@ -1,22 +1,17 @@
-﻿using Google.Cloud.Firestore;
+using Google.Cloud.Firestore;
 using System.ComponentModel.DataAnnotations;
 
 namespace BudgetMate.Models
 {
     [FirestoreData]
-    public class Expense
+    public class Income
     {
         [FirestoreDocumentId]
         public string? Id { get; set; }
 
         [Required]
-        [MaxLength(100)]
         [FirestoreProperty]
-        public string Category { get; set; }
-
-        [MaxLength(255)]
-        [FirestoreProperty]
-        public string? Description { get; set; }
+        public string Source { get; set; } // e.g., Salary, Investment, Freelance
 
         [Required]
         [FirestoreProperty]
@@ -28,6 +23,5 @@ namespace BudgetMate.Models
 
         [FirestoreProperty]
         public string? UserId { get; set; }
-
     }
 }

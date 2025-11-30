@@ -7,7 +7,7 @@ export default function Footer() {
             <div className="flex items-center justify-center gap-2 mb-2">
                 <span>Black-Mesa Development</span>
                 <span className="text-slate-300">|</span>
-                <span>v1.2</span>
+                <span>v1.3</span>
             </div>
             <p>&copy; {new Date().getFullYear()} BudgetMate. All rights reserved.</p>
         </footer>

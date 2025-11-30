@@ -62,38 +62,32 @@ const App = () => {
         showToast('Logged out.');
     };
 
-    const fetchProfile = async () => {
-        if (!token) return;
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/User/profile`, {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            if (response.ok) {
-                const data = await response.json();
-                setUserProfile(data);
-            }
-        } catch (error) {
-            console.error('Error fetching profile:', error);
-        }
-    };
+    const [income, setIncome] = useState([]);
+    const [savings, setSavings] = useState([]);
 
-    const fetchExpenses = async () => {
+    const fetchData = async () => {
         if (!token) return;
         setIsLoading(true);
         try {
-            const response = await fetch(`${API_BASE_URL}/api/Expenses`, {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            if (response.ok) {
-                const data = await response.json();
-                setExpenses(data);
-            } else if (response.status === 401) {
+            const [expensesRes, incomeRes, savingsRes, profileRes] = await Promise.all([
+                fetch(`${API_BASE_URL}/api/Expenses`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                fetch(`${API_BASE_URL}/api/Income`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                fetch(`${API_BASE_URL}/api/Savings`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                fetch(`${API_BASE_URL}/api/User/profile`, { headers: { 'Authorization': `Bearer ${token}` } })
+            ]);
+
+            if (expensesRes.ok) setExpenses(await expensesRes.json());
+            if (incomeRes.ok) setIncome(await incomeRes.json());
+            if (savingsRes.ok) setSavings(await savingsRes.json());
+            if (profileRes.ok) setUserProfile(await profileRes.json());
+
+            if (expensesRes.status === 401) {
                 handleLogout();
                 showToast('Session expired. Please login again.', 'error');
             }
         } catch (error) {
-            console.error('Error fetching expenses:', error);
-            showToast('Failed to fetch expenses', 'error');
+            console.error('Error fetching data:', error);
+            showToast('Failed to fetch data', 'error');
         } finally {
             setIsLoading(false);
         }
@@ -101,12 +95,43 @@ const App = () => {
 
     useEffect(() => {
         if (token) {
-            fetchExpenses();
-            fetchProfile();
+            fetchData();
         }
     }, [token]);
 
+    const calculateBudgetBreakdown = () => {
+        const totalIncome = income.reduce((acc, curr) => acc + curr.amount, 0);
+        const rule = userProfile?.savingsRule || '50/30/20';
+
+        let needs = 0, wants = 0, savingsGoal = 0;
+
+        if (rule === '50/30/20') {
+            needs = totalIncome * 0.5;
+            wants = totalIncome * 0.3;
+            savingsGoal = totalIncome * 0.2;
+        } else if (rule === '70/20/10') {
+            needs = totalIncome * 0.7;
+            savingsGoal = totalIncome * 0.2;
+            wants = totalIncome * 0.1;
+        } else if (rule === '60/20/20') {
+            needs = totalIncome * 0.6;
+            wants = totalIncome * 0.2;
+            savingsGoal = totalIncome * 0.2;
+        } else if (rule === '80/20') {
+            needs = totalIncome * 0.8;
+            savingsGoal = totalIncome * 0.2;
+        } else if (rule === '50/50') {
+            needs = totalIncome * 0.5;
+            savingsGoal = totalIncome * 0.5;
+        }
+
+        return { needs, wants, savings: savingsGoal };
+    };
+
+    const budgetBreakdown = calculateBudgetBreakdown();
+
     if (!token) {
+        // ... (Login/Register logic remains same)
         return (
             <>
                 {authView === 'login' ? (
@@ -154,10 +179,15 @@ const App = () => {
                 {activeView === 'dashboard' && (
                     <div className="animate-fade-in">
                         <ExpenseCards expenses={expenses} budget={budget} setBudget={setBudget} userProfile={userProfile} />
-                        <Charts expenses={expenses} />
+                        <Charts
+                            expenses={expenses}
+                            income={income}
+                            savings={savings}
+                            budgetBreakdown={budgetBreakdown}
+                        />
                         <CRUD
                             expenses={expenses}
-                            onRefresh={fetchExpenses}
+                            onRefresh={fetchData}
                             showToast={showToast}
                             token={token}
                         />
@@ -167,14 +197,14 @@ const App = () => {
                     <BudgetPlanning token={token} showToast={showToast} />
                 )}
                 {activeView === 'reports' && (
-                    <Reports expenses={expenses} />
+                    <Reports expenses={expenses} income={income} savings={savings} />
                 )}
                 {activeView === 'calendar' && (
                     <CalendarView expenses={expenses} />
                 )}
                 {activeView === 'subscriptions' && (
                     <Subscriptions
-                        onRefresh={fetchExpenses}
+                        onRefresh={fetchData}
                         token={token}
                         showToast={showToast}
                     />

@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
-import { Doughnut, Line } from 'react-chartjs-2';
+import { Doughnut, Line, Bar } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
     PointElement,
     LineElement,
+    BarElement,
     ArcElement,
     Title,
     Tooltip,
@@ -18,6 +19,7 @@ ChartJS.register(
     LinearScale,
     PointElement,
     LineElement,
+    BarElement,
     ArcElement,
     Title,
     Tooltip,
@@ -25,7 +27,7 @@ ChartJS.register(
     Filler
 );
 
-export default function Charts({ expenses = [] }) {
+export default function Charts({ expenses = [], income = [], savings = [], budgetBreakdown }) {
     const doughnutData = useMemo(() => {
         const categories = {};
         expenses.forEach(e => {
@@ -53,39 +55,41 @@ export default function Charts({ expenses = [] }) {
         };
     }, [expenses]);
 
-    const lineData = useMemo(() => {
-        const monthly = {};
-        expenses.forEach(e => {
-            const date = new Date(e.date);
-            const monthYear = date.toLocaleString('default', { month: 'short' });
-            monthly[monthYear] = (monthly[monthYear] || 0) + e.amount;
-        });
+    const budgetVsActualData = useMemo(() => {
+        if (!budgetBreakdown) return null;
+
+        const needsSpent = expenses
+            .filter(e => ['Housing', 'Utilities', 'Food', 'Transport', 'Health'].includes(e.category))
+            .reduce((acc, curr) => acc + curr.amount, 0);
+
+        const wantsSpent = expenses
+            .filter(e => !['Housing', 'Utilities', 'Food', 'Transport', 'Health'].includes(e.category))
+            .reduce((acc, curr) => acc + curr.amount, 0);
 
         return {
-            labels: Object.keys(monthly),
+            labels: ['Needs', 'Wants', 'Savings'],
             datasets: [
                 {
-                    label: 'Expenses',
-                    data: Object.values(monthly),
-                    borderColor: '#6366f1', // Indigo 500
-                    backgroundColor: (context) => {
-                        const ctx = context.chart.ctx;
-                        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-                        gradient.addColorStop(0, 'rgba(99, 102, 241, 0.4)');
-                        gradient.addColorStop(1, 'rgba(99, 102, 241, 0.0)');
-                        return gradient;
-                    },
-                    fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: '#ffffff',
-                    pointBorderColor: '#6366f1',
-                    pointBorderWidth: 2,
-                    pointRadius: 4,
-                    pointHoverRadius: 6
+                    label: 'Budgeted',
+                    data: [budgetBreakdown.needs, budgetBreakdown.wants, budgetBreakdown.savings],
+                    backgroundColor: 'rgba(99, 102, 241, 0.5)', // Indigo
+                    borderColor: 'rgba(99, 102, 241, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Actual Spent/Saved',
+                    data: [
+                        needsSpent,
+                        wantsSpent,
+                        savings.reduce((acc, curr) => acc + curr.amount, 0)
+                    ],
+                    backgroundColor: 'rgba(34, 197, 94, 0.5)', // Green
+                    borderColor: 'rgba(34, 197, 94, 1)',
+                    borderWidth: 1
                 }
             ]
         };
-    }, [expenses]);
+    }, [expenses, budgetBreakdown, savings]);
 
     const commonOptions = {
         responsive: true,
@@ -113,32 +117,6 @@ export default function Charts({ expenses = [] }) {
         }
     };
 
-    const lineOptions = {
-        ...commonOptions,
-        scales: {
-            y: {
-                beginAtZero: true,
-                grid: {
-                    color: '#f1f5f9',
-                    drawBorder: false
-                },
-                ticks: {
-                    font: { size: 11 },
-                    color: '#64748b'
-                }
-            },
-            x: {
-                grid: {
-                    display: false
-                },
-                ticks: {
-                    font: { size: 11 },
-                    color: '#64748b'
-                }
-            }
-        }
-    };
-
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <div className="glass-card p-6 animate-fade-in delay-100">
@@ -149,9 +127,23 @@ export default function Charts({ expenses = [] }) {
             </div>
 
             <div className="glass-card p-6 animate-fade-in delay-200">
-                <h3 className="text-lg font-bold text-slate-800 mb-6">Monthly Trend</h3>
+                <h3 className="text-lg font-bold text-slate-800 mb-6">Budget vs Actual</h3>
                 <div className="h-[300px]">
-                    <Line data={lineData} options={lineOptions} />
+                    {budgetVsActualData ? (
+                        <Bar
+                            data={budgetVsActualData}
+                            options={{
+                                ...commonOptions,
+                                scales: {
+                                    y: { beginAtZero: true }
+                                }
+                            }}
+                        />
+                    ) : (
+                        <div className="flex items-center justify-center h-full text-slate-400">
+                            No budget data available
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

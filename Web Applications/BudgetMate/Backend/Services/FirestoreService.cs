@@ -37,7 +37,9 @@ namespace BudgetMate.Services
                 return null;
             }
 
-            return snapshot.Documents[0].ConvertTo<User>();
+            var user = snapshot.Documents[0].ConvertTo<User>();
+            user.Id = snapshot.Documents[0].Id;
+            return user;
         }
 
         public async Task UpdateUserAsync(User user)
@@ -64,7 +66,12 @@ namespace BudgetMate.Services
             Query query = expensesRef.WhereEqualTo("UserId", userId);
             QuerySnapshot snapshot = await query.GetSnapshotAsync();
 
-            return snapshot.Documents.Select(doc => doc.ConvertTo<Expense>()).ToList();
+            return snapshot.Documents.Select(doc => 
+            {
+                var expense = doc.ConvertTo<Expense>();
+                expense.Id = doc.Id;
+                return expense;
+            }).ToList();
         }
 
         public async Task<Expense?> GetExpenseByIdAsync(string id)
@@ -77,7 +84,9 @@ namespace BudgetMate.Services
                 return null;
             }
 
-            return snapshot.ConvertTo<Expense>();
+            var expense = snapshot.ConvertTo<Expense>();
+            expense.Id = snapshot.Id;
+            return expense;
         }
 
         public async Task UpdateExpenseAsync(Expense expense)
@@ -89,6 +98,66 @@ namespace BudgetMate.Services
         public async Task DeleteExpenseAsync(string id)
         {
             DocumentReference docRef = _firestoreDb.Collection(ExpensesCollection).Document(id);
+            await docRef.DeleteAsync();
+        }
+        private const string IncomesCollection = "Incomes";
+        private const string SavingsCollection = "Savings";
+
+        // ... (existing methods)
+
+        // Income Operations
+        public async Task<string> AddIncomeAsync(Income income)
+        {
+            CollectionReference incomesRef = _firestoreDb.Collection(IncomesCollection);
+            DocumentReference docRef = await incomesRef.AddAsync(income);
+            return docRef.Id;
+        }
+
+        public async Task<List<Income>> GetIncomesByUserIdAsync(string userId)
+        {
+            CollectionReference incomesRef = _firestoreDb.Collection(IncomesCollection);
+            Query query = incomesRef.WhereEqualTo("UserId", userId);
+            QuerySnapshot snapshot = await query.GetSnapshotAsync();
+
+            return snapshot.Documents.Select(doc =>
+            {
+                var income = doc.ConvertTo<Income>();
+                income.Id = doc.Id;
+                return income;
+            }).ToList();
+        }
+
+        public async Task DeleteIncomeAsync(string id)
+        {
+            DocumentReference docRef = _firestoreDb.Collection(IncomesCollection).Document(id);
+            await docRef.DeleteAsync();
+        }
+
+        // Savings Operations
+        public async Task<string> AddSavingsAsync(Savings savings)
+        {
+            CollectionReference savingsRef = _firestoreDb.Collection(SavingsCollection);
+            DocumentReference docRef = await savingsRef.AddAsync(savings);
+            return docRef.Id;
+        }
+
+        public async Task<List<Savings>> GetSavingsByUserIdAsync(string userId)
+        {
+            CollectionReference savingsRef = _firestoreDb.Collection(SavingsCollection);
+            Query query = savingsRef.WhereEqualTo("UserId", userId);
+            QuerySnapshot snapshot = await query.GetSnapshotAsync();
+
+            return snapshot.Documents.Select(doc =>
+            {
+                var savings = doc.ConvertTo<Savings>();
+                savings.Id = doc.Id;
+                return savings;
+            }).ToList();
+        }
+
+        public async Task DeleteSavingsAsync(string id)
+        {
+            DocumentReference docRef = _firestoreDb.Collection(SavingsCollection).Document(id);
             await docRef.DeleteAsync();
         }
     }
