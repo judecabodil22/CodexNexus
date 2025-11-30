@@ -79,6 +79,9 @@ BudgetMate is a modern, premium personal finance application designed to make tr
 
 <img width="1919" height="950" alt="image" src="https://github.com/user-attachments/assets/4947fd5a-2e1f-4142-9589-0d988c3b0158" />
 
+<img width="1919" height="951" alt="image" src="https://github.com/user-attachments/assets/1094a9bd-8301-4cd0-8520-555c442e05ba" />
+
+
 
 
 ## 🤝 Contributing
