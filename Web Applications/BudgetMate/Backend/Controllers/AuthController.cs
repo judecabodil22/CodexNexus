@@ -25,23 +25,30 @@ namespace BudgetMate.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<User>> Register(UserDto request)
         {
-            var existingUser = await _firestoreService.GetUserByUsernameAsync(request.Username);
-            if (existingUser != null)
+            try
             {
-                return BadRequest("Username already exists.");
+                var existingUser = await _firestoreService.GetUserByUsernameAsync(request.Username);
+                if (existingUser != null)
+                {
+                    return BadRequest("Username already exists.");
+                }
+
+                string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+
+                var user = new User
+                {
+                    Username = request.Username,
+                    PasswordHash = passwordHash
+                };
+
+                await _firestoreService.AddUserAsync(user);
+
+                return Ok("User registered successfully.");
             }
-
-            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
-
-            var user = new User
+            catch (Exception ex)
             {
-                Username = request.Username,
-                PasswordHash = passwordHash
-            };
-
-            await _firestoreService.AddUserAsync(user);
-
-            return Ok("User registered successfully.");
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpPost("login")]

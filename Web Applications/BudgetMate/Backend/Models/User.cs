@@ -7,7 +7,7 @@ namespace BudgetMate.Models
     public class User
     {
         [FirestoreDocumentId]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -19,7 +19,7 @@ namespace BudgetMate.Models
         public string PasswordHash { get; set; } = string.Empty;
 
         [FirestoreProperty]
-        public decimal Salary { get; set; }
+        public double Salary { get; set; }
 
         [FirestoreProperty]
         public string PayCycle { get; set; } = "Monthly";

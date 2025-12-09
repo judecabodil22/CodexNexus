@@ -3,8 +3,12 @@ using BudgetMate.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure port for Cloud Run
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+// Configure port for Cloud Run if PORT env var is set
+var port = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrEmpty(port))
+{
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+}
 
 // Add services to the container.
 builder.Services.AddSingleton<FirestoreService>();
@@ -14,7 +18,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("https://judecabodil22.github.io", "http://localhost:5173")
+            policy.WithOrigins("https://judecabodil22.github.io", "https://judecabodil22.github.io/", "http://localhost:5173")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });

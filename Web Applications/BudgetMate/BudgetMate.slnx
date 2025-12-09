@@ -1,9 +1,0 @@
-<Solution>
-  <Folder Name="/Frontend/">
-    <File Path="Frontend/budgetmate-frontend/src/App.jsx" />
-  </Folder>
-  <Folder Name="/Frontend/components/">
-    <File Path="Frontend/budgetmate-frontend/src/components/Charts.jsx" />
-  </Folder>
-  <Project Path="Backend\BudgetMate.csproj" />
-</Solution>
